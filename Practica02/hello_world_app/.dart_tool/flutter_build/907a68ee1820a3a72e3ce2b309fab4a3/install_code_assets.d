@@ -1,0 +1,1 @@
+ C:\\Users\\bauba\\OneDrive\\Documentos\\jejnni\\Practicas_DMI_230317\\Practica02\\hello_world_app\\.dart_tool\\flutter_build\\907a68ee1820a3a72e3ce2b309fab4a3\\native_assets.json: 
