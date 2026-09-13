@@ -14,9 +14,7 @@
 
 <p align="center">
   🌸 Contador interactivo desarrollado con Flutter y Dart 🌸
-</p>
-
----
+</p>---
 
 ## 🎀 Descripción
 
@@ -83,7 +81,6 @@ El botón con el icono `plus_one` aumenta el valor del contador en uno.
 ```dart
 clickCounter++;
 ```
-
 ### ➖ Disminuir
 
 El botón con el icono `exposure_minus_1_outlined` disminuye el valor del contador en uno.
