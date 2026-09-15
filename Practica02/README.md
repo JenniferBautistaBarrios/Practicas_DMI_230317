@@ -25,7 +25,7 @@ La aplicación consiste en un **contador interactivo** que permite al usuario au
 Además de implementar la funcionalidad básica del contador, se agregaron diferentes comportamientos visuales dependiendo del valor actual, permitiendo representar de manera clara los estados:
 
  **💙Positivo**
- **Neutro**
+ **🌷Neutro**
 ❤️ **Negativo**
 
 El propósito de esta práctica es introducir los conceptos fundamentales del desarrollo de interfaces móviles con Flutter, principalmente el uso de **widgets, manejo de estados, eventos de usuario y actualización dinámica de la interfaz**.
