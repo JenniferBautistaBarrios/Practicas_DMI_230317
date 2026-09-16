@@ -195,7 +195,7 @@ Este widget recibe:
 * 🎨 `icon` — Icono que se mostrará.
 * ⚙️ `onPressed` — Función que se ejecutará al presionar el botón.
 
-Esto permite utilizar el mismo componente para las diferentes acciones del contador y mantener el código más organizado y reutilizable.
+Esto permite utilizar el mismo componente para las diferentes acciones del contador y mantener el código más organizado y reutilizable
 
 ---
 
