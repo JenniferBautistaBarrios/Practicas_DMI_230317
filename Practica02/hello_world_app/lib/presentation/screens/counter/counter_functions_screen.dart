@@ -17,7 +17,7 @@ class _CounterFunctionsScreenState extends State<CounterFunctionsScreen> {
         title: const Text('Counter Functions'),
         actions: [
           IconButton(
-            icon: Icon(Icons.refresh_rounded),
+            icon: const Icon(Icons.refresh_rounded),
             onPressed: () {
               setState(() {
                 clickCounter = 0;
@@ -38,14 +38,14 @@ class _CounterFunctionsScreenState extends State<CounterFunctionsScreen> {
                 color: clickCounter < 0
                     ? Colors.red
                     : clickCounter == 0
-                        ? Colors.blue
-                        : Colors.green,
+                        ? const Color.fromARGB(255, 120, 6, 158)
+                        : const Color.fromARGB(255, 255, 37, 215),
               ),
             ),
             Text(
               'Click${clickCounter == 1 || clickCounter == -1 ? '' : 's'}',
-              style: TextStyle(fontSize: 25, fontFamily: 'MiFuente'),
-            )
+              style: const TextStyle(fontSize: 25, fontFamily: 'MiFuente'),
+            ),
           ],
         ),
       ),
@@ -73,6 +73,7 @@ class _CounterFunctionsScreenState extends State<CounterFunctionsScreen> {
           CustomButton(
             icon: Icons.exposure_minus_1_outlined,
             onPressed: () {
+              if (clickCounter == 0) return;
               setState(() {
                 clickCounter--;
               });
@@ -97,10 +98,9 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      //shape: const StadiumBorder(),
       enableFeedback: true,
       elevation: 10,
-      backgroundColor: Colors.blue,
+      backgroundColor: const Color.fromARGB(255, 232, 74, 119),
       onPressed: onPressed,
       child: Icon(icon),
     );
