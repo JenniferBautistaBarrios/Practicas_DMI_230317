@@ -1,0 +1,28 @@
+^C:\USERS\BAUBA\ONEDRIVE\DOCUMENTOS\JEJNNI\PRACTICAS_DMI_230317\PRACTICA02\HELLO_WORLD_APP\BUILD\WINDOWS\X64\CMAKEFILES\0666D5FBC3188AD5831B2CC6B40D666B\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=C:\Users\bauba\.config\flutter\flutter PROJECT_DIR=C:\Users\bauba\OneDrive\Documentos\jejnni\Practicas_DMI_230317\Practica02\hello_world_app FLUTTER_ROOT=C:\Users\bauba\.config\flutter\flutter FLUTTER_EPHEMERAL_DIR=C:\Users\bauba\OneDrive\Documentos\jejnni\Practicas_DMI_230317\Practica02\hello_world_app\windows\flutter\ephemeral PROJECT_DIR=C:\Users\bauba\OneDrive\Documentos\jejnni\Practicas_DMI_230317\Practica02\hello_world_app FLUTTER_TARGET=C:\Users\bauba\OneDrive\Documentos\jejnni\Practicas_DMI_230317\Practica02\hello_world_app\lib\main.dart DART_DEFINES=RkxVVFRFUl9CVUlMRF9OQU1FPTEuMC4w,RkxVVFRFUl9CVUlMRF9OVU1CRVI9MQ==,RkxVVFRFUl9WRVJTSU9OPTMuNDcuNA==,RkxVVFRFUl9DSEFOTkVMPXN0YWJsZQ==,RkxVVFRFUl9HSVRfVVJMPWh0dHBzOi8vZ2l0aHViLmNvbS9mbHV0dGVyL2ZsdXR0ZXIuZ2l0,RkxVVFRFUl9GUkFNRVdPUktfUkVWSVNJT049OTU4NGM2NzEzYg==,RkxVVFRFUl9FTkdJTkVfUkVWSVNJT049MDZhMmUyYTExMA==,RkxVVFRFUl9EQVJUX1ZFUlNJT049My4xMy4z DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false PACKAGE_CONFIG=C:\Users\bauba\OneDrive\Documentos\jejnni\Practicas_DMI_230317\Practica02\hello_world_app\.dart_tool\package_config.json C:/Users/bauba/.config/flutter/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\BAUBA\ONEDRIVE\DOCUMENTOS\JEJNNI\PRACTICAS_DMI_230317\PRACTICA02\HELLO_WORLD_APP\BUILD\WINDOWS\X64\CMAKEFILES\7E5062A0A58F15008F4A445C3A8B958B\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\BAUBA\ONEDRIVE\DOCUMENTOS\JEJNNI\PRACTICAS_DMI_230317\PRACTICA02\HELLO_WORLD_APP\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/bauba/OneDrive/Documentos/jejnni/Practicas_DMI_230317/Practica02/hello_world_app/windows -BC:/Users/bauba/OneDrive/Documentos/jejnni/Practicas_DMI_230317/Practica02/hello_world_app/build/windows/x64 --check-stamp-file C:/Users/bauba/OneDrive/Documentos/jejnni/Practicas_DMI_230317/Practica02/hello_world_app/build/windows/x64/flutter/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

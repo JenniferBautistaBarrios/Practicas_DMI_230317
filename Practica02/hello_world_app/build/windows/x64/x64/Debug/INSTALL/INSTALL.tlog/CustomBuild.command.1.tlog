@@ -1,0 +1,10 @@
+^C:\USERS\BAUBA\ONEDRIVE\DOCUMENTOS\JEJNNI\PRACTICAS_DMI_230317\PRACTICA02\HELLO_WORLD_APP\BUILD\WINDOWS\X64\CMAKEFILES\8489F8F6952DE97BF7EAEC926AD58103\INSTALL_FORCE.RULE
+setlocal
+cd .
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

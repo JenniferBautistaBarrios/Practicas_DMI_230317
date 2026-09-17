@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\bauba\OneDrive\Documentos\jejnni\Practicas_DMI_230317\Practica02\hello_world_app\build\windows\x64\CMakeFiles\8489f8f6952de97bf7eaec926ad58103\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{97D2B8A7-2B03-3FFD-AA4B-3D7432866680}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

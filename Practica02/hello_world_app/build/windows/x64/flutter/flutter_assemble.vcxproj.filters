@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\bauba\OneDrive\Documentos\jejnni\Practicas_DMI_230317\Practica02\hello_world_app\build\windows\x64\CMakeFiles\0666d5fbc3188ad5831b2cc6b40d666b\flutter_windows.dll.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\bauba\OneDrive\Documentos\jejnni\Practicas_DMI_230317\Practica02\hello_world_app\build\windows\x64\CMakeFiles\7e5062a0a58f15008f4a445c3a8b958b\flutter_assemble.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\bauba\OneDrive\Documentos\jejnni\Practicas_DMI_230317\Practica02\hello_world_app\windows\flutter\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\bauba\OneDrive\Documentos\jejnni\Practicas_DMI_230317\Practica02\hello_world_app\build\windows\x64\flutter\CMakeFiles\flutter_assemble" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{97D2B8A7-2B03-3FFD-AA4B-3D7432866680}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

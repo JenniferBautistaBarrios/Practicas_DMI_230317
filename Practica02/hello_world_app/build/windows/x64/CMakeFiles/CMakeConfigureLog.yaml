@@ -1,0 +1,777 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeDetermineSystem.cmake:212 (message)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      The system is: Windows - 10.0.26200 - AMD64
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:468 (find_file)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:506 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCXXCompilerId.cpp.in"
+    candidate_directories:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/"
+    found: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeCXXCompilerId.cpp.in"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Python314\\Scripts\\"
+        - "C:\\Python314\\"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\dev\\flutter_windows_3.47.6-stable\\flutter\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Programs\\OpenAI\\Codex\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\bauba\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\bauba\\AppData\\Roaming\\npm"
+        - "C:\\tools\\dart-sdk\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Pub\\Cache\\bin"
+        - "C:\\dev\\flutter_windows_3.47.6-stable\\flutter\\bin"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      Versi├│n de MSBuild 18.10.1-1.26427.6+3cd27c13e para .NET Framework
+      Compilaci├│n iniciada a las 03/10/2026 07:29:15 p. m..
+      
+      Proyecto "C:\\Users\\bauba\\OneDrive\\Documentos\\jejnni\\Practicas_DMI_230317\\Practica02\\hello_world_app\\build\\windows\\x64\\CMakeFiles\\4.3.1-msvc1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" en nodo 1 (destinos predeterminados).
+      PrepareForBuild:
+        Creando directorio "Debug\\".
+        La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
+        Creando directorio "Debug\\CompilerIdCXX.tlog\\".
+      InitializeBuildStatus:
+        Se crear├í "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+        Aplicando tarea Touch a "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
+      ClCompile:
+        C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc145.pdb" /external:W0 /Gd /TP /FC /errorReport:queue CMakeCXXCompilerId.cpp
+        CMakeCXXCompilerId.cpp
+      Link:
+        C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X64 Debug\\CMakeCXXCompilerId.obj
+        CompilerIdCXX.vcxproj -> C:\\Users\\bauba\\OneDrive\\Documentos\\jejnni\\Practicas_DMI_230317\\Practica02\\hello_world_app\\build\\windows\\x64\\CMakeFiles\\4.3.1-msvc1\\CompilerIdCXX\\CompilerIdCXX.exe
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_CXX_COMPILER=C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        Se eliminar├í el archivo "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
+        Aplicando tarea Touch a "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.lastbuildstate".
+      Compilaci├│n del proyecto terminada "C:\\Users\\bauba\\OneDrive\\Documentos\\jejnni\\Practicas_DMI_230317\\Practica02\\hello_world_app\\build\\windows\\x64\\CMakeFiles\\4.3.1-msvc1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" (destinos predeterminados).
+      
+      Compilaci├│n correcta.
+          0 Advertencia(s)
+          0 Errores
+      
+      Tiempo transcurrido 00:00:02.76
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+      
+      The CXX compiler identification is MSVC, found in:
+        C:/Users/bauba/OneDrive/Documentos/jejnni/Practicas_DMI_230317/Practica02/hello_world_app/build/windows/x64/CMakeFiles/4.3.1-msvc1/CompilerIdCXX/CompilerIdCXX.exe
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:103 (__resolve_linker_path)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "_CMAKE_TOOL_WITH_PATH"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "link"
+    candidate_directories:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/"
+      - "C:/Python314/Scripts/"
+      - "C:/Python314/"
+      - "C:/Windows/SysWOW64/"
+      - "C:/Windows/"
+      - "C:/Windows/SysWOW64/wbem/"
+      - "C:/Windows/SysWOW64/WindowsPowerShell/v1.0/"
+      - "C:/Windows/SysWOW64/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/nodejs/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/dev/flutter_windows_3.47.6-stable/flutter/bin/"
+      - "C:/Users/bauba/AppData/Local/Programs/OpenAI/Codex/bin/"
+      - "C:/Users/bauba/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/bauba/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/bauba/AppData/Roaming/npm/"
+      - "C:/tools/dart-sdk/bin/"
+      - "C:/Users/bauba/AppData/Local/Pub/Cache/bin/"
+    searched_directories:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/link.com"
+    found: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/link.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Python314\\Scripts\\"
+        - "C:\\Python314\\"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\dev\\flutter_windows_3.47.6-stable\\flutter\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Programs\\OpenAI\\Codex\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\bauba\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\bauba\\AppData\\Roaming\\npm"
+        - "C:\\tools\\dart-sdk\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Pub\\Cache\\bin"
+        - "C:\\dev\\flutter_windows_3.47.6-stable\\flutter\\bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:104 (__resolve_linker_path)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "_CMAKE_TOOL_WITH_PATH"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "lld-link"
+    candidate_directories:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/"
+      - "C:/Python314/Scripts/"
+      - "C:/Python314/"
+      - "C:/Windows/SysWOW64/"
+      - "C:/Windows/"
+      - "C:/Windows/SysWOW64/wbem/"
+      - "C:/Windows/SysWOW64/WindowsPowerShell/v1.0/"
+      - "C:/Windows/SysWOW64/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/nodejs/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/dev/flutter_windows_3.47.6-stable/flutter/bin/"
+      - "C:/Users/bauba/AppData/Local/Programs/OpenAI/Codex/bin/"
+      - "C:/Users/bauba/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/bauba/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/bauba/AppData/Roaming/npm/"
+      - "C:/tools/dart-sdk/bin/"
+      - "C:/Users/bauba/AppData/Local/Pub/Cache/bin/"
+    searched_directories:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/lld-link.com"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/lld-link.exe"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/lld-link"
+      - "C:/Python314/Scripts/lld-link.com"
+      - "C:/Python314/Scripts/lld-link.exe"
+      - "C:/Python314/Scripts/lld-link"
+      - "C:/Python314/lld-link.com"
+      - "C:/Python314/lld-link.exe"
+      - "C:/Python314/lld-link"
+      - "C:/Windows/SysWOW64/lld-link.com"
+      - "C:/Windows/SysWOW64/lld-link.exe"
+      - "C:/Windows/SysWOW64/lld-link"
+      - "C:/Windows/lld-link.com"
+      - "C:/Windows/lld-link.exe"
+      - "C:/Windows/lld-link"
+      - "C:/Windows/SysWOW64/wbem/lld-link.com"
+      - "C:/Windows/SysWOW64/wbem/lld-link.exe"
+      - "C:/Windows/SysWOW64/wbem/lld-link"
+      - "C:/Windows/SysWOW64/WindowsPowerShell/v1.0/lld-link.com"
+      - "C:/Windows/SysWOW64/WindowsPowerShell/v1.0/lld-link.exe"
+      - "C:/Windows/SysWOW64/WindowsPowerShell/v1.0/lld-link"
+      - "C:/Windows/SysWOW64/OpenSSH/lld-link.com"
+      - "C:/Windows/SysWOW64/OpenSSH/lld-link.exe"
+      - "C:/Windows/SysWOW64/OpenSSH/lld-link"
+      - "C:/Program Files/Git/cmd/lld-link.com"
+      - "C:/Program Files/Git/cmd/lld-link.exe"
+      - "C:/Program Files/Git/cmd/lld-link"
+      - "C:/Program Files/nodejs/lld-link.com"
+      - "C:/Program Files/nodejs/lld-link.exe"
+      - "C:/Program Files/nodejs/lld-link"
+      - "C:/ProgramData/chocolatey/bin/lld-link.com"
+      - "C:/ProgramData/chocolatey/bin/lld-link.exe"
+      - "C:/ProgramData/chocolatey/bin/lld-link"
+      - "C:/dev/flutter_windows_3.47.6-stable/flutter/bin/lld-link.com"
+      - "C:/dev/flutter_windows_3.47.6-stable/flutter/bin/lld-link.exe"
+      - "C:/dev/flutter_windows_3.47.6-stable/flutter/bin/lld-link"
+      - "C:/Users/bauba/AppData/Local/Programs/OpenAI/Codex/bin/lld-link.com"
+      - "C:/Users/bauba/AppData/Local/Programs/OpenAI/Codex/bin/lld-link.exe"
+      - "C:/Users/bauba/AppData/Local/Programs/OpenAI/Codex/bin/lld-link"
+      - "C:/Users/bauba/AppData/Local/Microsoft/WindowsApps/lld-link.com"
+      - "C:/Users/bauba/AppData/Local/Microsoft/WindowsApps/lld-link.exe"
+      - "C:/Users/bauba/AppData/Local/Microsoft/WindowsApps/lld-link"
+      - "C:/Users/bauba/AppData/Local/Programs/Microsoft VS Code/bin/lld-link.com"
+      - "C:/Users/bauba/AppData/Local/Programs/Microsoft VS Code/bin/lld-link.exe"
+      - "C:/Users/bauba/AppData/Local/Programs/Microsoft VS Code/bin/lld-link"
+      - "C:/Users/bauba/AppData/Roaming/npm/lld-link.com"
+      - "C:/Users/bauba/AppData/Roaming/npm/lld-link.exe"
+      - "C:/Users/bauba/AppData/Roaming/npm/lld-link"
+      - "C:/tools/dart-sdk/bin/lld-link.com"
+      - "C:/tools/dart-sdk/bin/lld-link.exe"
+      - "C:/tools/dart-sdk/bin/lld-link"
+      - "C:/Users/bauba/AppData/Local/Pub/Cache/bin/lld-link.com"
+      - "C:/Users/bauba/AppData/Local/Pub/Cache/bin/lld-link.exe"
+      - "C:/Users/bauba/AppData/Local/Pub/Cache/bin/lld-link"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Python314\\Scripts\\"
+        - "C:\\Python314\\"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\dev\\flutter_windows_3.47.6-stable\\flutter\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Programs\\OpenAI\\Codex\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\bauba\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\bauba\\AppData\\Roaming\\npm"
+        - "C:\\tools\\dart-sdk\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Pub\\Cache\\bin"
+        - "C:\\dev\\flutter_windows_3.47.6-stable\\flutter\\bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_LINKER"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "link"
+    candidate_directories:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/"
+      - "C:/Python314/Scripts/"
+      - "C:/Python314/"
+      - "C:/Windows/SysWOW64/"
+      - "C:/Windows/"
+      - "C:/Windows/SysWOW64/wbem/"
+      - "C:/Windows/SysWOW64/WindowsPowerShell/v1.0/"
+      - "C:/Windows/SysWOW64/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/nodejs/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/dev/flutter_windows_3.47.6-stable/flutter/bin/"
+      - "C:/Users/bauba/AppData/Local/Programs/OpenAI/Codex/bin/"
+      - "C:/Users/bauba/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/bauba/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/bauba/AppData/Roaming/npm/"
+      - "C:/tools/dart-sdk/bin/"
+      - "C:/Users/bauba/AppData/Local/Pub/Cache/bin/"
+    searched_directories:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/link.com"
+    found: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/link.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Python314\\Scripts\\"
+        - "C:\\Python314\\"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\dev\\flutter_windows_3.47.6-stable\\flutter\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Programs\\OpenAI\\Codex\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\bauba\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\bauba\\AppData\\Roaming\\npm"
+        - "C:\\tools\\dart-sdk\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Pub\\Cache\\bin"
+        - "C:\\dev\\flutter_windows_3.47.6-stable\\flutter\\bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_MT"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "mt"
+    candidate_directories:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/"
+      - "C:/Python314/Scripts/"
+      - "C:/Python314/"
+      - "C:/Windows/SysWOW64/"
+      - "C:/Windows/"
+      - "C:/Windows/SysWOW64/wbem/"
+      - "C:/Windows/SysWOW64/WindowsPowerShell/v1.0/"
+      - "C:/Windows/SysWOW64/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/nodejs/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/dev/flutter_windows_3.47.6-stable/flutter/bin/"
+      - "C:/Users/bauba/AppData/Local/Programs/OpenAI/Codex/bin/"
+      - "C:/Users/bauba/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/bauba/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/bauba/AppData/Roaming/npm/"
+      - "C:/tools/dart-sdk/bin/"
+      - "C:/Users/bauba/AppData/Local/Pub/Cache/bin/"
+    searched_directories:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/mt.com"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/mt.exe"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/mt"
+      - "C:/Python314/Scripts/mt.com"
+      - "C:/Python314/Scripts/mt.exe"
+      - "C:/Python314/Scripts/mt"
+      - "C:/Python314/mt.com"
+      - "C:/Python314/mt.exe"
+      - "C:/Python314/mt"
+      - "C:/Windows/SysWOW64/mt.com"
+      - "C:/Windows/SysWOW64/mt.exe"
+      - "C:/Windows/SysWOW64/mt"
+      - "C:/Windows/mt.com"
+      - "C:/Windows/mt.exe"
+      - "C:/Windows/mt"
+      - "C:/Windows/SysWOW64/wbem/mt.com"
+      - "C:/Windows/SysWOW64/wbem/mt.exe"
+      - "C:/Windows/SysWOW64/wbem/mt"
+      - "C:/Windows/SysWOW64/WindowsPowerShell/v1.0/mt.com"
+      - "C:/Windows/SysWOW64/WindowsPowerShell/v1.0/mt.exe"
+      - "C:/Windows/SysWOW64/WindowsPowerShell/v1.0/mt"
+      - "C:/Windows/SysWOW64/OpenSSH/mt.com"
+      - "C:/Windows/SysWOW64/OpenSSH/mt.exe"
+      - "C:/Windows/SysWOW64/OpenSSH/mt"
+      - "C:/Program Files/Git/cmd/mt.com"
+      - "C:/Program Files/Git/cmd/mt.exe"
+      - "C:/Program Files/Git/cmd/mt"
+      - "C:/Program Files/nodejs/mt.com"
+      - "C:/Program Files/nodejs/mt.exe"
+      - "C:/Program Files/nodejs/mt"
+      - "C:/ProgramData/chocolatey/bin/mt.com"
+      - "C:/ProgramData/chocolatey/bin/mt.exe"
+      - "C:/ProgramData/chocolatey/bin/mt"
+      - "C:/dev/flutter_windows_3.47.6-stable/flutter/bin/mt.com"
+      - "C:/dev/flutter_windows_3.47.6-stable/flutter/bin/mt.exe"
+      - "C:/dev/flutter_windows_3.47.6-stable/flutter/bin/mt"
+      - "C:/Users/bauba/AppData/Local/Programs/OpenAI/Codex/bin/mt.com"
+      - "C:/Users/bauba/AppData/Local/Programs/OpenAI/Codex/bin/mt.exe"
+      - "C:/Users/bauba/AppData/Local/Programs/OpenAI/Codex/bin/mt"
+      - "C:/Users/bauba/AppData/Local/Microsoft/WindowsApps/mt.com"
+      - "C:/Users/bauba/AppData/Local/Microsoft/WindowsApps/mt.exe"
+      - "C:/Users/bauba/AppData/Local/Microsoft/WindowsApps/mt"
+      - "C:/Users/bauba/AppData/Local/Programs/Microsoft VS Code/bin/mt.com"
+      - "C:/Users/bauba/AppData/Local/Programs/Microsoft VS Code/bin/mt.exe"
+      - "C:/Users/bauba/AppData/Local/Programs/Microsoft VS Code/bin/mt"
+      - "C:/Users/bauba/AppData/Roaming/npm/mt.com"
+      - "C:/Users/bauba/AppData/Roaming/npm/mt.exe"
+      - "C:/Users/bauba/AppData/Roaming/npm/mt"
+      - "C:/tools/dart-sdk/bin/mt.com"
+      - "C:/tools/dart-sdk/bin/mt.exe"
+      - "C:/tools/dart-sdk/bin/mt"
+      - "C:/Users/bauba/AppData/Local/Pub/Cache/bin/mt.com"
+      - "C:/Users/bauba/AppData/Local/Pub/Cache/bin/mt.exe"
+      - "C:/Users/bauba/AppData/Local/Pub/Cache/bin/mt"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Python314\\Scripts\\"
+        - "C:\\Python314\\"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\dev\\flutter_windows_3.47.6-stable\\flutter\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Programs\\OpenAI\\Codex\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\bauba\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\bauba\\AppData\\Roaming\\npm"
+        - "C:\\tools\\dart-sdk\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Pub\\Cache\\bin"
+        - "C:\\dev\\flutter_windows_3.47.6-stable\\flutter\\bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_AR"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "lib"
+    candidate_directories:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/"
+      - "C:/Python314/Scripts/"
+      - "C:/Python314/"
+      - "C:/Windows/SysWOW64/"
+      - "C:/Windows/"
+      - "C:/Windows/SysWOW64/wbem/"
+      - "C:/Windows/SysWOW64/WindowsPowerShell/v1.0/"
+      - "C:/Windows/SysWOW64/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/nodejs/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/dev/flutter_windows_3.47.6-stable/flutter/bin/"
+      - "C:/Users/bauba/AppData/Local/Programs/OpenAI/Codex/bin/"
+      - "C:/Users/bauba/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/bauba/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/bauba/AppData/Roaming/npm/"
+      - "C:/tools/dart-sdk/bin/"
+      - "C:/Users/bauba/AppData/Local/Pub/Cache/bin/"
+    searched_directories:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/lib.com"
+    found: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/lib.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Python314\\Scripts\\"
+        - "C:\\Python314\\"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\dev\\flutter_windows_3.47.6-stable\\flutter\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Programs\\OpenAI\\Codex\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\bauba\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\bauba\\AppData\\Roaming\\npm"
+        - "C:\\tools\\dart-sdk\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Pub\\Cache\\bin"
+        - "C:\\dev\\flutter_windows_3.47.6-stable\\flutter\\bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeDetermineRCCompiler.cmake:40 (find_program)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Platform/Windows-MSVC.cmake:596 (enable_language)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Platform/Windows-MSVC.cmake:569 (__windows_compiler_msvc_enable_rc)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Platform/Windows-MSVC-CXX.cmake:6 (__windows_compiler_msvc)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeCXXInformation.cmake:48 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_RC_COMPILER"
+    description: "RC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "rc"
+    candidate_directories:
+      - "C:/Python314/Scripts/"
+      - "C:/Python314/"
+      - "C:/Windows/SysWOW64/"
+      - "C:/Windows/"
+      - "C:/Windows/SysWOW64/wbem/"
+      - "C:/Windows/SysWOW64/WindowsPowerShell/v1.0/"
+      - "C:/Windows/SysWOW64/OpenSSH/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/nodejs/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/dev/flutter_windows_3.47.6-stable/flutter/bin/"
+      - "C:/Users/bauba/AppData/Local/Programs/OpenAI/Codex/bin/"
+      - "C:/Users/bauba/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/bauba/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/bauba/AppData/Roaming/npm/"
+      - "C:/tools/dart-sdk/bin/"
+      - "C:/Users/bauba/AppData/Local/Pub/Cache/bin/"
+      - "C:/Program Files/bin/"
+      - "C:/Program Files/sbin/"
+      - "C:/Program Files/"
+      - "C:/Program Files (x86)/bin/"
+      - "C:/Program Files (x86)/sbin/"
+      - "C:/Program Files (x86)/"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/sbin/"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/"
+      - "C:/Program Files/hello_world_app/bin/"
+      - "C:/Program Files/hello_world_app/sbin/"
+      - "C:/Program Files/hello_world_app/"
+    searched_directories:
+      - "C:/Python314/Scripts/rc.com"
+      - "C:/Python314/Scripts/rc.exe"
+      - "C:/Python314/Scripts/rc"
+      - "C:/Python314/rc.com"
+      - "C:/Python314/rc.exe"
+      - "C:/Python314/rc"
+      - "C:/Windows/SysWOW64/rc.com"
+      - "C:/Windows/SysWOW64/rc.exe"
+      - "C:/Windows/SysWOW64/rc"
+      - "C:/Windows/rc.com"
+      - "C:/Windows/rc.exe"
+      - "C:/Windows/rc"
+      - "C:/Windows/SysWOW64/wbem/rc.com"
+      - "C:/Windows/SysWOW64/wbem/rc.exe"
+      - "C:/Windows/SysWOW64/wbem/rc"
+      - "C:/Windows/SysWOW64/WindowsPowerShell/v1.0/rc.com"
+      - "C:/Windows/SysWOW64/WindowsPowerShell/v1.0/rc.exe"
+      - "C:/Windows/SysWOW64/WindowsPowerShell/v1.0/rc"
+      - "C:/Windows/SysWOW64/OpenSSH/rc.com"
+      - "C:/Windows/SysWOW64/OpenSSH/rc.exe"
+      - "C:/Windows/SysWOW64/OpenSSH/rc"
+      - "C:/Program Files/Git/cmd/rc.com"
+      - "C:/Program Files/Git/cmd/rc.exe"
+      - "C:/Program Files/Git/cmd/rc"
+      - "C:/Program Files/nodejs/rc.com"
+      - "C:/Program Files/nodejs/rc.exe"
+      - "C:/Program Files/nodejs/rc"
+      - "C:/ProgramData/chocolatey/bin/rc.com"
+      - "C:/ProgramData/chocolatey/bin/rc.exe"
+      - "C:/ProgramData/chocolatey/bin/rc"
+      - "C:/dev/flutter_windows_3.47.6-stable/flutter/bin/rc.com"
+      - "C:/dev/flutter_windows_3.47.6-stable/flutter/bin/rc.exe"
+      - "C:/dev/flutter_windows_3.47.6-stable/flutter/bin/rc"
+      - "C:/Users/bauba/AppData/Local/Programs/OpenAI/Codex/bin/rc.com"
+      - "C:/Users/bauba/AppData/Local/Programs/OpenAI/Codex/bin/rc.exe"
+      - "C:/Users/bauba/AppData/Local/Programs/OpenAI/Codex/bin/rc"
+      - "C:/Users/bauba/AppData/Local/Microsoft/WindowsApps/rc.com"
+      - "C:/Users/bauba/AppData/Local/Microsoft/WindowsApps/rc.exe"
+      - "C:/Users/bauba/AppData/Local/Microsoft/WindowsApps/rc"
+      - "C:/Users/bauba/AppData/Local/Programs/Microsoft VS Code/bin/rc.com"
+      - "C:/Users/bauba/AppData/Local/Programs/Microsoft VS Code/bin/rc.exe"
+      - "C:/Users/bauba/AppData/Local/Programs/Microsoft VS Code/bin/rc"
+      - "C:/Users/bauba/AppData/Roaming/npm/rc.com"
+      - "C:/Users/bauba/AppData/Roaming/npm/rc.exe"
+      - "C:/Users/bauba/AppData/Roaming/npm/rc"
+      - "C:/tools/dart-sdk/bin/rc.com"
+      - "C:/tools/dart-sdk/bin/rc.exe"
+      - "C:/tools/dart-sdk/bin/rc"
+      - "C:/Users/bauba/AppData/Local/Pub/Cache/bin/rc.com"
+      - "C:/Users/bauba/AppData/Local/Pub/Cache/bin/rc.exe"
+      - "C:/Users/bauba/AppData/Local/Pub/Cache/bin/rc"
+      - "C:/Program Files/bin/rc.com"
+      - "C:/Program Files/bin/rc.exe"
+      - "C:/Program Files/bin/rc"
+      - "C:/Program Files/sbin/rc.com"
+      - "C:/Program Files/sbin/rc.exe"
+      - "C:/Program Files/sbin/rc"
+      - "C:/Program Files/rc.com"
+      - "C:/Program Files/rc.exe"
+      - "C:/Program Files/rc"
+      - "C:/Program Files (x86)/bin/rc.com"
+      - "C:/Program Files (x86)/bin/rc.exe"
+      - "C:/Program Files (x86)/bin/rc"
+      - "C:/Program Files (x86)/sbin/rc.com"
+      - "C:/Program Files (x86)/sbin/rc.exe"
+      - "C:/Program Files (x86)/sbin/rc"
+      - "C:/Program Files (x86)/rc.com"
+      - "C:/Program Files (x86)/rc.exe"
+      - "C:/Program Files (x86)/rc"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/rc.com"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/rc.exe"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/rc"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/sbin/rc.com"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/sbin/rc.exe"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/sbin/rc"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/rc.com"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/rc.exe"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/rc"
+      - "C:/Program Files/hello_world_app/bin/rc.com"
+      - "C:/Program Files/hello_world_app/bin/rc.exe"
+      - "C:/Program Files/hello_world_app/bin/rc"
+      - "C:/Program Files/hello_world_app/sbin/rc.com"
+      - "C:/Program Files/hello_world_app/sbin/rc.exe"
+      - "C:/Program Files/hello_world_app/sbin/rc"
+      - "C:/Program Files/hello_world_app/rc.com"
+      - "C:/Program Files/hello_world_app/rc.exe"
+      - "C:/Program Files/hello_world_app/rc"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Python314\\Scripts\\"
+        - "C:\\Python314\\"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\dev\\flutter_windows_3.47.6-stable\\flutter\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Programs\\OpenAI\\Codex\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\bauba\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\bauba\\AppData\\Roaming\\npm"
+        - "C:\\tools\\dart-sdk\\bin"
+        - "C:\\Users\\bauba\\AppData\\Local\\Pub\\Cache\\bin"
+        - "C:\\dev\\flutter_windows_3.47.6-stable\\flutter\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files/hello_world_app"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake"
+        - "C:/Program Files/hello_world_app"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "C:/Users/bauba/OneDrive/Documentos/jejnni/Practicas_DMI_230317/Practica02/hello_world_app/build/windows/x64/CMakeFiles/CMakeScratch/TryCompile-96gpyc"
+      binary: "C:/Users/bauba/OneDrive/Documentos/jejnni/Practicas_DMI_230317/Practica02/hello_world_app/build/windows/x64/CMakeFiles/CMakeScratch/TryCompile-96gpyc"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/bauba/OneDrive/Documentos/jejnni/Practicas_DMI_230317/Practica02/hello_world_app/build/windows/x64/CMakeFiles/CMakeScratch/TryCompile-96gpyc'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_905ab.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
+        Versi├│n de MSBuild 18.10.1-1.26427.6+3cd27c13e para .NET Framework
+        Compilaci├│n iniciada a las 03/10/2026 07:29:19 p. m..
+        
+        Proyecto "C:\\Users\\bauba\\OneDrive\\Documentos\\jejnni\\Practicas_DMI_230317\\Practica02\\hello_world_app\\build\\windows\\x64\\CMakeFiles\\CMakeScratch\\TryCompile-96gpyc\\cmTC_905ab.vcxproj" en nodo 1 (destinos predeterminados).
+        PrepareForBuild:
+          La salida estructurada est├í habilitada. El formato del diagn├│stico del compilador reflejar├í la jerarqu├¡a de errores. Consulte https://aka.ms/cpp/structured-output para obtener m├ís detalles.
+          Creando directorio "C:\\Users\\bauba\\OneDrive\\Documentos\\jejnni\\Practicas_DMI_230317\\Practica02\\hello_world_app\\build\\windows\\x64\\CMakeFiles\\CMakeScratch\\TryCompile-96gpyc\\Debug\\".
+          Creando directorio "cmTC_905ab.dir\\Debug\\cmTC_905ab.tlog\\".
+        InitializeBuildStatus:
+          Se crear├í "cmTC_905ab.dir\\Debug\\cmTC_905ab.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_905ab.dir\\Debug\\cmTC_905ab.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /Fo"cmTC_905ab.dir\\Debug\\\\" /Fd"cmTC_905ab.dir\\Debug\\vc145.pdb" /external:W3 /TP /errorReport:queue "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.3\\Modules\\CMakeCXXCompilerABI.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.51.36257 for x64
+          (C) Microsoft Corporation. Todos los derechos reservados.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /Fo"cmTC_905ab.dir\\Debug\\\\" /Fd"cmTC_905ab.dir\\Debug\\vc145.pdb" /external:W3 /TP /errorReport:queue "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.3\\Modules\\CMakeCXXCompilerABI.cpp"
+          CMakeCXXCompilerABI.cpp
+        Link:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\bauba\\OneDrive\\Documentos\\jejnni\\Practicas_DMI_230317\\Practica02\\hello_world_app\\build\\windows\\x64\\CMakeFiles\\CMakeScratch\\TryCompile-96gpyc\\Debug\\cmTC_905ab.exe" /INCREMENTAL /ILK:"cmTC_905ab.dir\\Debug\\cmTC_905ab.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/bauba/OneDrive/Documentos/jejnni/Practicas_DMI_230317/Practica02/hello_world_app/build/windows/x64/CMakeFiles/CMakeScratch/TryCompile-96gpyc/Debug/cmTC_905ab.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/bauba/OneDrive/Documentos/jejnni/Practicas_DMI_230317/Practica02/hello_world_app/build/windows/x64/CMakeFiles/CMakeScratch/TryCompile-96gpyc/Debug/cmTC_905ab.lib" /MACHINE:X64  /machine:x64 cmTC_905ab.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_905ab.vcxproj -> C:\\Users\\bauba\\OneDrive\\Documentos\\jejnni\\Practicas_DMI_230317\\Practica02\\hello_world_app\\build\\windows\\x64\\CMakeFiles\\CMakeScratch\\TryCompile-96gpyc\\Debug\\cmTC_905ab.exe
+        FinalizeBuildStatus:
+          Se eliminar├í el archivo "cmTC_905ab.dir\\Debug\\cmTC_905ab.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_905ab.dir\\Debug\\cmTC_905ab.tlog\\cmTC_905ab.lastbuildstate".
+        Compilaci├│n del proyecto terminada "C:\\Users\\bauba\\OneDrive\\Documentos\\jejnni\\Practicas_DMI_230317\\Practica02\\hello_world_app\\build\\windows\\x64\\CMakeFiles\\CMakeScratch\\TryCompile-96gpyc\\cmTC_905ab.vcxproj" (destinos predeterminados).
+        
+        Compilaci├│n correcta.
+            0 Advertencia(s)
+            0 Errores
+        
+        Tiempo transcurrido 00:00:01.47
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'CXX': C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/HostX64/x64/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Internal/CMakeDetermineLinkerId.cmake:38 (message)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
+      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Running the CXX compiler's linker: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/HostX64/x64/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.51.36257.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+...

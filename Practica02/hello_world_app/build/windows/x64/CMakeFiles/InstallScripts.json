@@ -1,0 +1,9 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Users/bauba/OneDrive/Documentos/jejnni/Practicas_DMI_230317/Practica02/hello_world_app/build/windows/x64/cmake_install.cmake",
+		"C:/Users/bauba/OneDrive/Documentos/jejnni/Practicas_DMI_230317/Practica02/hello_world_app/build/windows/x64/flutter/cmake_install.cmake",
+		"C:/Users/bauba/OneDrive/Documentos/jejnni/Practicas_DMI_230317/Practica02/hello_world_app/build/windows/x64/runner/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
