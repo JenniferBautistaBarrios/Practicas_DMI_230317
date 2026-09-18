@@ -36,10 +36,10 @@ class _CounterFunctionsScreenState extends State<CounterFunctionsScreen> {
                 fontSize: 160,
                 fontWeight: FontWeight.w100,
                 color: clickCounter < 0
-                    ? Colors.red
+                    ? const Color.fromARGB(255, 255, 157, 204)
                     : clickCounter == 0
-                        ? Colors.blue
-                        : Colors.green,
+                        ? const Color.fromARGB(255, 240, 33, 243)
+                        : const Color.fromARGB(255, 79, 30, 237),
               ),
             ),
             Text(
@@ -100,7 +100,7 @@ class CustomButton extends StatelessWidget {
       //shape: const StadiumBorder(),
       enableFeedback: true,
       elevation: 10,
-      backgroundColor: Colors.blue,
+      backgroundColor: const Color.fromARGB(255, 255, 54, 121),
       onPressed: onPressed,
       child: Icon(icon),
     );
