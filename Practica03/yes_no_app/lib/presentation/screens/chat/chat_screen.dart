@@ -16,11 +16,10 @@ class ChatScreen extends StatelessWidget {
         leading: const Padding(
           padding: EdgeInsets.all(4.0),
           child: CircleAvatar(
-            backgroundImage: NetworkImage(
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUBf1YpZy9ejF0Jp6xTi-0K7s_gbh7DbRqLjGxtZ9yOw&s=10'),
+            backgroundImage: AssetImage('assets/images/amorcito.jpg'),
           ),
         ),
-        title: const Text('El Gato -¡phone 7 Pro Max!'),
+        title: const Text('Amorcito'),
         centerTitle: false,
       ),
       body: _ChatView(),

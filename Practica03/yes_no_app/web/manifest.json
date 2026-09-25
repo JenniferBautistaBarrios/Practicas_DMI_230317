@@ -1,6 +1,6 @@
 {
-    "name": "yes_no_app",
-    "short_name": "yes_no_app",
+    "name": "Amorcito",
+    "short_name": "Amorcito",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

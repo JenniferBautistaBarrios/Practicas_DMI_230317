@@ -5,6 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:yes_no_app/domain/entities/message.dart';
 
+// Clave gratuita de https://developers.giphy.com (Create an App > API).
+// Si se deja vacía, se usan los GIFs que devuelve yesno.wtf.
+const String _giphyApiKey = '';
+
+const Map<String, List<String>> _gifQueries = {
+  'yes': ['yes', 'yes reaction', 'nod yes', 'celebrate', 'love heart'],
+  'no': ['no', 'nope', 'no way', 'shake head no', 'angry no'],
+  'maybe': ['maybe', 'shrug', 'not sure', 'hmm thinking', 'confused'],
+};
+
 class ChatProvider extends ChangeNotifier {
   final ScrollController chatScrollController = ScrollController();
 
@@ -22,7 +32,8 @@ class ChatProvider extends ChangeNotifier {
     if (_random.nextInt(100) < 20) {
       messageList.add(Message(
         text: 'Tal vez',
-        imageUrl: 'https://media1.tenor.com/m/mFlSH_ZAUfsAAAAd/yes-no.gif',
+        imageUrl: await _fetchGif('maybe',
+            'https://media1.tenor.com/m/mFlSH_ZAUfsAAAAd/yes-no.gif'),
         fromWho: FromWho.her,
       ));
       notifyListeners();
@@ -45,7 +56,7 @@ class ChatProvider extends ChangeNotifier {
       };
       messageList.add(Message(
         text: text,
-        imageUrl: data['image'] as String?,
+        imageUrl: await _fetchGif(apiAnswer, data['image'] as String?),
         fromWho: FromWho.her,
       ));
     } catch (error, stackTrace) {
@@ -59,6 +70,29 @@ class ChatProvider extends ChangeNotifier {
     }
     notifyListeners();
     moveScrollToBottom();
+  }
+
+  /// Busca un GIF distinto en Giphy; si falla, regresa [fallback].
+  Future<String?> _fetchGif(String answer, String? fallback) async {
+    if (_giphyApiKey.isEmpty) return fallback;
+    try {
+      final queries = _gifQueries[answer] ?? _gifQueries['maybe']!;
+      final uri = Uri.https('api.giphy.com', '/v1/gifs/search', {
+        'api_key': _giphyApiKey,
+        'q': queries[_random.nextInt(queries.length)],
+        'limit': '25',
+        'rating': 'g',
+      });
+      final response = await http.get(uri);
+      if (response.statusCode != 200) return fallback;
+      final results = (jsonDecode(response.body)['data'] as List);
+      if (results.isEmpty) return fallback;
+      final gif = results[_random.nextInt(results.length)];
+      return gif['images']['original']['url'] as String? ?? fallback;
+    } catch (error) {
+      debugPrint('Error al consultar Giphy: $error');
+      return fallback;
+    }
   }
 
   Future<void> moveScrollToBottom() async {
