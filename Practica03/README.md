@@ -3,7 +3,9 @@
 <p align="center">
   🌸✨ <strong>Yes No App — Práctica 03</strong> ✨🌸
 </p>
-
+<p align="center">
+  <img src="/images.png" alt="Logo de la Universidad Tecnológica de Xicotepec de Juárez" width="350"/>
+</p>
 <p align="center">
   Aplicación de chat desarrollada con <strong>Flutter</strong> y <strong>Dart</strong>.
 </p>
