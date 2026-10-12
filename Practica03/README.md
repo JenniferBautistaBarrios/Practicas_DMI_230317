@@ -7,6 +7,12 @@
   <img src="/images.png" alt="Logo de la Universidad Tecnológica de Xicotepec de Juárez" width="350"/>
 </p>
 <p align="center">
+  <img src="/images.png" alt="Logo de la Universidad Tecnológica de Xicotepec de Juárez" width="200"/>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="/flutter.png" alt="Logo de Flutter" width="200"/>
+</p>
+
+<p align="center">
   Aplicación de chat desarrollada con <strong>Flutter</strong> y <strong>Dart</strong>.
 </p>
 

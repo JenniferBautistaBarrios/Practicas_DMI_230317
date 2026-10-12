@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+<title>Arquitectura - yes_no_app SportBot</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fdf1f4;--surface:#ffffff;--border:#f6cfdc;--text:#43202f;--muted:#94677b;--accent:#e0457b;
+  --col-ext:#ff7a59;--col-config:#d946ef;--col-domain:#f43f8e;--col-infra:#b45cf0;
+  --col-prov:#f59e6c;--col-screen:#6d7cff;--col-widget:#2bb5a0;--col-plat:#a08aa8;--col-dep:#e0a458;
+  --bar-bg:rgba(255,255,255,.88);--panel-bg:#fff8fa;--item-bg:#fdeaf1;--item-hover:#fbd9e6;--btn-bg:#ffffff;
+  --glass-bg:rgba(253,241,244,.72);--code:#b8235f;--shadow:rgba(224,69,123,.25);--grid:rgba(224,69,123,.07);
+}
+body.dark{
+  --bg:#1b0d16;--surface:#2a1424;--border:#52263f;--text:#fde9f2;--muted:#d0a3bb;--accent:#ff6aa8;
+  --bar-bg:rgba(34,14,28,.9);--panel-bg:#220f1c;--item-bg:#35182e;--item-hover:#4d1f44;--btn-bg:#35182e;
+  --glass-bg:rgba(27,13,22,.78);--code:#ffb6d6;--shadow:rgba(0,0,0,.5);--grid:rgba(255,106,168,.08);
+}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans','Segoe UI',system-ui,sans-serif;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+#topbar{position:relative;display:flex;align-items:center;gap:10px;padding:12px 24px;background:var(--bar-bg);backdrop-filter:blur(10px);box-shadow:0 10px 30px -18px var(--shadow);flex-shrink:0;z-index:100}
+#topbar::after{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,#ff8fb8,#e0457b,#b44bd6)}
+#title-block{flex:1}
+#title-block h1{font-size:19px;font-weight:800;letter-spacing:-.2px;color:var(--text)}
+#title-block h1 span{background:linear-gradient(90deg,#e0457b,#b44bd6);-webkit-background-clip:text;background-clip:text;color:transparent}
+#title-block small{color:var(--muted);font-size:11px}
+#title-block small[style]{color:var(--accent)!important;font-weight:700!important}
+.pill{background:var(--btn-bg);border:1.5px solid var(--border);border-radius:12px;padding:6px 15px;font-size:12px;font-family:inherit;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;color:var(--text)}
+.pill:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.pill.active{background:linear-gradient(135deg,#f06fa0,#e0457b);border-color:transparent;color:#fff;box-shadow:0 6px 14px -6px var(--shadow)}
+#guided-bar{display:flex;align-items:center;gap:12px;padding:9px 24px;background:var(--panel-bg);border-bottom:1px solid var(--border);flex-shrink:0;font-size:12px;flex-wrap:wrap}
+#guided-bar .label{color:var(--muted);font-size:11px;letter-spacing:.6px;font-weight:600}
+.guide-chip{display:flex;align-items:center;gap:7px;background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:4px 12px 4px 5px;cursor:pointer;transition:all .2s;font-size:11px;color:var(--text);font-weight:500}
+.guide-chip:hover{border-color:var(--accent);transform:translateY(-1px)}
+.guide-chip.active{border-color:var(--accent);background:var(--item-hover);color:var(--accent);font-weight:700}
+.guide-chip .num{background:linear-gradient(135deg,#f06fa0,#e0457b);color:#fff;border-radius:8px;padding:1px 7px;font-size:10px;font-weight:700}
+.guide-chip.active .num{background:#fff;color:var(--accent)}
+#play-btn{background:var(--text);border:none;border-radius:12px;padding:6px 16px;cursor:pointer;font-size:11px;font-family:inherit;font-weight:700;color:#fff;transition:all .2s}
+body.dark #play-btn{background:var(--accent)}
+#play-btn:hover{background:var(--accent);transform:translateY(-1px)}
+.guided-steps{color:var(--muted);font-size:11px;margin-left:auto}
+#layout{display:flex;flex:1;overflow:hidden}
+#sidebar{width:208px;background:var(--panel-bg);border-right:1px solid var(--border);padding:16px 12px;display:flex;flex-direction:column;gap:4px;overflow-y:auto;flex-shrink:0}
+#sidebar h3{font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:1.6px;margin-bottom:6px;font-weight:800}
+.filter-item{position:relative;display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:10px;cursor:pointer;font-size:12px;font-weight:500;transition:all .15s;color:var(--text)}
+.filter-item:hover{background:var(--item-bg)}
+.filter-item.active{background:var(--item-hover);font-weight:700}
+.filter-item.active::before{content:'';position:absolute;left:-12px;top:6px;bottom:6px;width:4px;border-radius:0 4px 4px 0;background:var(--accent)}
+.dot{width:11px;height:11px;border-radius:4px;flex-shrink:0;transform:rotate(45deg) scale(.85)}
+.filter-count{margin-left:auto;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:0 7px;font-size:10px;color:var(--accent);font-weight:700}
+#canvas-wrap{flex:1;overflow:auto;position:relative;background-color:var(--bg);
+  background-image:radial-gradient(ellipse at 15% 0%,rgba(255,143,184,.28),transparent 45%),radial-gradient(ellipse at 90% 100%,rgba(180,75,214,.16),transparent 45%),linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:auto,auto,32px 32px,32px 32px;background-attachment:local}
+#canvas{position:relative;width:2100px;min-height:940px;padding:30px}
+.zone{position:absolute;border-radius:22px;border:1.5px dashed;pointer-events:none}
+.zone-label{position:absolute;font-size:10px;font-weight:800;letter-spacing:.9px;text-transform:uppercase;padding:3px 12px;border-radius:8px;top:-12px;left:16px}
+.node{position:absolute;display:grid;grid-template-columns:34px 1fr;column-gap:9px;align-items:center;background:var(--surface);border-radius:18px;border:1px solid var(--border);padding:9px 12px 8px 15px;min-width:170px;cursor:pointer;transition:all .4s cubic-bezier(.175,.885,.32,1.275);user-select:none;box-shadow:0 10px 24px -14px var(--shadow);line-height:1.25}
+.node::before{content:'';position:absolute;left:0;top:14px;bottom:14px;width:4px;border-radius:0 4px 4px 0;background:currentColor}
+.node:hover{transform:translateY(-5px) scale(1.05);box-shadow:0 22px 40px -16px var(--shadow);border-color:currentColor;z-index:50}
+.node::after{content:'';position:absolute;inset:0;border-radius:18px;box-shadow:0 0 24px currentColor;opacity:0;transition:opacity .3s;pointer-events:none}
+.node:hover::after{opacity:.3}
+.node.highlighted{box-shadow:0 0 0 2px currentColor,0 16px 32px -12px var(--shadow);transform:translateY(-2px)}
+.node.dimmed{opacity:.2;pointer-events:none}
+.node-icon{grid-column:1;grid-row:1/3;width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:color-mix(in srgb,currentColor 14%,transparent);font-size:17px}
+.node-name{grid-column:2;grid-row:1;font-size:13.5px;font-weight:800;align-self:end}
+.node-path{grid-column:2;grid-row:2;font-size:10px;color:var(--muted);word-break:break-all;line-height:1.3;align-self:start;margin-top:2px}
+.node-details{grid-column:1/-1;margin:5px 0 4px;font-size:10px;color:var(--muted);line-height:1.45}
+.node-details code{color:var(--code);background:var(--item-bg);padding:0 5px;border-radius:5px;font-family:'Fira Code','JetBrains Mono','Consolas',monospace;font-size:9px}
+.node-badge{grid-column:1/-1;justify-self:start;line-height:1.3;display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:800;padding:2px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:.9px}
+.node-conn{position:absolute;top:-9px;right:12px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:9px;padding:1px 8px;color:var(--muted);font-weight:600}
+.n-ext{color:var(--col-ext)}.n-config{color:var(--col-config)}.n-domain{color:var(--col-domain)}.n-infra{color:var(--col-infra)}
+.n-prov{color:var(--col-prov)}.n-screen{color:var(--col-screen)}.n-widget{color:var(--col-widget)}.n-plat{color:var(--col-plat)}.n-dep{color:var(--col-dep)}
+#svg-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.ap{fill:none;stroke-width:1.8;stroke-dasharray:6 4;animation:dash 2s linear infinite;opacity:.8;stroke-linecap:round}
+.ap.solid{stroke-dasharray:none;animation:none}
+.albl{paint-order:stroke;stroke:var(--bg);stroke-width:4px;stroke-linejoin:round;font-weight:700}
+@keyframes dash{to{stroke-dashoffset:-20}}
+#modal-overlay{position:fixed;inset:0;background:var(--glass-bg);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:1000}
+#modal-overlay.open{opacity:1;pointer-events:auto}
+#modal-card{background:var(--surface);border:1px solid var(--border);border-radius:30px;width:90%;max-width:560px;max-height:85vh;padding:32px;box-shadow:0 30px 70px -20px var(--shadow),0 0 0 8px rgba(255,143,184,.18);transform:scale(.8) translateY(20px);opacity:0;transition:all .4s cubic-bezier(.175,.885,.32,1.275);overflow-y:auto;position:relative}
+#modal-overlay.open #modal-card{transform:scale(1) translateY(0);opacity:1}
+#mc-close{position:absolute;top:18px;right:18px;background:var(--item-bg);border:none;color:var(--accent);border-radius:12px;width:36px;height:36px;cursor:pointer;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;transition:all .2s}
+#mc-close:hover{background:var(--accent);color:#fff;transform:rotate(90deg)}
+#mc-content h2{font-size:24px;font-weight:800;margin-bottom:8px;letter-spacing:-.5px}
+.mc-badge{display:inline-block;padding:4px 12px;border-radius:8px;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px}
+.mc-path{font-size:12px;color:var(--muted);margin-bottom:20px;font-family:'Fira Code','Consolas',monospace;background:var(--item-bg);padding:8px 14px;border-radius:10px;word-break:break-all}
+.mc-section{margin-bottom:24px;animation:fadeInUp .5s ease backwards}
+.mc-section h3{font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:1.6px;margin-bottom:12px;border-bottom:2px solid var(--item-hover);padding-bottom:6px;font-weight:800}
+.mc-desc{font-size:14px;line-height:1.7;color:var(--text)}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.dp-row{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px}
+.dp-row .key{color:var(--muted)}
+.dp-row .val{font-weight:700;text-align:right;max-width:60%}
+.dep-item{font-size:11.5px;padding:4px 0;color:var(--muted);display:flex;align-items:flex-start;gap:8px}
+.dep-item::before{content:'\2192';color:var(--accent);font-weight:800;flex-shrink:0}
+.dep-item.in::before{content:'\2190';color:var(--col-widget)}
+.code-block{background:var(--item-bg);border-left:4px solid var(--accent);border-radius:12px;padding:12px 14px;font-family:'Fira Code','Courier New',monospace;font-size:10.5px;color:var(--code);line-height:1.7;white-space:pre-wrap;word-break:break-all}
+#legend{position:fixed;bottom:14px;left:224px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;background:var(--glass-bg);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:14px;padding:8px 16px;font-size:10px;font-weight:500;z-index:100;box-shadow:0 10px 24px -12px var(--shadow)}
+.leg-item{display:flex;align-items:center;gap:5px;cursor:pointer;color:var(--text)}
+.leg-dot{width:9px;height:9px;border-radius:3px;transform:rotate(45deg);transition:transform .2s}
+.leg-item:hover .leg-dot{transform:rotate(45deg) scale(1.5)}
+#zoom-ctrl{position:fixed;bottom:14px;right:22px;display:flex;gap:6px;z-index:100}
+.zbtn{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;width:30px;height:30px;cursor:pointer;font-size:15px;color:var(--accent);font-weight:800;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.zbtn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+#zoom-label{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:0 12px;font-size:11px;display:flex;align-items:center;color:var(--muted);font-weight:700}
+.signal-dot{position:absolute;width:8px;height:8px;border-radius:50%;pointer-events:none;z-index:50;filter:blur(1px)}
+#toast{position:fixed;bottom:60px;left:50%;transform:translateX(-50%);background:var(--text);color:#fff;border-radius:12px;padding:9px 22px;font-size:12px;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:300;white-space:nowrap}
+body.dark #toast{background:var(--accent)}
+#toast.show{opacity:1}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-thumb{background:#f4a6c6;border-radius:4px}
+::-webkit-scrollbar-track{background:transparent}
+</style>
+</head>
+<body>
+<div id="topbar">
+  <div id="title-block">
+    <h1>Arquitectura &middot; <span>yes_no_app</span> <small style="font-size:12px">&mdash; SportBot</small></h1>
+    <small>Practica 03 &middot; Flutter &middot; DMI-230040</small><br><small style="color:var(--accent); font-weight:bold; font-size:12px;">Realizado por: Luis Daniel Suarez Escamilla 10A IDGS</small>
+  </div>
+  <button class="pill active" id="mode-flow" onclick="setMode('flow')">&#9889; Signal Flow</button>
+  <button class="pill" id="mode-static" onclick="setMode('static')">&#9633; Classic</button>
+  <button class="pill" id="theme-btn" onclick="toggleTheme()">&#127774; Light</button>
+  <button class="pill" onclick="resetZoom()">&#8962; Reset</button>
+  <button class="pill" onclick="exportDiagram()">&#8599; Export</button>
+</div>
+<div id="guided-bar">
+  <span class="label">GUIDED VIEWS 0 / 3 &mdash;</span>
+  <strong>Explore this system</strong>
+  <button id="play-btn" onclick="playStory()">&#9654; Play story</button>
+  <div class="guide-chip" id="gv1" onclick="activateGuide(0)"><span class="num">01</span> Flujo de respuesta <small style="color:var(--muted);margin-left:4px">+5 -2</small></div>
+  <div class="guide-chip" id="gv2" onclick="activateGuide(1)"><span class="num">02</span> Ciclo de mensajes <small style="color:var(--muted);margin-left:4px">+4 -3</small></div>
+  <div class="guide-chip" id="gv3" onclick="activateGuide(2)"><span class="num">03</span> Widgets UI <small style="color:var(--muted);margin-left:4px">+3 -1</small></div>
+  <span class="guided-steps" id="guide-desc">Haz clic en un nodo para explorar sus dependencias</span>
+</div>
+<div id="layout">
+  <div id="sidebar">
+    <h3>Capas</h3>
+    <div class="filter-item active" onclick="filterLayer('all')" id="f-all"><span class="dot" style="background:#a08aa8"></span>Todas<span class="filter-count">11</span></div>
+    <div class="filter-item" onclick="filterLayer('ext')" id="f-ext"><span class="dot" style="background:var(--col-ext)"></span>External<span class="filter-count">1</span></div>
+    <div class="filter-item" onclick="filterLayer('dep')" id="f-dep"><span class="dot" style="background:var(--col-dep)"></span>Dependencias<span class="filter-count">2</span></div>
+    <div class="filter-item" onclick="filterLayer('config')" id="f-config"><span class="dot" style="background:var(--col-config)"></span>Config<span class="filter-count">2</span></div>
+    <div class="filter-item" onclick="filterLayer('domain')" id="f-domain"><span class="dot" style="background:var(--col-domain)"></span>Domain<span class="filter-count">1</span></div>
+    <div class="filter-item" onclick="filterLayer('infra')" id="f-infra"><span class="dot" style="background:var(--col-infra)"></span>Infrastructure<span class="filter-count">2</span></div>
+    <div class="filter-item" onclick="filterLayer('prov')" id="f-prov"><span class="dot" style="background:var(--col-prov)"></span>Provider<span class="filter-count">1</span></div>
+    <div class="filter-item" onclick="filterLayer('screen')" id="f-screen"><span class="dot" style="background:var(--col-screen)"></span>Screen<span class="filter-count">1</span></div>
+    <div class="filter-item" onclick="filterLayer('widget')" id="f-widget"><span class="dot" style="background:var(--col-widget)"></span>Widgets<span class="filter-count">3</span></div>
+    <div class="filter-item" onclick="filterLayer('plat')" id="f-plat"><span class="dot" style="background:var(--col-plat)"></span>Plataformas<span class="filter-count">3</span></div>
+    <h3 style="margin-top:14px">Stats</h3>
+    <div style="font-size:11px;color:var(--muted);line-height:2.1">
+      <div>&#128193; Dart files: <b style="color:var(--text)">10</b></div>
+      <div>&#128279; Conexiones: <b style="color:var(--text)">20</b></div>
+      <div>&#128230; Paquetes: <b style="color:var(--text)">3</b></div>
+      <div>&#127760; APIs: <b style="color:var(--text)">1</b></div>
+      <div>&#128241; Plataformas: <b style="color:var(--text)">5</b></div>
+    </div>
+  </div>
+  <div id="canvas-wrap">
+    <div id="canvas">
+      <svg id="svg-layer" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="m-or" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ff7a59"/></marker>
+          <marker id="m-pu" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#b45cf0"/></marker>
+          <marker id="m-ye" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f59e6c"/></marker>
+          <marker id="m-bl" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#6d7cff"/></marker>
+          <marker id="m-gr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#2bb5a0"/></marker>
+          <marker id="m-pk" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f43f8e"/></marker>
+          <marker id="m-cy" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#d946ef"/></marker>
+          <marker id="m-gy" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#a08aa8"/></marker>
+          <marker id="m-dg" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#e0a458"/></marker>
+        </defs>
+      </svg>
+
+      <!-- ZONE: Deps -->
+      <div class="zone" style="left:40px;top:28px;width:560px;height:140px;border-color:rgba(224,164,88,.4);background:rgba(224,164,88,.03)">
+        <span class="zone-label" style="color:var(--col-dep);background:rgba(224,164,88,.15)">&#128230; Dependencias &amp; Recursos</span>
+      </div>
+      <div class="node n-dep" id="n-pubspec" style="left:58px;top:52px;width:200px" onclick="openDetail('pubspec')">
+        <div class="node-icon">&#128230;</div>
+        <div class="node-name">pubspec.yaml</div>
+        <div class="node-path">yes_no_app/pubspec.yaml</div>
+        <div class="node-details"><code>provider ^6.1.5 &bull; dio ^5.4.0</code><br><code>google_fonts ^6.2.1</code></div>
+        <span class="node-badge" style="background:rgba(224,164,88,.15);color:var(--col-dep)">DEP</span>
+      </div>
+      <div class="node n-dep" id="n-assets" style="left:285px;top:52px;width:280px" onclick="openDetail('assets')">
+        <div class="node-icon">&#128444;</div>
+        <div class="node-name">assets/</div>
+        <div class="node-path">assets/sportbot_icon.jpg</div>
+        <div class="node-details"><code>AssetImage - avatar del bot en AppBar</code></div>
+        <span class="node-badge" style="background:rgba(224,164,88,.15);color:var(--col-dep)">ASSET</span>
+      </div>
+
+      <!-- ZONE: Root -->
+      <div class="zone" style="left:1630px;top:28px;width:400px;height:450px;border-color:rgba(160,138,168,.4);background:rgba(160,138,168,.03)">
+        <span class="zone-label" style="color:var(--col-plat);background:rgba(160,138,168,.15)">&#128193; Raíz del Proyecto</span>
+      </div>
+      <div class="node n-plat" id="n-test" style="left:1650px;top:60px;width:360px" onclick="openDetail('test')">
+        <div class="node-icon">&#129514;</div>
+        <div class="node-name">test/</div>
+        <div class="node-path">Pruebas unitarias y de widgets</div>
+        <div class="node-details"><code>flutter test</code></div>
+        <span class="node-badge" style="background:rgba(160,138,168,.15);color:var(--col-plat)">TESTING</span>
+      </div>
+      <div class="node n-config" id="n-analysis" style="left:1650px;top:160px;width:360px" onclick="openDetail('analysis')">
+        <div class="node-icon">&#128220;</div>
+        <div class="node-name">analysis_options.yaml</div>
+        <div class="node-path">Reglas del linter</div>
+        <div class="node-details"><code>include: package:flutter_lints...</code></div>
+        <span class="node-badge" style="background:rgba(217,70,239,.15);color:var(--col-config)">CONFIG</span>
+      </div>
+      <div class="node n-dep" id="n-gitignore" style="left:1650px;top:260px;width:360px" onclick="openDetail('gitignore')">
+        <div class="node-icon">&#128062;</div>
+        <div class="node-name">.gitignore</div>
+        <div class="node-path">Exclusiones de Git</div>
+        <div class="node-details"><code>/build/</code></div>
+        <span class="node-badge" style="background:rgba(224,164,88,.15);color:var(--col-dep)">GIT</span>
+      </div>
+      <div class="node n-dep" id="n-readme" style="left:1650px;top:360px;width:360px" onclick="openDetail('readme')">
+        <div class="node-icon">&#128196;</div>
+        <div class="node-name">README.md</div>
+        <div class="node-path">Documentación del proyecto</div>
+        <div class="node-details"><code>Instrucciones y descripción</code></div>
+        <span class="node-badge" style="background:rgba(224,164,88,.15);color:var(--col-dep)">DOCS</span>
+      </div>
+
+      <!-- ZONE: Flutter lib -->
+      <div class="zone" style="left:40px;top:176px;width:1570px;height:541px;border-color:rgba(219,39,119,.3);background:rgba(219,39,119,.02)">
+        <span class="zone-label" style="color:#db2777;background:rgba(219,39,119,.12)">&#127919; Flutter &middot; lib/ &middot; Codigo Fuente Dart</span>
+      </div>
+
+      <!-- main.dart -->
+      <div class="node n-config" id="n-main" style="left:660px;top:183px;width:225px" onclick="openDetail('main')">
+        <div class="node-conn">out 3 &middot; in 0</div>
+        <div class="node-icon">&#128640;</div>
+        <div class="node-name">main.dart</div>
+        <div class="node-path">lib/main.dart</div>
+        <div class="node-details"><code>MyApp &bull; MultiProvider</code><br><code>AppTheme(selectedColor:0)</code></div>
+        <span class="node-badge" style="background:rgba(217,70,239,.15);color:var(--col-config)">ENTRY</span>
+      </div>
+
+      <!-- AppTheme -->
+      <div class="node n-config" id="n-theme" style="left:930px;top:183px;width:225px" onclick="openDetail('theme')">
+        <div class="node-conn">out 0 &middot; in 1</div>
+        <div class="node-icon">&#127912;</div>
+        <div class="node-name">AppTheme</div>
+        <div class="node-path">lib/config/theme/app_theme.dart</div>
+        <div class="node-details"><code>Brightness.dark &bull; Material3</code><br><code>Color #1565C0 azul deportivo</code></div>
+        <span class="node-badge" style="background:rgba(217,70,239,.15);color:var(--col-config)">CONFIG</span>
+      </div>
+
+      <!-- Row 2 -->
+      <!-- External API -->
+      <div class="node n-ext" id="n-api" style="left:60px;top:345px;width:195px" onclick="openDetail('api')">
+        <div class="node-conn">out 1 &middot; in 1</div>
+        <div class="node-icon">&#127760;</div>
+        <div class="node-name">yesno.wtf</div>
+        <div class="node-path">https://yesno.wtf/api</div>
+        <div class="node-details"><code>GET ?force=yes|no|maybe</code><br><code>JSON: answer &bull; image &bull; forced</code></div>
+        <span class="node-badge" style="background:rgba(255,122,89,.15);color:var(--col-ext)">EXTERNAL</span>
+      </div>
+
+      <!-- GetYesNoAnswer -->
+      <div class="node n-infra" id="n-datasource" style="left:300px;top:325px;width:235px" onclick="openDetail('datasource')">
+        <div class="node-conn">out 2 &middot; in 1</div>
+        <div class="node-icon">&#9881;</div>
+        <div class="node-name">GetYesNoAnswer</div>
+        <div class="node-path">lib/infrastructure/datasources/<br>get_yes_no_answer.dart</div>
+        <div class="node-details"><code>[yes,yes,no,no,maybe] 40/40/20</code><br><code>Dio().get(force: random)</code></div>
+        <span class="node-badge" style="background:rgba(180,92,240,.15);color:var(--col-infra)">DATASOURCE</span>
+      </div>
+
+      <!-- ChatProvider -->
+      <div class="node n-prov" id="n-provider" style="left:588px;top:325px;width:235px" onclick="openDetail('provider')">
+        <div class="node-conn">out 2 &middot; in 2</div>
+        <div class="node-icon">&#128260;</div>
+        <div class="node-name">ChatProvider</div>
+        <div class="node-path">lib/presentation/providers/<br>chat_provider.dart</div>
+        <div class="node-details"><code>sendMessage(text) &bull; notifyListeners()</code><br><code>ScrollController</code></div>
+        <span class="node-badge" style="background:rgba(245,158,108,.15);color:var(--col-prov)">PROVIDER</span>
+      </div>
+
+      <!-- ChatScreen -->
+      <div class="node n-screen" id="n-screen" style="left:880px;top:325px;width:235px" onclick="openDetail('screen')">
+        <div class="node-conn">out 3 &middot; in 2</div>
+        <div class="node-icon">&#128241;</div>
+        <div class="node-name">ChatScreen</div>
+        <div class="node-path">lib/presentation/screens/chat/<br>chat_screen.dart</div>
+        <div class="node-details"><code>context.watch&lt;ChatProvider&gt;()</code><br><code>ListView.builder &bull; AppBar</code></div>
+        <span class="node-badge" style="background:rgba(109,124,255,.15);color:var(--col-screen)">SCREEN</span>
+      </div>
+
+      <!-- MessageFieldBox (row2 right) -->
+      <div class="node n-widget" id="n-fieldbox" style="left:1165px;top:325px;width:220px" onclick="openDetail('fieldbox')">
+        <div class="node-conn">out 1 &middot; in 1</div>
+        <div class="node-icon">&#9000;</div>
+        <div class="node-name">MessageFieldBox</div>
+        <div class="node-path">lib/presentation/widgets/shared/<br>message_field_box.dart</div>
+        <div class="node-details"><code>onValue: ValueChanged&lt;String&gt;</code><br><code>TextFormField + Send btn</code></div>
+        <span class="node-badge" style="background:rgba(43,181,160,.15);color:var(--col-widget)">WIDGET</span>
+      </div>
+
+      <!-- Row 3 -->
+      <!-- YesNoModel -->
+      <div class="node n-infra" id="n-model" style="left:300px;top:530px;width:235px" onclick="openDetail('model')">
+        <div class="node-conn">out 1 &middot; in 1</div>
+        <div class="node-icon">&#128208;</div>
+        <div class="node-name">YesNoModel</div>
+        <div class="node-path">lib/infrastructure/models/<br>yes_no_model.dart</div>
+        <div class="node-details"><code>fromJson(Map json)</code><br><code>toMessageEntity() - Si/No/Tal vez</code></div>
+        <span class="node-badge" style="background:rgba(180,92,240,.15);color:var(--col-infra)">MODEL</span>
+      </div>
+
+      <!-- Message entity -->
+      <div class="node n-domain" id="n-message" style="left:588px;top:530px;width:235px" onclick="openDetail('message')">
+        <div class="node-conn">out 0 &middot; in 4</div>
+        <div class="node-icon">&#128172;</div>
+        <div class="node-name">Message</div>
+        <div class="node-path">lib/domain/entities/message.dart</div>
+        <div class="node-details"><code>text &bull; from &bull; imageUrl?</code><br><code>createdAt: DateTime.now()</code></div>
+        <span class="node-badge" style="background:rgba(244,63,142,.15);color:var(--col-domain)">ENTITY</span>
+      </div>
+
+      <!-- MyMessageBubble -->
+      <div class="node n-widget" id="n-mybubble" style="left:880px;top:510px;width:220px" onclick="openDetail('mybubble')">
+        <div class="node-conn">out 0 &middot; in 1</div>
+        <div class="node-icon">&#128153;</div>
+        <div class="node-name">MyMessageBubble</div>
+        <div class="node-path">lib/presentation/widgets/chat/<br>my_message_bubble.dart</div>
+        <div class="node-details"><code>Burbuja usuario -&gt; derecha</code><br><code>texto + hora HH:MM AM/PM</code></div>
+        <span class="node-badge" style="background:rgba(43,181,160,.15);color:var(--col-widget)">WIDGET</span>
+      </div>
+
+      <!-- HerMessageBubble -->
+      <div class="node n-widget" id="n-herbubble" style="left:1165px;top:510px;width:220px" onclick="openDetail('herbubble')">
+        <div class="node-conn">out 0 &middot; in 1</div>
+        <div class="node-icon">&#129302;</div>
+        <div class="node-name">HerMessageBubble</div>
+        <div class="node-path">lib/presentation/widgets/chat/<br>her_message_bubble.dart</div>
+        <div class="node-details"><code>Burbuja bot &lt;- izquierda</code><br><code>texto + hora + GIF animado</code></div>
+        <span class="node-badge" style="background:rgba(43,181,160,.15);color:var(--col-widget)">WIDGET</span>
+      </div>
+
+      <!-- ZONE: Platform -->
+      <div class="zone" style="left:40px;top:750px;width:1570px;height:115px;border-color:rgba(160,138,168,.3);background:rgba(160,138,168,.03)">
+        <span class="zone-label" style="color:var(--col-plat);background:rgba(160,138,168,.15)">&#127959; Targets y salida compilada</span>
+      </div>
+      <div class="node n-plat" id="n-platforms" style="left:60px;top:770px;width:330px" onclick="openDetail('platforms')">
+        <div class="node-icon">&#128193;</div>
+        <div class="node-name">Proyectos de plataforma</div>
+        <div class="node-path">android/ &bull; ios/ &bull; linux/ &bull; macos/ &bull; web/ &bull; windows/</div>
+        <div class="node-details"><code>android:label="SportBot" + INTERNET permission</code></div>
+        <span class="node-badge" style="background:rgba(160,138,168,.15);color:var(--col-plat)">PLATFORM</span>
+      </div>
+      <div class="node n-plat" id="n-build" style="left:425px;top:770px;width:205px" onclick="openDetail('build')">
+        <div class="node-icon">&#128296;</div>
+        <div class="node-name">build/</div>
+        <div class="node-path">Salida local de Flutter</div>
+        <div class="node-details"><code>flutter build apk</code></div>
+        <span class="node-badge" style="background:rgba(160,138,168,.15);color:var(--col-plat)">BUILD</span>
+      </div>
+      <div class="node n-plat" id="n-apk" style="left:665px;top:770px;width:215px" onclick="openDetail('apk')">
+        <div class="node-icon">&#128242;</div>
+        <div class="node-name">app-debug.apk</div>
+        <div class="node-path">build/app/outputs/flutter-apk/</div>
+        <div class="node-details"><code>SportBot v1.0.0+1</code></div>
+        <span class="node-badge" style="background:rgba(160,138,168,.15);color:var(--col-plat)">OUTPUT</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-overlay">
+  <div id="modal-card">
+    <button id="mc-close" onclick="closeDetail()">X</button>
+    <div id="mc-content"></div>
+  </div>
+</div>
+
+<div id="legend">
+  <b style="font-size:10px;color:var(--muted)">Legend</b>
+  <div class="leg-item" onclick="filterLayer('ext')"><div class="leg-dot" style="background:var(--col-ext)"></div>External</div>
+  <div class="leg-item" onclick="filterLayer('dep')"><div class="leg-dot" style="background:var(--col-dep)"></div>Deps</div>
+  <div class="leg-item" onclick="filterLayer('config')"><div class="leg-dot" style="background:var(--col-config)"></div>Config</div>
+  <div class="leg-item" onclick="filterLayer('domain')"><div class="leg-dot" style="background:var(--col-domain)"></div>Domain</div>
+  <div class="leg-item" onclick="filterLayer('infra')"><div class="leg-dot" style="background:var(--col-infra)"></div>Infra</div>
+  <div class="leg-item" onclick="filterLayer('prov')"><div class="leg-dot" style="background:var(--col-prov)"></div>Provider</div>
+  <div class="leg-item" onclick="filterLayer('screen')"><div class="leg-dot" style="background:var(--col-screen)"></div>Screen</div>
+  <div class="leg-item" onclick="filterLayer('widget')"><div class="leg-dot" style="background:var(--col-widget)"></div>Widget</div>
+  <div class="leg-item" onclick="filterLayer('plat')"><div class="leg-dot" style="background:var(--col-plat)"></div>Platform</div>
+</div>
+<div id="zoom-ctrl">
+  <button class="zbtn" onclick="zoom(-0.1)">-</button>
+  <div id="zoom-label">100%</div>
+  <button class="zbtn" onclick="zoom(0.1)">+</button>
+</div>
+<div id="toast"></div>
+<script>
+const DETAILS={
+  test:{name:'test/',path:'yes_no_app/test/',layer:'TESTING',color:'#a08aa8',desc:'Directorio para pruebas unitarias, de widgets y de integración.',fields:[['Comando','flutter test']],out:[],inn:[],code:'void main() {\n  testWidgets(\'My widget test\', (WidgetTester tester) async {\n    // Build our app and trigger a frame.\n  });\n}'},
+  analysis:{name:'analysis_options.yaml',path:'yes_no_app/analysis_options.yaml',layer:'CONFIG',color:'#d946ef',desc:'Configura el analizador estático de Dart y las reglas de linting.',fields:[['Lints','flutter_lints']],out:[],inn:[],code:'include: package:flutter_lints/flutter.yaml\nlinter:\n  rules:\n    - prefer_const_constructors'},
+  gitignore:{name:'.gitignore',path:'yes_no_app/.gitignore',layer:'GIT',color:'#e0a458',desc:'Archivos excluidos del control de versiones (ej. carpetas build, archivos generados).',fields:[],out:[],inn:[],code:'/build/\n.dart_tool/\n.flutter-plugins\n.pub-cache/'},
+  readme:{name:'README.md',path:'yes_no_app/README.md',layer:'DOCS',color:'#e0a458',desc:'Documentación principal del repositorio.',fields:[],out:[],inn:[],code:'# yes_no_app\n\nA new Flutter project.'},
+  pubspec:{name:'pubspec.yaml',path:'yes_no_app/pubspec.yaml',layer:'DEP',color:'#e0a458',
+    desc:'Archivo de configuracion del proyecto Flutter. Define metadatos, version del SDK y dependencias de terceros.',
+    fields:[['SDK','Dart ^3.13.2'],['Version','1.0.0+1'],['Plataforma','Flutter']],
+    out:['provider:^6.1.5 → ChatProvider','dio:^5.4.0 → GetYesNoAnswer','google_fonts:^6.2.1 → AppTheme'],inn:[],
+    code:'dependencies:\n  flutter:\n    sdk: flutter\n  provider: ^6.1.5+1\n  dio: ^5.4.0\n  google_fonts: ^6.2.1\n  cupertino_icons: ^1.0.8'},
+  assets:{name:'assets/',path:'assets/sportbot_icon.jpg',layer:'ASSET',color:'#e0a458',
+    desc:'Carpeta de recursos estaticos. Contiene el icono personalizado SportBot usado como avatar en el AppBar.',
+    fields:[['Archivo','sportbot_icon.jpg'],['Uso','AssetImage en ChatScreen'],['Referencia','pubspec.yaml flutter.assets']],
+    out:['sportbot_icon.jpg → ChatScreen AppBar'],inn:['pubspec.yaml declara el asset'],
+    code:'flutter:\n  assets:\n    - assets/sportbot_icon.jpg'},
+  main:{name:'main.dart',path:'lib/main.dart',layer:'ENTRY',color:'#d946ef',
+    desc:'Punto de entrada. Configura MultiProvider, MaterialApp, el tema oscuro y lanza ChatScreen como home.',
+    fields:[['Clase','MyApp : StatelessWidget'],['Widget raiz','MaterialApp'],['Providers','ChatProvider']],
+    out:['AppTheme → genera ThemeData','ChatProvider → inyectado via MultiProvider','ChatScreen → home de la app'],inn:[],
+    code:'void main() => runApp(const MyApp());\nMultiProvider(\n  providers: [\n    ChangeNotifierProvider(\n      create: (_) => ChatProvider()),\n  ],\n  child: MaterialApp(\n    title: "SportBot",\n    theme: AppTheme(selectedColor:0).theme(),\n    home: const ChatScreen(),\n  ),\n)'},
+  theme:{name:'AppTheme',path:'lib/config/theme/app_theme.dart',layer:'CONFIG',color:'#d946ef',
+    desc:'Clase de configuracion visual. Tema oscuro Material3 con paleta azul deportiva.',
+    fields:[['Seed color','#1565C0 (azul deportivo)'],['Modo','Brightness.dark'],['Version','Material 3']],
+    out:[],inn:['main.dart → AppTheme(selectedColor:0).theme()'],
+    code:'const Color _customColor = Color(0xFF1565C0);\n\nThemeData theme() {\n  return ThemeData(\n    useMaterial3: true,\n    colorSchemeSeed: _colorThemes[selectedColor],\n    brightness: Brightness.dark,\n  );\n}'},
+  api:{name:'yesno.wtf API',path:'https://yesno.wtf/api',layer:'EXTERNAL',color:'#ff7a59',
+    desc:'Servicio externo que devuelve respuestas aleatorias con GIF. Se fuerza la respuesta con ?force= para la distribucion 40/40/20.',
+    fields:[['Endpoint','GET https://yesno.wtf/api'],['Parametro','?force=yes|no|maybe'],['Respuesta','JSON {answer, image, forced}']],
+    out:['JSON response → GetYesNoAnswer'],inn:['GetYesNoAnswer → Dio.get()'],
+    code:'// Ejemplo de respuesta JSON:\n{\n  "answer": "yes",\n  "forced": true,\n  "image": "https://yesno.wtf/assets/yes/...gif"\n}'},
+  datasource:{name:'GetYesNoAnswer',path:'lib/infrastructure/datasources/get_yes_no_answer.dart',layer:'DATASOURCE',color:'#b45cf0',
+    desc:'Datasource que implementa la distribucion 40/40/20 usando 5 opciones equiprobables. Usa Dio para el HTTP.',
+    fields:[['Distribucion','40% Si · 40% No · 20% Tal vez'],['HTTP','Dio ^5.4.0'],['Metodo','getAnswer() async']],
+    out:['Dio → yesno.wtf API (HTTP GET)','YesNoModel → parsea respuesta JSON'],inn:['ChatProvider → llama getAnswer()'],
+    code:"final _options = ['yes','yes','no','no','maybe'];\n\nFuture<Message> getAnswer() async {\n  final rand = _options[Random().nextInt(5)];\n  final res = await _dio.get(\n    'https://yesno.wtf/api',\n    queryParameters: {'force': rand},\n  );\n  return YesNoModel.fromJson(res.data)\n    .toMessageEntity();\n}"},
+  provider:{name:'ChatProvider',path:'lib/presentation/providers/chat_provider.dart',layer:'PROVIDER',color:'#f59e6c',
+    desc:'Gestor de estado del chat (ChangeNotifier). Acumula mensajes, detecta ? al final y dispara la peticion al bot.',
+    fields:[['Hereda de','ChangeNotifier'],['Estado','List<Message> messages'],['Scroll','ScrollController chatScrollController']],
+    out:['GetYesNoAnswer → pide respuesta del bot','ChatScreen → notifyListeners() re-render'],
+    inn:['ChatScreen → context.watch<ChatProvider>()','MessageFieldBox → sendMessage(text)'],
+    code:'List<Message> messages = [];\n\nFuture<void> sendMessage(String text) async {\n  messages.add(Message(text: text, from: MessageFrom.mine));\n  notifyListeners();\n  _scrollToBottom();\n  if (text.endsWith("?")) {\n    final bot = await _getYesNoAnswer.getAnswer();\n    messages.add(bot);\n    notifyListeners();\n    _scrollToBottom();\n  }\n}'},
+  screen:{name:'ChatScreen',path:'lib/presentation/screens/chat/chat_screen.dart',layer:'SCREEN',color:'#6d7cff',
+    desc:'Pantalla principal. Observa ChatProvider, renderiza burbujas y contiene el campo de texto.',
+    fields:[['Tipo','StatelessWidget'],['Observa','ChatProvider via context.watch'],['Scroll','chatScrollController']],
+    out:['MyMessageBubble → mensajes del usuario','HerMessageBubble → mensajes del bot','MessageFieldBox → campo de texto'],
+    inn:['main.dart → home: ChatScreen()','ChatProvider → notifyListeners() re-render'],
+    code:"final chatProvider = context.watch<ChatProvider>();\nListView.builder(\n  controller: chatProvider.chatScrollController,\n  itemBuilder: (ctx, i) {\n    final msg = chatProvider.messages[i];\n    return msg.from == MessageFrom.mine\n      ? MyMessageBubble(message: msg)\n      : HerMessageBubble(message: msg);\n  },\n)"},
+  model:{name:'YesNoModel',path:'lib/infrastructure/models/yes_no_model.dart',layer:'MODEL',color:'#b45cf0',
+    desc:'Modelo que parsea el JSON de yesno.wtf y lo convierte a la entidad Message con texto en espanol.',
+    fields:[['Props','answer · forced · image'],['Fabrica','fromJson(Map<String,dynamic> json)'],['Conversion','toMessageEntity()']],
+    out:['Message entity → via toMessageEntity()'],inn:['GetYesNoAnswer → YesNoModel.fromJson(response.data)'],
+    code:'factory YesNoModel.fromJson(Map<String,dynamic> json) {\n  return YesNoModel(\n    answer: json["answer"],\n    forced: json["forced"],\n    image:  json["image"],\n  );\n}\nMessage toMessageEntity() {\n  final text = answer == "yes" ? "Si 💪"\n             : answer == "no"  ? "No 🚫"\n             : "Tal vez... 🤔";\n  return Message(text: text, from: MessageFrom.bot, imageUrl: image);\n}'},
+  message:{name:'Message',path:'lib/domain/entities/message.dart',layer:'ENTITY',color:'#f43f8e',
+    desc:'Entidad central del dominio. Representa un mensaje con remitente, texto, GIF opcional y timestamp automatico.',
+    fields:[['text','String contenido del mensaje'],['from','MessageFrom.mine o .bot'],['imageUrl','String? URL del GIF'],['createdAt','DateTime.now() hora local']],
+    out:[],inn:['YesNoModel.toMessageEntity()','ChatProvider crea Message(mine)','MyMessageBubble consume message.text','HerMessageBubble consume message.imageUrl'],
+    code:'enum MessageFrom { mine, bot }\n\nclass Message {\n  final String      text;\n  final MessageFrom from;\n  final String?     imageUrl;\n  final DateTime    createdAt;\n\n  Message({\n    required this.text,\n    required this.from,\n    this.imageUrl,\n  }) : createdAt = DateTime.now();\n}'},
+  mybubble:{name:'MyMessageBubble',path:'lib/presentation/widgets/chat/my_message_bubble.dart',layer:'WIDGET',color:'#2bb5a0',
+    desc:'Burbuja del usuario alineada a la derecha con el color primario del tema y la hora de envio.',
+    fields:[['Alineacion','CrossAxisAlignment.end'],['Color','colors.primary'],['Hora','HH:MM AM/PM']],
+    out:[],inn:['ChatScreen → MyMessageBubble(message: msg)'],
+    code:'Column(\n  crossAxisAlignment: CrossAxisAlignment.end,\n  children: [\n    Container(\n      decoration: BoxDecoration(\n        color: colors.primary,\n        borderRadius: BorderRadius.circular(20)),\n      child: Column(children: [\n        Text(message.text, style: TextStyle(color: Colors.white)),\n        Text(timeText, style: TextStyle(color: white70, fontSize:11)),\n      ])),\n  ]\n)'},
+  herbubble:{name:'HerMessageBubble',path:'lib/presentation/widgets/chat/her_message_bubble.dart',layer:'WIDGET',color:'#2bb5a0',
+    desc:'Burbuja del bot a la izquierda. Muestra texto traducido, hora y GIF animado con manejo de carga.',
+    fields:[['Alineacion','CrossAxisAlignment.start'],['Color','colors.secondary'],['GIF','Image.network + loadingBuilder + errorBuilder']],
+    out:[],inn:['ChatScreen → HerMessageBubble(message: msg)','Message.imageUrl → URL del GIF'],
+    code:'if (message.imageUrl != null)\n  _ImageBubble(imageUrl: message.imageUrl!);\n\nClipRRect(\n  borderRadius: BorderRadius.circular(20),\n  child: Image.network(\n    imageUrl, width: size.width * 0.7, height: 150,\n    fit: BoxFit.cover,\n    loadingBuilder: (ctx, child, prog) {\n      if (prog == null) return child;\n      return CircularProgressIndicator();\n    },\n  ),\n)'},
+  fieldbox:{name:'MessageFieldBox',path:'lib/presentation/widgets/shared/message_field_box.dart',layer:'WIDGET',color:'#2bb5a0',
+    desc:'Campo de texto para enviar mensajes. Desacoplado via callback onValue para reutilizacion.',
+    fields:[['onValue','ValueChanged<String> callback'],['Submit','Enter key + boton enviar'],['Hint','Escribe un mensaje...']],
+    out:['ChatProvider → sendMessage via onValue'],inn:['ChatScreen → MessageFieldBox(onValue: chatProvider.sendMessage)'],
+    code:'class MessageFieldBox extends StatelessWidget {\n  final ValueChanged<String> onValue;\n\n  onFieldSubmitted: (value) {\n    final trimmed = value.trim();\n    if (trimmed.isEmpty) return;\n    onValue(trimmed);\n    textController.clear();\n    focusNode.requestFocus();\n  },\n}'},
+  platforms:{name:'Proyectos de plataforma',path:'android/ · ios/ · linux/ · macos/ · web/ · windows/',layer:'PLATFORM',color:'#a08aa8',
+    desc:'Proyectos nativos para cada plataforma. Android incluye permiso INTERNET y label SportBot.',
+    fields:[['android','AndroidManifest + INTERNET permission'],['label','SportBot'],['otros','ios · linux · macos · web · windows']],
+    out:['build/ → artefactos compilados'],inn:['Flutter toolchain → flutter build'],
+    code:'<!-- AndroidManifest.xml -->\n<uses-permission\n  android:name="android.permission.INTERNET"/>\n<application android:label="SportBot"\n  android:icon="@mipmap/ic_launcher" ...>'},
+  build:{name:'build/',path:'yes_no_app/build/',layer:'BUILD',color:'#a08aa8',
+    desc:'Directorio de salida del compilador Flutter. Contiene APKs y artefactos para cada plataforma.',
+    fields:[['Comando','flutter build apk --debug'],['Debug','app-debug.apk'],['Release','app-release.apk']],
+    out:['app-debug.apk → instalacion directa'],inn:['Proyectos de plataforma → entrada'],
+    code:'# Compilar APK debug:\nflutter build apk --debug\n\n# Salida:\nbuild/app/outputs/flutter-apk/app-debug.apk'},
+  apk:{name:'app-debug.apk',path:'build/app/outputs/flutter-apk/',layer:'OUTPUT',color:'#a08aa8',
+    desc:'APK instalable en Android. Lista para despliegue en la universidad.',
+    fields:[['Version','1.0.0+1'],['minSdk','21'],['targetSdk','34']],
+    out:[],inn:['build/ → compilacion'],
+    code:'adb install app-debug.apk\n# o arrastrar al emulador\n# o compartir por USB al dispositivo'}
+};
+
+const CONNECTIONS=[
+  {from:'n-pubspec',to:'n-datasource',color:'#e0a458',label:'dio',style:'dashed',mk:'m-dg'},
+  {from:'n-pubspec',to:'n-provider',color:'#e0a458',label:'provider',style:'dashed',mk:'m-dg'},
+  {from:'n-pubspec',to:'n-theme',color:'#e0a458',label:'fonts',style:'dashed',mk:'m-dg'},
+  {from:'n-assets',to:'n-screen',color:'#e0a458',label:'AssetImage',style:'dashed',mk:'m-dg'},
+  {from:'n-main',to:'n-theme',color:'#d946ef',label:'theme()',style:'solid',mk:'m-cy'},
+  {from:'n-main',to:'n-provider',color:'#d946ef',label:'provide',style:'solid',mk:'m-cy'},
+  {from:'n-main',to:'n-screen',color:'#d946ef',label:'home:',style:'solid',mk:'m-cy'},
+  {from:'n-datasource',to:'n-api',color:'#ff7a59',label:'Dio.get(force)',style:'solid',mk:'m-or'},
+  {from:'n-api',to:'n-datasource',color:'#b45cf0',label:'JSON',style:'dashed',mk:'m-pu'},
+  {from:'n-datasource',to:'n-model',color:'#b45cf0',label:'fromJson()',style:'solid',mk:'m-pu'},
+  {from:'n-model',to:'n-message',color:'#f43f8e',label:'toEntity()',style:'solid',mk:'m-pk'},
+  {from:'n-provider',to:'n-datasource',color:'#f59e6c',label:'getAnswer()',style:'solid',mk:'m-ye'},
+  {from:'n-provider',to:'n-message',color:'#f43f8e',label:'Message(mine)',style:'dashed',mk:'m-pk'},
+  {from:'n-screen',to:'n-provider',color:'#6d7cff',label:'watch<>()',style:'dashed',mk:'m-bl'},
+  {from:'n-screen',to:'n-mybubble',color:'#2bb5a0',label:'Message',style:'solid',mk:'m-gr'},
+  {from:'n-screen',to:'n-herbubble',color:'#2bb5a0',label:'Message',style:'solid',mk:'m-gr'},
+  {from:'n-screen',to:'n-fieldbox',color:'#2bb5a0',label:'onValue:',style:'solid',mk:'m-gr'},
+  {from:'n-fieldbox',to:'n-provider',color:'#f59e6c',label:'sendMsg()',style:'dashed',mk:'m-ye'},
+  {from:'n-platforms',to:'n-build',color:'#a08aa8',label:'compile',style:'dashed',mk:'m-gy'},
+  {from:'n-build',to:'n-apk',color:'#a08aa8',label:'output',style:'solid',mk:'m-gy'}
+];
+
+const GUIDES=[
+  {name:'Flujo de respuesta',desc:'De la pregunta del usuario a la respuesta del bot',nodes:['n-fieldbox','n-provider','n-datasource','n-api','n-model','n-message','n-herbubble']},
+  {name:'Ciclo de mensajes',desc:'Como se crean y muestran los mensajes en pantalla',nodes:['n-main','n-screen','n-provider','n-message','n-mybubble','n-herbubble']},
+  {name:'Widgets UI',desc:'Los tres widgets de interfaz y su composicion',nodes:['n-screen','n-mybubble','n-herbubble','n-fieldbox']}
+];
+
+const layerMap={
+  ext:['n-api'],dep:['n-pubspec','n-assets'],config:['n-main','n-theme'],
+  domain:['n-message'],infra:['n-datasource','n-model'],prov:['n-provider'],
+  screen:['n-screen'],widget:['n-mybubble','n-herbubble','n-fieldbox'],
+  plat:['n-platforms','n-build','n-apk']
+};
+
+let zoomLevel=1,activeGuide=-1,signalMode=true,signalInterval=null,storyTimer=null;
+
+function getCtr(el){
+  const r=el.getBoundingClientRect();
+  const cr=document.getElementById('canvas').getBoundingClientRect();
+  return{x:(r.left+r.right)/2-cr.left,y:(r.top+r.bottom)/2-cr.top,
+    left:r.left-cr.left,right:r.right-cr.left,top:r.top-cr.top,bottom:r.bottom-cr.top};
+}
+
+function drawArrows(){
+  const svg=document.getElementById('svg-layer');
+  svg.querySelectorAll('path.ap,text.albl').forEach(e=>e.remove());
+  CONNECTIONS.forEach(conn=>{
+    const fe=document.getElementById(conn.from),te=document.getElementById(conn.to);
+    if(!fe||!te)return;
+    const f=getCtr(fe),t=getCtr(te);
+    let fx,fy,tx,ty;
+    const dx=t.x-f.x,dy=t.y-f.y;
+    if(Math.abs(dx)>Math.abs(dy)){
+      fx=dx>0?f.right:f.left;fy=f.y;tx=dx>0?t.left:t.right;ty=t.y;
+    }else{
+      fx=f.x;fy=dy>0?f.bottom:f.top;tx=t.x;ty=dy>0?t.top:t.bottom;
+    }
+    const cx1=fx+(tx-fx)*.5,cy1=fy,cx2=fx+(tx-fx)*.5,cy2=ty;
+    const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+    p.setAttribute('d','M'+fx+','+fy+' C'+cx1+','+cy1+' '+cx2+','+cy2+' '+tx+','+ty);
+    p.setAttribute('stroke',conn.color);
+    p.setAttribute('marker-end','url(#'+conn.mk+')');
+    p.classList.add('ap');
+    if(conn.style==='solid')p.classList.add('solid');
+    svg.appendChild(p);
+    const mx=(fx+tx)/2,my=(fy+ty)/2-7;
+    const lbl=document.createElementNS('http://www.w3.org/2000/svg','text');
+    lbl.setAttribute('x',mx);lbl.setAttribute('y',my);
+    lbl.setAttribute('fill',conn.color);lbl.setAttribute('font-size','9');
+    lbl.setAttribute('text-anchor','middle');lbl.setAttribute('font-family','monospace');
+    lbl.setAttribute('opacity','0.75');lbl.classList.add('albl');
+    lbl.textContent=conn.label;
+    svg.appendChild(lbl);
+  });
+}
+
+function startSignalFlow(){
+  if(signalInterval)clearInterval(signalInterval);
+  if(!signalMode)return;
+  let idx=0;
+  signalInterval=setInterval(()=>{
+    const conn=CONNECTIONS[idx%CONNECTIONS.length];idx++;
+    const fe=document.getElementById(conn.from),te=document.getElementById(conn.to);
+    if(!fe||!te)return;
+    const f=getCtr(fe),t=getCtr(te);
+    const dot=document.createElement('div');
+    dot.className='signal-dot';
+    dot.style.background=conn.color;
+    dot.style.boxShadow='0 0 6px 3px '+conn.color;
+    document.getElementById('canvas').appendChild(dot);
+    const sx=f.x-4,sy=f.y-4,ex=t.x-4,ey=t.y-4,dur=700;
+    const st=performance.now();
+    dot.style.opacity='1';
+    function step(now){
+      const p=Math.min((now-st)/dur,1);
+      const e=p<.5?2*p*p:-1+(4-2*p)*p;
+      dot.style.left=(sx+(ex-sx)*e)+'px';dot.style.top=(sy+(ey-sy)*e)+'px';
+      if(p<1)requestAnimationFrame(step);
+      else{dot.style.opacity='0';setTimeout(()=>dot.remove(),200);}
+    }
+    requestAnimationFrame(step);
+  },380);
+}
+
+function openDetail(key){
+  const d=DETAILS[key];if(!d)return;
+  const outH=d.out.map((s,i)=>`<div class="dep-item" style="animation-delay:${i*0.05}s">${s}</div>`).join('');
+  const inH=d.inn.map((s,i)=>`<div class="dep-item in" style="animation-delay:${i*0.05}s">${s}</div>`).join('');
+  const fH=d.fields.map(([k,v],i)=>`<div class="dp-row" style="animation-delay:${i*0.05}s"><span class="key">${k}</span><span class="val">${v}</span></div>`).join('');
+  
+  const bg = d.color.replace('#', '');
+  const r = parseInt(bg.substr(0,2),16), g = parseInt(bg.substr(2,2),16), b = parseInt(bg.substr(4,2),16);
+  
+  document.getElementById('mc-content').innerHTML=
+    `<h2 style="color:${d.color}">${d.name}</h2>`+
+    `<div class="mc-badge" style="background:rgba(${r},${g},${b},0.15);color:${d.color};border:1px solid rgba(${r},${g},${b},0.3)">${d.layer}</div>`+
+    `<div class="mc-path">&#128194; ${d.path}</div>`+
+    `<div class="mc-section" style="animation-delay:0.1s"><h3>Descripción</h3><p class="mc-desc">${d.desc}</p></div>`+
+    (d.fields.length?`<div class="mc-section" style="animation-delay:0.2s"><h3>Propiedades</h3>${fH}</div>`:'')+
+    (d.out.length?`<div class="mc-section" style="animation-delay:0.3s"><h3>Salidas (OUT)</h3>${outH}</div>`:'')+
+    (d.inn.length?`<div class="mc-section" style="animation-delay:0.4s"><h3>Entradas (IN)</h3>${inH}</div>`:'')+
+    `<div class="mc-section" style="animation-delay:0.5s"><h3>Código relevante</h3><div class="code-block">`+
+      d.code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+
+    `</div></div>`;
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function closeDetail(){document.getElementById('modal-overlay').classList.remove('open');}
+
+function filterLayer(layer){
+  document.querySelectorAll('.filter-item').forEach(e=>e.classList.remove('active'));
+  const btn=document.getElementById('f-'+layer);if(btn)btn.classList.add('active');
+  const all=document.querySelectorAll('.node');
+  if(layer==='all'){all.forEach(n=>{n.classList.remove('dimmed','highlighted');});return;}
+  const active=layerMap[layer]||[];
+  all.forEach(n=>{
+    if(active.includes(n.id)){n.classList.remove('dimmed');n.classList.add('highlighted');}
+    else{n.classList.add('dimmed');n.classList.remove('highlighted');}
+  });
+  toast('Filtrando: '+layer.toUpperCase()+' ('+active.length+' nodos)');
+}
+
+function activateGuide(idx){
+  activeGuide=idx;const g=GUIDES[idx];
+  document.querySelectorAll('.guide-chip').forEach(c=>c.classList.remove('active'));
+  document.getElementById('gv'+(idx+1)).classList.add('active');
+  document.getElementById('guide-desc').textContent=g.desc;
+  document.querySelectorAll('.node').forEach(n=>{
+    if(g.nodes.includes(n.id)){n.classList.remove('dimmed');n.classList.add('highlighted');}
+    else{n.classList.add('dimmed');n.classList.remove('highlighted');}
+  });
+  toast('Vista guiada: '+g.name);
+}
+
+function playStory(){
+  if(storyTimer){clearTimeout(storyTimer);storyTimer=null;document.getElementById('play-btn').textContent='Play story';return;}
+  document.getElementById('play-btn').textContent='Pause';
+  let step=0;
+  function next(){
+    if(step>=GUIDES.length){
+      document.querySelectorAll('.node').forEach(n=>{n.classList.remove('dimmed','highlighted');});
+      document.querySelectorAll('.guide-chip').forEach(c=>c.classList.remove('active'));
+      document.getElementById('guide-desc').textContent='Historia completa';
+      document.getElementById('play-btn').textContent='Play story';
+      storyTimer=null;return;
+    }
+    activateGuide(step++);storyTimer=setTimeout(next,2800);
+  }
+  next();
+}
+
+function zoom(d){
+  zoomLevel=Math.min(2,Math.max(.3,zoomLevel+d));
+  document.getElementById('canvas').style.transform='scale('+zoomLevel+')';
+  document.getElementById('canvas').style.transformOrigin='top left';
+  document.getElementById('zoom-label').textContent=Math.round(zoomLevel*100)+'%';
+  setTimeout(drawArrows,60);
+}
+function resetZoom(){
+  zoomLevel=1;
+  document.getElementById('canvas').style.transform='scale(1)';
+  document.getElementById('zoom-label').textContent='100%';
+  setTimeout(drawArrows,60);
+}
+function toggleTheme(){
+  document.body.classList.toggle('dark');
+  document.getElementById('theme-btn').innerHTML=document.body.classList.contains('dark')?'&#127769; Dark':'&#127774; Light';
+}
+function setMode(m){
+  signalMode=(m==='flow');
+  document.getElementById('mode-flow').classList.toggle('active',signalMode);
+  document.getElementById('mode-static').classList.toggle('active',!signalMode);
+  if(signalMode)startSignalFlow();
+  else{clearInterval(signalInterval);signalInterval=null;}
+  drawArrows();
+}
+function exportDiagram(){
+  const b=new Blob([document.documentElement.outerHTML],{type:'text/html'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);
+  a.download='yes_no_app_architecture.html';a.click();
+  toast('Diagrama exportado');
+}
+let toastT;
+function toast(msg){
+  const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');
+  clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),2500);
+}
+document.getElementById('canvas-wrap').addEventListener('click',function(e){
+  if(e.target===this||e.target===document.getElementById('canvas')){
+    document.querySelectorAll('.node').forEach(n=>{n.classList.remove('dimmed','highlighted');});
+    document.querySelectorAll('.filter-item').forEach(el=>el.classList.remove('active'));
+    document.getElementById('f-all').classList.add('active');
+    document.querySelectorAll('.guide-chip').forEach(c=>c.classList.remove('active'));
+    activeGuide=-1;
+    document.getElementById('guide-desc').textContent='Haz clic en un nodo para explorar sus dependencias';
+    closeDetail();
+  }
+});
+document.getElementById('modal-overlay').addEventListener('click',function(e){
+  if(e.target===this) closeDetail();
+});
+window.addEventListener('load',()=>{setTimeout(()=>{drawArrows();startSignalFlow();},250);});
+window.addEventListener('resize',()=>{setTimeout(drawArrows,100);});
+document.getElementById('canvas-wrap').addEventListener('scroll',()=>{drawArrows();});
+</script>
+</body>
+</html>
