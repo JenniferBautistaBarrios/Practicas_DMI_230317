@@ -1,6 +1,6 @@
 {
-    "name": "hello_world_app",
-    "short_name": "hello_world_app",
+    "name": "hello_world_app_230317",
+    "short_name": "hello_world_app_230317",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

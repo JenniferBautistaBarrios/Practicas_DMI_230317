@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-//import 'package:hello_world_app/presentation/screens/counter/counter_screen.dart';
-import 'package:hello_world_app/presentation/screens/counter/counter_functions_screen.dart';
-
+import 'screens/counters/counter_screen.dart';
+import 'screens/counters/counter_function_screen.dart';
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -15,9 +13,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
-        colorSchemeSeed: const Color.fromARGB(255, 54, 114, 244),
+        colorSchemeSeed: Colors.pink
       ),
-      home: const CounterFunctionsScreen()
+      home: const CounterFunctionsScreen(),
     );
   }
 }
