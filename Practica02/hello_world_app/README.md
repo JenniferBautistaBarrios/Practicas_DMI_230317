@@ -255,7 +255,7 @@ También se practicó la personalización visual: se aplicó un **tema en tonos 
 </p>
 
 <p align="center">
-  <a href="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica02/arquitectura/index.html">
+  <a href="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica02/hello_world_app/architecture-diagram.html">
     💗 Ver diagrama de arquitectura 💗
   </a>
 </p>
