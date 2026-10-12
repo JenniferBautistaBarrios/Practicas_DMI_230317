@@ -11,7 +11,6 @@
   &nbsp;&nbsp;&nbsp;&nbsp;
   <img src="/flutter.png" alt="Logo de Flutter" width="200"/>
 </p>
-
 <p align="center">
   Aplicación de chat desarrollada con <strong>Flutter</strong> y <strong>Dart</strong>.
 </p>
