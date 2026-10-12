@@ -82,7 +82,7 @@ Las respuestas pueden incluir un **GIF**, haciendo que la interacción sea más 
 
 El proyecto cuenta con un diagrama donde se representa la arquitectura utilizada para organizar la aplicación.
 
-🌐 **[Ver diagrama de arquitectura del proyecto](https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica03/Arquitectura/Arquitectura.html)**
+🌐 **[Ver diagrama de arquitectura del proyecto](https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica03/Arquitectura/architecture-diagrama.html)**
 
 ---
 
