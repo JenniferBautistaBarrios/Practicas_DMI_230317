@@ -72,6 +72,7 @@ Cada práctica incluye el código fuente, una descripción de las actividades re
 | 01 | Metodología de Evaluación de la Materia | Transcribir en la libreta y comprender la metodología y las fechas de evaluación de la asignatura. | 05 | 🟢 Finalizada |
 | 02 | [Mi primera aplicación móvil con Flutter](https://github.com/JenniferBautistaBarrios/Practicas_DMI_230317/tree/main/Practica02/hello_world_app) | Desarrollo de una aplicación móvil con Flutter para comprender la estructura de un proyecto y el uso de widgets Stateless y Stateful. | 20 | 🟢 Finalizada |
 | 03 | [Yes, No, Maybe — Chat con API de respuestas automáticas](https://github.com/JenniferBautistaBarrios/Practicas_DMI_230317/tree/main/Practica03) | Creación de una aplicación de chat en Flutter que utiliza la API yesno.wtf para mostrar respuestas automáticas acompañadas de GIFs, con una distribución de 40 % Sí, 40 % No y 20 % Tal vez. | 30 | 🟢 Finalizada |
+| 04 | [Aplicacion de toktik](https://github.com/JenniferBautistaBarrios/Practicas_DMI_230317/tree/main/Practica04/toktik) | El alumno creará una aplicación de reproducción de videos verticales con el uso de Provider y tematización temporal de Halloween y Navidad. | 30 | 🟢 Finalizada |
 
 ---
 
