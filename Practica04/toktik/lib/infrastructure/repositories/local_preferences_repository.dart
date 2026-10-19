@@ -53,6 +53,23 @@ class LocalPreferencesRepository implements PreferencesRepository {
       .toList();
   @override
   bool isLiked(VideoPost video) => (_saved[video.id] as Map?)?['liked'] == true;
+
+  Future<void> removeYouTubeFavorites() async {
+    try {
+      await _update(() {
+        final saved = _saved;
+        saved.removeWhere((_, value) {
+          if (value is! Map || value['liked'] != true) return false;
+          final video = value['video'];
+          return video is Map && video['source'] == VideoSource.youtube.name;
+        });
+        return {..._data, 'likes': saved};
+      });
+    } catch (_) {
+      // No impide iniciar la app si el almacenamiento no está disponible.
+    }
+  }
+
   @override
   int likes(VideoPost video) {
     final count = video.likes + (isLiked(video) ? 1 : 0);

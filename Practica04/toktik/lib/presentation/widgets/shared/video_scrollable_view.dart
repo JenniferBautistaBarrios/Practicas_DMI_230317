@@ -13,11 +13,13 @@ import 'video_buttons.dart';
 class VideoScrollableView extends StatefulWidget {
   final List<VideoPost> videos;
   final bool active;
+  final bool favorites;
   final VoidCallback? onNearEnd;
   const VideoScrollableView({
     super.key,
     required this.videos,
     this.active = true,
+    this.favorites = false,
     this.onNearEnd,
   });
   @override
@@ -80,6 +82,22 @@ class _VideoScrollableViewState extends State<VideoScrollableView>
         return Stack(
           key: ValueKey(video.id),
           children: [
+            if (widget.favorites)
+              Positioned(
+                top: MediaQuery.paddingOf(context).top + 12,
+                right: 16,
+                child: IconButton.filledTonal(
+                  tooltip: 'Quitar de favoritos',
+                  onPressed: () => context
+                      .read<PreferencesProvider>()
+                      .toggleLike(video),
+                  icon: const Icon(Icons.delete_outline_rounded),
+                  style: IconButton.styleFrom(
+                    backgroundColor: Colors.black.withValues(alpha: .55),
+                    foregroundColor: Colors.white,
+                  ),
+                ),
+              ),
             if (widget.active && index == _index)
               Positioned.fill(
                 child: video.source == VideoSource.youtube

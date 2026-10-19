@@ -113,9 +113,54 @@ Estos son los iconos que utiliza la interfaz:
 | ▶ | Reanudar un video pausado | `Icons.play_arrow` |
 | 🏠 / 🔎 / ♥ | Inicio, Discovery y Me gusta | `Icons.home_rounded`, `Icons.explore_rounded`, `Icons.favorite_rounded` |
 
-## 📸 Evidencias de la aplicación
+## 🎃 Evidencias de Halloween
 
-Las capturas reales de compilación y pruebas se agregarán en [`evidencias/`](evidencias/README.md). No se muestran imágenes de prueba hasta que se hayan tomado en la aplicación.
+Capturas de la aplicación con el tema de Halloween:
+
+| Inicio | Discovery |
+|---|---|
+| <img src="evidencias/evidencia1hallowen.jpeg" alt="Pantalla inicial de KittyTokTik con el tema de Halloween" width="240"> | <img src="evidencias/evidencia2hallowen.jpeg" alt="Feed de Discovery con el tema de Halloween" width="240"> |
+
+| Me gusta | Ajustes de temporada |
+|---|---|
+| <img src="evidencias/evidencia3hallowen.jpeg" alt="Pantalla Me gusta con el tema de Halloween" width="240"> | <img src="evidencias/evidencia4hallowen.jpeg" alt="Selector de temas con Halloween seleccionado" width="240"> |
+
+## 💝 Evidencias de San Valentín
+
+Capturas de la aplicación con el tema de San Valentín:
+
+| Inicio | Discovery |
+|---|---|
+| <img src="evidencias/evidencia1%20sanvalentin.jpeg" alt="Pantalla inicial de KittyTokTik con el tema de San Valentín" width="240"> | <img src="evidencias/evidencia2sanvalentin.jpeg" alt="Feed de Discovery con el tema de San Valentín" width="240"> |
+
+| Inicio · reproducción | Me gusta |
+|---|---|
+| <img src="evidencias/evidencia3sanvalentin.jpeg" alt="Video reproduciéndose en Inicio con el tema de San Valentín" width="240"> | <img src="evidencias/evidencia4sanvalentin.jpeg" alt="Video guardado en Me gusta con el tema de San Valentín" width="240"> |
+
+## 🎄 Evidencias de Navidad
+
+Capturas de KittyTokTik con el tema navideño:
+
+| Inicio | Discovery |
+|---|---|
+| <img src="evidencias/navidad1.jpeg" alt="Pantalla inicial con el tema de Navidad" width="240"> | <img src="evidencias/navidad2.jpeg" alt="Feed de Discovery durante la temporada navideña" width="240"> |
+
+| Inicio · video | Selector de temporada |
+|---|---|
+| <img src="evidencias/navidad3.jpeg" alt="Video en Inicio con el tema de Navidad" width="240"> | <img src="evidencias/navidad4.jpeg" alt="Selector de temas con Navidad seleccionada" width="240"> |
+
+## ✨ Evidencias del tema normal
+
+Capturas de KittyTokTik con el tema normal:
+
+| Inicio | Discovery |
+|---|---|
+| <img src="evidencias/normal1.jpeg" alt="Pantalla inicial de KittyTokTik con el tema normal" width="240"> | <img src="evidencias/normal2.jpeg" alt="Feed de Discovery con el tema normal" width="240"> |
+
+| Para ti | Me gusta y selector de temporada |
+|---|---|
+| <img src="evidencias/normal3%20.jpeg" alt="Feed Para ti con el tema normal" width="240"> | <img src="evidencias/normal4.jpeg" alt="Sección Me gusta y selector con el tema normal activo" width="240"> |
+
 
 ## 🎨 Diseño e identidad visual
 
@@ -195,9 +240,6 @@ El APK generado se encuentra en `build/app/outputs/flutter-apk/app-release.apk`.
 
 **Enlace real de Appetize:** `PENDIENTE: pegar aquí el enlace generado por Appetize.io`.
 
-### Evidencias
-
-Agrega capturas reales a [`evidencias/`](evidencias/README.md), siguiendo la lista de nombres y contenido descrita allí. La carpeta está preparada, pero todavía no contiene capturas de pruebas. No se muestran resultados ni enlaces inventados.
 
 ### Plan y resultados de pruebas
 
@@ -241,14 +283,14 @@ El repositorio ya tiene cambios locales anteriores a esta práctica. Antes de co
 ```bash
 git status --short --branch
 git switch -c practica/publicacion-appetize
-git add README.md evidencias/README.md
+git add README.md
 git diff --cached --stat
 git diff --cached
 git commit -m "docs: documentar publicación de KittyTokTik en Appetize"
 git push -u origin practica/publicacion-appetize
 ```
 
-Si `git switch -c` indica que la rama ya existe, usa `git switch practica/publicacion-appetize`. Antes de confirmar, agrega de forma explícita solo los archivos que quieras incluir; por ejemplo, después de tomar capturas revisadas, agrega `evidencias/01-appetize-enlace.png` y las demás imágenes necesarias. El APK dentro de `build/` no se agrega a Git.
+Si `git switch -c` indica que la rama ya existe, usa `git switch practica/publicacion-appetize`. Antes de confirmar, revisa los archivos que vas a incluir. El APK dentro de `build/` no se agrega a Git.
 
 ## 🏗️ Arquitectura del proyecto
 

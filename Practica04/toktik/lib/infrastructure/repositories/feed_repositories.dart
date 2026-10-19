@@ -80,7 +80,13 @@ class FavoritesFeedRepository implements FavoritesRepository {
   FavoritesFeedRepository(this.preferences);
   @override
   List<VideoPost> get savedVideos =>
-      preferences.favorites.where((v) => v.supportsDirectPlayback).toList();
+      preferences.favorites
+          .where(
+            (video) =>
+                video.supportsDirectPlayback &&
+                video.source != VideoSource.youtube,
+          )
+          .toList();
   @override
   Future<FeedPage> load(int page) async =>
       FeedPage(page == 1 ? savedVideos : [], []);

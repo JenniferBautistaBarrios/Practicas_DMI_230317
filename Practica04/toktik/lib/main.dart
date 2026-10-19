@@ -62,6 +62,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     final preferences = LocalPreferencesRepository(widget.storage);
+    unawaited(preferences.removeYouTubeFavorites());
     _preferences = PreferencesProvider(preferences)
       ..addListener(_onPreferences);
     final localRepository = VideoPostsRepositoryImpl(

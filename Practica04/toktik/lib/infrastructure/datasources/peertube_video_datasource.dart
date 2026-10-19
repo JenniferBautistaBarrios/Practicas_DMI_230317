@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,13 +12,26 @@ import 'wikimedia_video_datasource.dart';
 class PeerTubeVideoDatasource extends DirectVideoDatasource {
   static const _queries = [
     'food',
+    'cooking',
+    'recipe',
     'sports',
+    'football',
+    'soccer',
+    'basketball',
     'NASA',
-    'gaming',
-    'comida',
-    'deportes',
     'space',
+    'science',
+    'gaming',
+    'video game',
+    'comida',
+    'cocina',
+    'receta',
+    'deportes',
+    'futbol',
+    'ciencia',
     'videojuegos',
+    'tecnologia',
+    'music',
   ];
   static const _licenses = {
     1: 'https://creativecommons.org/licenses/by/4.0/',
@@ -30,11 +45,14 @@ class PeerTubeVideoDatasource extends DirectVideoDatasource {
   };
   final _pages = <int, List<VideoPost>>{};
   final _seen = <String>{};
-  int _query = 0;
+  final _random = Random();
+  late int _query;
   final _starts = List<int>.filled(_queries.length, 0);
   final _finishedQueries = <int>{};
   PeerTubeVideoDatasource(http.Client client, SharedPreferences storage)
-    : super(client, storage, 'peertube.categories.v2');
+    : super(client, storage, 'peertube.categories.v3') {
+    _query = _random.nextInt(_queries.length);
+  }
 
   @override
   Future<List<VideoPost>> getTrendingVideosByPage(int page) async {
@@ -90,11 +108,16 @@ class PeerTubeVideoDatasource extends DirectVideoDatasource {
         if (candidates.isNotEmpty && failures == candidates.length) {
           throw StateError('PeerTube: instancias no disponibles');
         }
-        for (final video in results.whereType<VideoPost>()) {
+        final found = results.whereType<VideoPost>().toList()
+          ..shuffle(_random);
+        for (final video in found) {
           if (_seen.add(video.id)) videos.add(video);
         }
         final next = start + items.length;
-        if (items.isEmpty || next >= DirectVideoDatasource.number(data['total'])) {
+        final total = DirectVideoDatasource.number(data['total']);
+        if (items.isEmpty ||
+            (total > 0 && next >= total) ||
+            (total <= 0 && items.length < 40)) {
           _finishedQueries.add(query);
         } else {
           _starts[query] = next;

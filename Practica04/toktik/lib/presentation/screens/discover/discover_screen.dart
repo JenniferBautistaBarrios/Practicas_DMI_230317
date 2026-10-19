@@ -181,6 +181,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
           key: const ValueKey('favorites'),
           videos: favorites,
           active: _tab == 2,
+          favorites: true,
         );
   Widget _feedView(int index, {int tabIndex = 0}) => ListenableBuilder(
     listenable: _feeds[index],
