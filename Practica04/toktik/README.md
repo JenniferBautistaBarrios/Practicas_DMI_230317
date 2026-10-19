@@ -17,6 +17,26 @@
 
 ---
 
+## 🏗️ Diagramas de arquitectura
+
+**Arquitectura inicial — proveedor local:** muestra la pantalla conectada al estado y a la lista local de videos.
+
+<p align="center">
+  <img src="arquitectura/capturas/Arquitectura%20Inicial.png" alt="Diagrama de arquitectura inicial de KittyTokTik: proveedor local" width="100%">
+</p>
+
+[Abrir diagrama inicial interactivo](arquitectura/inicial/arquitectura.html)
+
+**Arquitectura final — proveedor, repositorio y fuentes de datos:** muestra las capas de la aplicación y el flujo hacia las fuentes de datos y la persistencia.
+
+<p align="center">
+  <img src="arquitectura/capturas/ArquitecturaFinal.png" alt="Diagrama de arquitectura final de KittyTokTik: proveedor, repositorio y fuentes de datos" width="100%">
+</p>
+
+[Abrir diagrama final interactivo](arquitectura/final/arquitectura.html)
+
+---
+
 ## 🎨 Identidad visual e iconos
 
 La interfaz usa una base clara y rosada. El color de acento y la tipografía cambian con la temporada. Los cuatro iconos que ya están en `assets/icons/` se muestran aquí:
@@ -232,65 +252,24 @@ El APK generado se encuentra en `build/app/outputs/flutter-apk/app-release.apk`.
 
 ### Publicación en Appetize.io
 
-1. Abre [Appetize.io](https://appetize.io/) e inicia sesión.
-2. Elige la opción para subir una aplicación Android y selecciona `build/app/outputs/flutter-apk/app-release.apk`.
-3. Espera el procesamiento y abre la aplicación desde el panel.
-4. Comprueba que el feed se inicie y que el video y controles visibles respondan.
-5. Copia el enlace de prueba generado por Appetize y reemplaza el marcador siguiente. El enlace aún no se ha proporcionado ni se ha subido la aplicación desde este entorno.
+<p align="center">
+  <a href="https://appetize.io/app/b_ehay32xnml7zxhkpfmrge5v4nq?device=pixel7&amp;osVersion=13.0&amp;toolbar=true" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/Entrar%20a%20KittyTokTik-Appetize.io-ec4899?style=for-the-badge&amp;logo=android&amp;logoColor=white" alt="Entrar a KittyTokTik en Appetize.io">
+  </a>
+</p>
 
-**Enlace real de Appetize:** `PENDIENTE: pegar aquí el enlace generado por Appetize.io`.
+Pulsa el botón **Entrar a KittyTokTik en Appetize.io** para abrir la aplicación en el navegador. El enlace configura un Pixel 7 con Android 13.
+
+Para publicar una nueva versión, selecciona `build/app/outputs/flutter-apk/app-release.apk` en la página de carga de Appetize y espera a que termine el procesamiento. Después puedes abrirla desde el panel y comprobar el feed, el video y sus controles.
+
+
 
 
 ### Plan y resultados de pruebas
 
 Completa el modelo, versión de Android y resultado después de ejecutar cada prueba en Appetize. Se requieren dos dispositivos Android distintos; Appetize puede permitir seleccionar perfiles de dispositivo, pero los resultados deben anotarse únicamente después de observar la ejecución.
 
-| Dispositivo Android | Modelo / perfil | Prueba | Resultado observado | Evidencia |
-|---|---|---|---|---|
-| 1 | Pendiente de probar | Abrir KittyTokTik y cargar el primer video | Pendiente | `evidencias/02-prueba-dispositivo-1.png` |
-| 1 | Pendiente de probar | Deslizar al siguiente video y comprobar reproducción | Pendiente | `evidencias/04-navegacion-feed.png` |
-| 2 | Pendiente de probar | Abrir KittyTokTik y cargar el primer video | Pendiente | `evidencias/03-prueba-dispositivo-2.png` |
-| 2 | Pendiente de probar | Deslizar al siguiente video y comprobar reproducción | Pendiente | `evidencias/04-navegacion-feed.png` |
 
-### Resultado de compilación local
-
-| Comprobación | Resultado |
-|---|---|
-| `flutter pub get` | Correcto: dependencias resueltas |
-| `flutter analyze` | Correcto: sin incidencias tras retirar un import innecesario |
-| `flutter build apk --release` | Correcto: compilación release finalizada |
-| `flutter test` | 39 pasaron, 4 fallaron y 1 se omitió; detalles abajo |
-| Archivo APK | `build/app/outputs/flutter-apk/app-release.apk` (232.8 MB) |
-
-Fallos observados en `flutter test`:
-
-- `features_test.dart`: una prueba espera 13 videos locales, pero actualmente el proyecto contiene 5 archivos MP4.
-- `widget_test.dart`: la prueba de “Para ti” no encuentra esa pestaña en el árbol durante la prueba.
-- `widget_test.dart`: la prueba del selector toca “Navidad” fuera del área visible del dispositivo de prueba y no aplica la temporada.
-- `widget_test.dart`: la prueba del splash espera el texto “Vdry · San Valentín”, mientras que el splash implementado muestra el nombre “KittyTokTik”.
-
-Estos resultados requieren revisión antes de declarar toda la suite correcta. No se agregaron videos ni se alteró la interfaz para forzar el pase de pruebas.
-| Carga en Appetize | Pendiente de realizar desde una cuenta Appetize |
-
-### Conclusiones
-
-La compilación Android release está lista y el análisis estático no reporta incidencias. La publicación todavía no está completa: falta subir el APK desde una cuenta Appetize, comprobar el enlace y ejecutar las pruebas en dos perfiles Android distintos. Completa la tabla y agrega las capturas reales antes de entregar.
-
-### Git: guardar y subir los cambios
-
-El repositorio ya tiene cambios locales anteriores a esta práctica. Antes de confirmar, revisa `git status` y conserva esos cambios. No uses `git reset --hard`, `git clean` ni agregues todo con `git add .` sin revisar, porque podrías descartar o subir archivos ajenos a esta práctica.
-
-```bash
-git status --short --branch
-git switch -c practica/publicacion-appetize
-git add README.md
-git diff --cached --stat
-git diff --cached
-git commit -m "docs: documentar publicación de KittyTokTik en Appetize"
-git push -u origin practica/publicacion-appetize
-```
-
-Si `git switch -c` indica que la rama ya existe, usa `git switch practica/publicacion-appetize`. Antes de confirmar, revisa los archivos que vas a incluir. El APK dentro de `build/` no se agrega a Git.
 
 ## 🏗️ Arquitectura del proyecto
 
@@ -332,3 +311,4 @@ toktik/
 │   └── fonts/
 ├── pubspec.yaml
 └── README.md
+
