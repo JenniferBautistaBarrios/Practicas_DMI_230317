@@ -1,54 +1,58 @@
 List<Map<String, dynamic>> videoPosts = [
   {
-    'name': 'Subiendo escaleras automáticas',
+    'name': 'Día de Muertos en la CDMX 💀🌼',
+    'description':
+        'La ciudad se llena de color para recordar a quienes siguen viviendo en nuestros corazones. 🕯️🌼 #DíaDeMuertos #CDMX #Tradiciones #México #ParaTi',
     'videoUrl': 'assets/videos/1.mp4',
-    'likes': 23230,
-    'views': 1523,
+    'likes': 1598,
+    'views': 1893,
   },
   {
-    'name': 'Planta apreciada por peatones',
+    'name': 'Tecnologías de la Información en la UTXJ 💻',
+    'description':
+        'Así se vive la tecnología y la vida universitaria en la UTXJ. ✨ #UTXJ #TecnologíasDeLaInformación #Universidad #Estudiantes #ParaTi',
     'videoUrl': 'assets/videos/2.mp4',
-    'likes': 24230,
-    'views': 1343,
+    'likes': 2347,
+    'views': 3106,
   },
   {
-    'name': 'Que borroso veo todo!',
+    'name': 'Música de piano 🎹',
+    'description':
+        'Una melodía tranquila para hacer una pausa y disfrutar el momento. 🤍 #Piano #Música #Relax #Momentos #ParaTi',
     'videoUrl': 'assets/videos/3.mp4',
-    'likes': 21564320,
-    'views': 123563,
+    'likes': 876,
+    'views': 1240,
   },
   {
-    'name': '¿Esto es trigo? que interesante',
+    'name': 'Tutorial de maquillaje 💄',
+    'description':
+        'Un look paso a paso para darle un toque especial a tu día. ✨ #TutorialDeMaquillaje #Makeup #Belleza #Tips #ParaTi',
     'videoUrl': 'assets/videos/4.mp4',
-    'likes': 320,
-    'views': 2300,
+    'likes': 4210,
+    'views': 5088,
   },
   {
-    'name': 'El COVID no me afecta',
+    'name': 'Memes de programación 😂💻',
+    'description':
+        'Cuando el código compila a la primera… algo debemos sospechar. 😅 #Programación #MemesDeProgramación #Humor #Tech #ParaTi',
     'videoUrl': 'assets/videos/5.mp4',
-    'likes': 3230,
-    'views': 31030,
+    'likes': 1325,
+    'views': 2074,
   },
   {
-    'name': 'No quiero ir a trabajar hoy señor Stark',
+    'name': 'Bridgerton, la serie que amamos 👑',
+    'description':
+        'Romances, secretos y vestidos increíbles: siempre queremos otro capítulo. ✨ #Bridgerton #Series #Romance #Netflix #ParaTi',
     'videoUrl': 'assets/videos/6.mp4',
-    'likes': 10,
-    'views': 330,
+    'likes': 2890,
+    'views': 3642,
   },
   {
-    'name': 'Limpiar nunca fue tan divertido',
+    'name': 'Mi Huauchinango querido 🌿',
+    'description':
+        'Un pedacito de Huauchinango para presumir lo bonito de nuestra tierra. 💚 #Huauchinango #Puebla #PuebloMágico #México #ParaTi',
     'videoUrl': 'assets/videos/7.mp4',
-    'likes': 1320,
-    'views': 33032,
+    'likes': 763,
+    'views': 1098,
   },
-  {
-    'name': '¿Ya llegamos a la India?... umm si',
-    'videoUrl': 'assets/videos/8.mp4',
-    'likes': 342,
-    'views': 3332,
-  },
-
-
 ];
-
-

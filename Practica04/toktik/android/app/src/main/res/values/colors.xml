@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#282273</color>
+    <color name="ic_launcher_halloween_background">#351366</color>
+    <color name="ic_launcher_christmas_background">#064331</color>
+    <color name="ic_launcher_valentines_background">#650D39</color>
+</resources>
