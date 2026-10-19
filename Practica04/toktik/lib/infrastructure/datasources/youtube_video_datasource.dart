@@ -200,7 +200,7 @@ class YouTubeVideoDatasource implements VideoPostDatasource {
     Map<String, String> query,
   ) async {
     final uri = _backend.replace(
-      path: '/api${path}',
+      path: '/api$path',
       queryParameters: query,
     );
     final response = await _client
