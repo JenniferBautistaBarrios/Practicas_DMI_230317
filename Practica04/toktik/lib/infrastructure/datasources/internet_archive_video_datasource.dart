@@ -10,11 +10,24 @@ import 'wikimedia_video_datasource.dart';
 
 /// Metadatos y búsqueda públicos; MP4 directo con audio comprobado en su cabecera.
 class InternetArchiveVideoDatasource extends DirectVideoDatasource {
-  static const query = 'mediatype:movies AND title:waterfall AND licenseurl:*';
+  static const _queries = [
+    'animals',
+    'dance',
+    'cooking',
+    'travel',
+    'comedy',
+    'sports',
+    'music',
+    'animation',
+    'space',
+    'art',
+    'science',
+    'people',
+  ];
   final _pages = <int, List<VideoPost>>{};
   final _seen = <String>{};
+  int _queryIndex = 0;
   int _searchPage = 1;
-  bool _seedLoaded = false;
   bool _exhausted = false;
   InternetArchiveVideoDatasource(http.Client client, SharedPreferences storage)
     : super(client, storage, 'archive.nature.v1');
@@ -26,34 +39,30 @@ class InternetArchiveVideoDatasource extends DirectVideoDatasource {
       if (_pages.containsKey(logical)) continue;
       final videos = <VideoPost>[];
       while (videos.isEmpty && !_exhausted) {
-        List<String> identifiers;
-        if (!_seedLoaded) {
-          identifiers = ['Flickr-22002602029', 'img-9763_202610'];
-        } else {
-          final data = await getJson(
-            Uri.https('archive.org', '/advancedsearch.php', {
-              'q': query,
-              'output': 'json',
-              'fl[]': 'identifier',
-              'rows': '8',
-              'page': '$_searchPage',
-              'sort[]': 'publicdate desc',
-            }),
-            'search.$_searchPage',
-          );
-          final response = data['response'] as Map<String, dynamic>?;
-          if (response == null) {
-            throw StateError('Internet Archive: catálogo no disponible');
-          }
-          identifiers = (response['docs'] as List? ?? [])
-              .map((item) => '${item['identifier']}')
-              .toList();
-          _exhausted =
-              identifiers.isEmpty ||
-              _searchPage * 8 >=
-                  DirectVideoDatasource.number(response['numFound']);
-          _searchPage++;
+        if (_queryIndex >= _queries.length) {
+          _exhausted = true;
+          break;
         }
+        final query =
+            'mediatype:movies AND title:${_queries[_queryIndex]} AND licenseurl:*';
+        final data = await getJson(
+          Uri.https('archive.org', '/advancedsearch.php', {
+            'q': query,
+            'output': 'json',
+            'fl[]': 'identifier',
+            'rows': '8',
+            'page': '$_searchPage',
+            'sort[]': 'publicdate desc',
+          }),
+          'search.$_queryIndex.$_searchPage',
+        );
+        final response = data['response'] as Map<String, dynamic>?;
+        if (response == null) {
+          throw StateError('Internet Archive: catálogo no disponible');
+        }
+        final identifiers = (response['docs'] as List? ?? [])
+            .map((item) => '${item['identifier']}')
+            .toList();
         var failures = 0;
         final batches = await Future.wait(
           identifiers.map((id) async {
@@ -66,15 +75,19 @@ class InternetArchiveVideoDatasource extends DirectVideoDatasource {
           }),
         );
         if (identifiers.isNotEmpty && failures == identifiers.length) {
-          if (_seedLoaded) {
-            _searchPage--;
-            _exhausted = false;
-          }
           throw StateError('Internet Archive: archivos no disponibles');
         }
-        _seedLoaded = true;
         for (final video in batches.expand((batch) => batch)) {
           if (_seen.add(video.id)) videos.add(video);
+        }
+        final numFound = DirectVideoDatasource.number(response['numFound']);
+        if (identifiers.isEmpty ||
+            (_searchPage * 8 >= numFound && numFound > 0)) {
+          _queryIndex++;
+          _searchPage = 1;
+          _exhausted = _queryIndex >= _queries.length;
+        } else {
+          _searchPage++;
         }
       }
       _pages[logical] = videos;
@@ -89,7 +102,9 @@ class InternetArchiveVideoDatasource extends DirectVideoDatasource {
     );
     final metadata = data['metadata'] as Map<String, dynamic>? ?? {};
     final license = '${metadata['licenseurl'] ?? ''}';
-    if (!license.startsWith('https://creativecommons.org/')) {
+    final licenseUri = Uri.tryParse(license);
+    if ((licenseUri?.scheme != 'https' && licenseUri?.scheme != 'http') ||
+        licenseUri?.host != 'creativecommons.org') {
       return [];
     }
     final server = '${data['d1'] ?? ''}';
@@ -97,39 +112,48 @@ class InternetArchiveVideoDatasource extends DirectVideoDatasource {
     if (!server.endsWith('.archive.org') || !directory.startsWith('/')) {
       return [];
     }
-    final videos = <VideoPost>[];
+    final playableFiles = <({Map<String, dynamic> file, Uri uri})>[];
     for (final file
         in (data['files'] as List? ?? []).cast<Map<String, dynamic>>()) {
       final width = DirectVideoDatasource.number(file['width']);
-      final height = DirectVideoDatasource.number(file['height']);
       final duration = num.tryParse('${file['length']}') ?? 0;
       final name = '${file['name']}';
       if (!name.endsWith('.mp4') ||
           width <= 0 ||
-          height / width < 1.4 ||
           duration <= 0 ||
-          duration > 90 ||
+          duration > 600 ||
           DirectVideoDatasource.number(file['size']) * 8 / duration > 4000000) {
         continue;
       }
-      final uri = Uri(scheme: 'https', host: server, path: '$directory/$name');
+      final uri = Uri(
+        scheme: 'https',
+        host: server,
+        path: '$directory/$name',
+      );
       if (!await _hasAudio(uri, DirectVideoDatasource.number(file['size']))) {
         continue;
       }
-      videos.add(
-        VideoPost(
-          caption: '${metadata['title'] ?? id}',
-          videoUrl: uri.toString(),
-          source: VideoSource.internetArchive,
-          externalId: '$id/$name',
-          attributionUrl: 'https://archive.org/details/$id',
-          licenseUrl: license,
-          description:
-              '${WikimediaVideoDatasource.plainText('${metadata['description'] ?? ''}')}\nAutor: ${metadata['creator'] ?? 'Ver ficha original'} · Internet Archive · $name. Se conserva el encuadre original.',
-        ),
-      );
+      playableFiles.add((file: file, uri: uri));
     }
-    return videos;
+    if (playableFiles.isEmpty) return [];
+    playableFiles.sort((a, b) {
+      final aWidth = DirectVideoDatasource.number(a.file['width']);
+      final bWidth = DirectVideoDatasource.number(b.file['width']);
+      return (aWidth - 480).abs().compareTo((bWidth - 480).abs());
+    });
+    final chosen = playableFiles.first;
+    return [
+      VideoPost(
+        caption: '${metadata['title'] ?? id}',
+        videoUrl: chosen.uri.toString(),
+        source: VideoSource.internetArchive,
+        externalId: id,
+        attributionUrl: 'https://archive.org/details/$id',
+        licenseUrl: licenseUri!.replace(scheme: 'https').toString(),
+        description:
+            '${WikimediaVideoDatasource.plainText('${metadata['description'] ?? ''}')}\nAutor: ${metadata['creator'] ?? 'Ver ficha original'} · Internet Archive · Se conserva el encuadre original.',
+      ),
+    ];
   }
 
   Future<bool> _hasAudio(Uri uri, int size) async {

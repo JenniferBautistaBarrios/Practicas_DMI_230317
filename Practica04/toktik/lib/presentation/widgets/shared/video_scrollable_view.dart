@@ -139,6 +139,7 @@ class _VideoScrollableViewState extends State<VideoScrollableView>
                             VideoSource.peertube => 'Autor · PeerTube ↗',
                             VideoSource.internetArchive =>
                               'Autor · Internet Archive ↗',
+                            VideoSource.nasa => 'Autor · NASA ↗',
                             VideoSource.pexels => 'Autor · Pexels ↗',
                             VideoSource.pixabay => 'Autor · Pixabay ↗',
                             VideoSource.wikimedia =>

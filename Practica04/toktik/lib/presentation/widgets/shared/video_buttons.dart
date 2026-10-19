@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../config/helpers/human_formats.dart';
 import '../../../domain/entities/video_post.dart';
+import '../../providers/peertube_comments_provider.dart';
 import '../../providers/preferences_provider.dart';
 import '../../providers/youtube_provider.dart';
 
@@ -22,10 +23,14 @@ class _VideoButtonsState extends State<VideoButtons> {
     final youtube = video.source == VideoSource.youtube
         ? context.read<YouTubeProvider>()
         : null;
+    final peertube = video.source == VideoSource.peertube
+        ? context.read<PeerTubeCommentsProvider>()
+        : null;
     final videoId = video.externalId;
     if (youtube != null && videoId != null) {
       youtube.loadComments(videoId);
     }
+    if (peertube != null && videoId != null) peertube.load(videoId);
 
     showModalBottomSheet<void>(
       context: context,
@@ -38,6 +43,7 @@ class _VideoButtonsState extends State<VideoButtons> {
       builder: (_) => _CommentsSheet(
         video: video,
         youtube: youtube,
+        peertube: peertube,
         videoId: videoId,
       ),
     );
@@ -176,11 +182,13 @@ class _VideoButtonsState extends State<VideoButtons> {
 class _CommentsSheet extends StatelessWidget {
   final VideoPost video;
   final YouTubeProvider? youtube;
+  final PeerTubeCommentsProvider? peertube;
   final String? videoId;
 
   const _CommentsSheet({
     required this.video,
     required this.youtube,
+    required this.peertube,
     required this.videoId,
   });
 
@@ -240,6 +248,55 @@ class _CommentsSheet extends StatelessWidget {
   }
 
   Widget _buildComments(BuildContext context) {
+    final peertubeProvider = peertube;
+    if (peertubeProvider != null && videoId != null) {
+      return ListenableBuilder(
+        listenable: peertubeProvider,
+        builder: (context, _) {
+          if (peertubeProvider.loading &&
+              peertubeProvider.selectedVideoId == videoId) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (peertubeProvider.error != null &&
+              peertubeProvider.selectedVideoId == videoId) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Text(
+                  peertubeProvider.error!,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            );
+          }
+          if (peertubeProvider.selectedVideoId != videoId ||
+              peertubeProvider.comments.isEmpty) {
+            return const Center(
+              child: Text('Este video aún no tiene comentarios públicos.'),
+            );
+          }
+          return ListView.separated(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            itemCount: peertubeProvider.comments.length,
+            separatorBuilder: (_, _) => const Divider(height: 1, indent: 68),
+            itemBuilder: (context, index) {
+              final comment = peertubeProvider.comments[index];
+              return ListTile(
+                leading: const CircleAvatar(
+                  child: Icon(Icons.person_outline_rounded),
+                ),
+                title: Text(comment.author),
+                subtitle: Text(comment.text),
+                trailing: comment.likeCount > 0
+                    ? Text('♥ ${comment.likeCount}')
+                    : null,
+              );
+            },
+          );
+        },
+      );
+    }
+
     final provider = youtube;
     if (provider == null || videoId == null) {
       return const Center(
@@ -262,7 +319,7 @@ class _CommentsSheet extends StatelessWidget {
         if (provider.commentsError != null &&
             provider.selectedVideoId == videoId) {
           return Center(
-            child: Padding(
+            child: SingleChildScrollView(
               padding: const EdgeInsets.all(24),
               child: Column(
                 mainAxisSize: MainAxisSize.min,

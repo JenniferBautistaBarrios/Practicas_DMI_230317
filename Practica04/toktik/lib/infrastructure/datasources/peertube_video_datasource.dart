@@ -8,20 +8,33 @@ import 'wikimedia_video_datasource.dart';
 /// Sepia Search descubre videos; la API de cada instancia entrega sus archivos.
 /// No se carga el reproductor web ni se necesita una cuenta de PeerTube.
 class PeerTubeVideoDatasource extends DirectVideoDatasource {
-  static const _queries = ['waterfall', 'beach', 'forest'];
+  static const _queries = [
+    'food',
+    'sports',
+    'NASA',
+    'gaming',
+    'comida',
+    'deportes',
+    'space',
+    'videojuegos',
+  ];
   static const _licenses = {
     1: 'https://creativecommons.org/licenses/by/4.0/',
     2: 'https://creativecommons.org/licenses/by-sa/4.0/',
+    3: 'https://creativecommons.org/licenses/by-nd/4.0/',
     4: 'https://creativecommons.org/licenses/by-nc/4.0/',
     5: 'https://creativecommons.org/licenses/by-nc-sa/4.0/',
+    6: 'https://creativecommons.org/licenses/by-nc-nd/4.0/',
     7: 'https://creativecommons.org/publicdomain/zero/1.0/',
+    8: 'https://creativecommons.org/publicdomain/zero/1.0/',
   };
   final _pages = <int, List<VideoPost>>{};
   final _seen = <String>{};
   int _query = 0;
-  int _start = 0;
+  final _starts = List<int>.filled(_queries.length, 0);
+  final _finishedQueries = <int>{};
   PeerTubeVideoDatasource(http.Client client, SharedPreferences storage)
-    : super(client, storage, 'peertube.nature.v1');
+    : super(client, storage, 'peertube.categories.v2');
 
   @override
   Future<List<VideoPost>> getTrendingVideosByPage(int page) async {
@@ -29,16 +42,23 @@ class PeerTubeVideoDatasource extends DirectVideoDatasource {
     for (var logical = 1; logical <= page; logical++) {
       if (_pages.containsKey(logical)) continue;
       final videos = <VideoPost>[];
-      while (videos.isEmpty && _query < _queries.length) {
+      var attempts = 0;
+      while (videos.isEmpty &&
+          _finishedQueries.length < _queries.length &&
+          attempts < _queries.length) {
+        final query = _query;
+        final start = _starts[query];
+        _query = (_query + 1) % _queries.length;
+        attempts++;
         final data = await getJson(
           Uri.https('sepiasearch.org', '/api/v1/search/videos', {
-            'search': _queries[_query],
-            'start': '$_start',
+            'search': _queries[query],
+            'start': '$start',
             'count': '40',
             'durationMax': '90',
             'nsfw': 'false',
           }),
-          'search.$_query.$_start',
+          'search.$query.$start',
         );
         final items = (data['data'] as List? ?? [])
             .cast<Map<String, dynamic>>();
@@ -53,11 +73,7 @@ class PeerTubeVideoDatasource extends DirectVideoDatasource {
               item['isLive'] != true &&
               _licenses.containsKey(
                 DirectVideoDatasource.number(item['licence']?['id']),
-              ) &&
-              RegExp(
-                r'waterfall|beach|forest|falls|hawaii|hiking',
-                caseSensitive: false,
-              ).hasMatch('${item['name']}');
+              );
         }).toList();
         // Una instancia federada caída no invalida el resto del catálogo.
         var failures = 0;
@@ -77,13 +93,11 @@ class PeerTubeVideoDatasource extends DirectVideoDatasource {
         for (final video in results.whereType<VideoPost>()) {
           if (_seen.add(video.id)) videos.add(video);
         }
-        final next = _start + items.length;
-        if (items.isEmpty ||
-            next >= DirectVideoDatasource.number(data['total'])) {
-          _query++;
-          _start = 0;
+        final next = start + items.length;
+        if (items.isEmpty || next >= DirectVideoDatasource.number(data['total'])) {
+          _finishedQueries.add(query);
         } else {
-          _start = next;
+          _starts[query] = next;
         }
       }
       _pages[logical] = videos;
@@ -135,8 +149,7 @@ class PeerTubeVideoDatasource extends DirectVideoDatasource {
     if (files.isEmpty) return null;
     return VideoPost(
       caption: '${data['name'] ?? item['name']}',
-      videoUrl:
-          '${files.first['hasAudio'] == true && Uri.tryParse('${files.first['playlistUrl']}')?.scheme == 'https' ? files.first['playlistUrl'] : files.first['fileUrl']}',
+      videoUrl: '${files.first['fileUrl']}',
       source: VideoSource.peertube,
       externalId: '${watch.host}/$uuid',
       likes: DirectVideoDatasource.number(data['likes']),

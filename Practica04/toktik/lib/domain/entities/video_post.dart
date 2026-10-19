@@ -8,6 +8,7 @@ enum VideoSource {
   internetArchive,
   wikimedia,
   peertube,
+  nasa,
   googleDrive,
 }
 
@@ -29,6 +30,7 @@ class VideoPost {
       source == VideoSource.pixabay ||
       source == VideoSource.wikimedia ||
       source == VideoSource.peertube ||
+      source == VideoSource.nasa ||
       source == VideoSource.googleDrive ||
       source == VideoSource.internetArchive;
   const VideoPost({

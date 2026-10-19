@@ -17,3 +17,7 @@ abstract class PagedYouTubeRepository {
 abstract class TrendingYouTubeRepository {
   Future<List<YouTubeVideo>> getTrendingMusicVideos({int limit = 20});
 }
+
+abstract class YouTubeVideosByIdsRepository {
+  Future<List<YouTubeVideo>> getVideosByIds(Iterable<String> videoIds);
+}

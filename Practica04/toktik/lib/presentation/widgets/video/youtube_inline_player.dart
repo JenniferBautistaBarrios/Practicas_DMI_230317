@@ -1,18 +1,28 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+
 
 class YouTubeInlinePlayer extends StatefulWidget {
   final String videoId;
   final bool muted;
   final double aspectRatio;
+  final bool autoPlay;
+  final String? thumbnailUrl;
+  final VoidCallback? onUnavailable;
 
   const YouTubeInlinePlayer({
     super.key,
     required this.videoId,
     this.muted = false,
     this.aspectRatio = 9 / 16,
+    this.autoPlay = true,
+    this.thumbnailUrl,
+    this.onUnavailable,
   });
 
   @override
@@ -21,6 +31,10 @@ class YouTubeInlinePlayer extends StatefulWidget {
 
 class _YouTubeInlinePlayerState extends State<YouTubeInlinePlayer> {
   YoutubePlayerController? _controller;
+  StreamSubscription<YoutubePlayerValue>? _playerSubscription;
+  Timer? _skipUnavailableTimer;
+  int? _playerError;
+  bool _unavailableReported = false;
 
   bool get _supportedPlatform => kIsWeb || switch (defaultTargetPlatform) {
     TargetPlatform.android ||
@@ -35,16 +49,40 @@ class _YouTubeInlinePlayerState extends State<YouTubeInlinePlayer> {
     if (_supportedPlatform) {
       _controller = YoutubePlayerController.fromVideoId(
         videoId: widget.videoId,
-        autoPlay: true,
+        autoPlay: widget.autoPlay,
         params: YoutubePlayerParams(
           mute: widget.muted,
-          showControls: true,
-          showFullscreenButton: true,
+          // The feed controls playback with autoplay and Flutter actions;
+          // let vertical gestures reach the surrounding PageView.
+          showControls: false,
+          pointerEvents: PointerEvents.none,
+          showFullscreenButton: false,
           interfaceLanguage: 'es',
           playsInline: true,
-          privacyEnhancedMode: true,
+          // A web embed needs its real hosting origin. On native platforms the
+          // player runs in a WebView, so do not claim youtube.com as the app's
+          // origin; that mismatch can make YouTube reject the embed.
+          origin: kIsWeb ? Uri.base.origin : null,
+          // Use youtube.com for anonymous playback. The no-cookie embed can
+          // fail to initialize some public Shorts in embedded WebViews.
+          privacyEnhancedMode: false,
         ),
       );
+      _playerSubscription = _controller!.stream.listen((value) {
+        if (!value.hasError || !mounted) return;
+        final code = value.error.code;
+        final onUnavailable = widget.onUnavailable;
+        if (onUnavailable != null) {
+          if (_unavailableReported) return;
+          _unavailableReported = true;
+          // Skip unavailable feed items before showing the playback error.
+          _skipUnavailableTimer = Timer(const Duration(milliseconds: 120), () {
+            if (mounted) onUnavailable();
+          });
+          return;
+        }
+        setState(() => _playerError = code);
+      });
     }
   }
 
@@ -62,6 +100,8 @@ class _YouTubeInlinePlayerState extends State<YouTubeInlinePlayer> {
 
   @override
   void dispose() {
+    _skipUnavailableTimer?.cancel();
+    _playerSubscription?.cancel();
     _controller?.close();
     super.dispose();
   }
@@ -96,12 +136,75 @@ class _YouTubeInlinePlayerState extends State<YouTubeInlinePlayer> {
         ),
       );
     }
+    final errorCode = _playerError;
     return Center(
-      child: YoutubePlayer(
-        controller: controller,
+      child: AspectRatio(
         aspectRatio: widget.aspectRatio,
-        backgroundColor: Colors.black,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            YoutubePlayer(
+              controller: controller,
+              aspectRatio: widget.aspectRatio,
+              backgroundColor: Colors.black,
+          // Vertical drags navigate the feed, not player fullscreen.
+              enableFullScreenOnVerticalDrag: false,
+              gestureRecognizers:
+                  const <Factory<OneSequenceGestureRecognizer>>{},
+            ),
+            if (errorCode != null)
+              ColoredBox(
+                color: Colors.black,
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    if (widget.thumbnailUrl != null)
+                      Image.network(
+                        widget.thumbnailUrl!,
+                        fit: BoxFit.contain,
+                        errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                      ),
+                    Center(
+                      child: SingleChildScrollView(
+                        padding: const EdgeInsets.all(16),
+                        child: Container(
+                          padding: const EdgeInsets.all(16),
+                          color: Colors.black87,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                _errorMessage(errorCode),
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                              const SizedBox(height: 12),
+                              TextButton.icon(
+                                onPressed: () => launchUrl(
+                                  Uri.https('www.youtube.com', '/watch', {'v': widget.videoId}),
+                                  mode: LaunchMode.externalApplication,
+                                ),
+                                icon: const Icon(Icons.open_in_new),
+                                label: const Text('Ver en YouTube'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
+
+  String _errorMessage(int code) => switch (code) {
+    100 => 'YouTube no encuentra este video o ya no es público. (Error 100)',
+    101 || 150 || 152 => 'El propietario no permite reproducir este video dentro de otras apps. (Error $code)',
+    153 => 'YouTube rechazó el reproductor integrado de esta app. (Error 153)',
+    _ => 'YouTube no pudo reproducir este video. (Error $code)',
+  };
 }

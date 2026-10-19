@@ -5,7 +5,7 @@ import '../datasources/youtube_video_datasource.dart';
 import '../models/video_model.dart';
 
 class YouTubeRepositoryImpl
-    implements YouTubeRepository, PagedYouTubeRepository, TrendingYouTubeRepository {
+    implements YouTubeRepository, PagedYouTubeRepository, TrendingYouTubeRepository, YouTubeVideosByIdsRepository {
   final YouTubeVideoDatasource datasource;
 
   const YouTubeRepositoryImpl(this.datasource);
@@ -15,6 +15,14 @@ class YouTubeRepositoryImpl
       (await datasource.getTrendingVideos(categoryId: '10', maxResults: limit))
           .map(_asYouTubeVideo)
           .toList();
+
+  @override
+  Future<List<YouTubeVideo>> getVideosByIds(Iterable<String> videoIds) async {
+    final ids = videoIds.toList();
+    final videos = await datasource.getVideosByIds(ids);
+    final byId = {for (final video in videos) video.id: _asYouTubeVideo(video)};
+    return [for (final id in ids) if (byId.containsKey(id)) byId[id]!];
+  }
 
   @override
   Future<List<YouTubeVideo>> searchVideos(String query, {int limit = 20}) async {

@@ -15,20 +15,23 @@ import 'infrastructure/repositories/video_posts_repository_impl.dart';
 import 'infrastructure/repositories/local_preferences_repository.dart';
 import 'infrastructure/repositories/feed_repositories.dart';
 import 'infrastructure/datasources/peertube_video_datasource.dart';
-import 'infrastructure/datasources/internet_archive_video_datasource.dart';
-import 'infrastructure/datasources/wikimedia_video_datasource.dart';
 import 'infrastructure/datasources/youtube_video_datasource.dart';
 import 'infrastructure/repositories/youtube_repository_impl.dart';
 import 'infrastructure/services/seasonal_audio.dart';
 import 'infrastructure/services/platform_app_icon_service.dart';
 import 'presentation/providers/preferences_provider.dart';
+import 'presentation/providers/peertube_comments_provider.dart';
 import 'presentation/providers/youtube_provider.dart';
 import 'presentation/screens/discover/discover_screen.dart';
 import 'presentation/widgets/shared/app_startup_gate.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   final storage = await SharedPreferences.getInstance();
   runApp(MyApp(storage: storage));
 }
@@ -51,6 +54,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   late final FavoritesFeedRepository _favorites;
   late final YouTubeVideoDatasource _youtubeDatasource;
   late final YouTubeProvider _youtubeProvider;
+  late final PeerTubeCommentsProvider _peerTubeCommentsProvider;
   Timer? _dateTimer;
   final _seasonalAudioPolicy = SeasonalAudioPolicy();
   @override
@@ -60,7 +64,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     final preferences = LocalPreferencesRepository(widget.storage);
     _preferences = PreferencesProvider(preferences)
       ..addListener(_onPreferences);
-    // Los videos propios se cargan desde assets/videos.
     final localRepository = VideoPostsRepositoryImpl(
       videosDatasource: LocalVideoDatasource(),
     );
@@ -68,22 +71,15 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       'PeerTube': VideoPostsRepositoryImpl(
         videosDatasource: PeerTubeVideoDatasource(_client, widget.storage),
       ),
-      'Internet Archive': VideoPostsRepositoryImpl(
-        videosDatasource: InternetArchiveVideoDatasource(
-          _client,
-          widget.storage,
-        ),
-      ),
-      'Wikimedia Commons': VideoPostsRepositoryImpl(
-        videosDatasource: WikimediaVideoDatasource(_client, widget.storage),
-      ),
     });
     _forYou = ForYouFeedRepository(localRepository);
     _favorites = FavoritesFeedRepository(preferences);
     _youtubeDatasource = YouTubeVideoDatasource(client: _client);
     _youtubeProvider = YouTubeProvider(
       YouTubeRepositoryImpl(_youtubeDatasource),
+      storage: widget.storage,
     );
+    _peerTubeCommentsProvider = PeerTubeCommentsProvider(_client);
     _dateTimer = Timer.periodic(
       const Duration(minutes: 1),
       (_) => _preferences.refreshDate(),
@@ -113,6 +109,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       _preferences.refreshDate();
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     } else {
       _audio.stop().catchError((Object _) {});
     }
@@ -124,6 +121,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     _dateTimer?.cancel();
     _preferences.removeListener(_onPreferences);
     _preferences.dispose();
+    _peerTubeCommentsProvider.dispose();
     _client.close();
     _audio.dispose();
     _youtubeProvider.dispose();
@@ -136,16 +134,19 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         value: _localPlayback,
         child: ChangeNotifierProvider<YouTubeProvider>.value(
           value: _youtubeProvider,
-          child: ChangeNotifierProvider.value(
-            value: _preferences,
-            child: Consumer<PreferencesProvider>(
-              builder: (context, preferences, _) => MaterialApp(
-                title: 'KittyTokTik',
-                debugShowCheckedModeBanner: false,
-                theme: AppTheme(season: preferences.season).getTheme(),
-                home: AppStartupGate(
-                  child: DiscoverScreen(
-                    repositories: [_discover, _forYou, _favorites],
+          child: ChangeNotifierProvider<PeerTubeCommentsProvider>.value(
+            value: _peerTubeCommentsProvider,
+            child: ChangeNotifierProvider.value(
+              value: _preferences,
+              child: Consumer<PreferencesProvider>(
+                builder: (context, preferences, _) => MaterialApp(
+                  title: 'KittyTokTik',
+                  debugShowCheckedModeBanner: false,
+                  theme: AppTheme(season: preferences.season).getTheme(),
+                  home: AppStartupGate(
+                    child: DiscoverScreen(
+                      repositories: [_discover, _forYou, _favorites],
+                    ),
                   ),
                 ),
               ),

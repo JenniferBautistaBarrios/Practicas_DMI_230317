@@ -1,42 +1,32 @@
-# 🎬 KittyTokTik — Videos verticales con Flutter
+# 🎬 KittyTokTik
 
 <p align="center">
-  <img src="/images.png" alt="Logo de la Universidad Tecnológica de Xicotepec de Juárez" width="200"/>
-
-<h1 align="center">KittyTokTik</h1>
-
-<h3 align="center">Desliza · Reproduce · Explora</h3>
-
-<p align="center">
-  Aplicación móvil de videos verticales desarrollada con Flutter y Dart.
+  <img src="assets/icons/Kittytoktik.png" alt="Icono de KittyTokTik" width="190">
   <br>
-  Una experiencia multimedia inspirada en las plataformas de videos cortos.
+  <strong>Desliza · Reproduce · Explora</strong>
+  <br>
+  Aplicación móvil de videos verticales desarrollada con Flutter y Dart.
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Flutter-Framework-02569B?logo=flutter&logoColor=white" alt="Flutter">
-  <img src="https://img.shields.io/badge/Dart-Lenguaje-0175C2?logo=dart&logoColor=white" alt="Dart">
-  <img src="https://img.shields.io/badge/Material%203-Interfaz-6750A4" alt="Material 3">
-  <img src="https://img.shields.io/badge/Plataforma-Multiplataforma-22C55E" alt="Multiplataforma">
+  <img src="https://img.shields.io/badge/Flutter-02569B?logo=flutter&logoColor=white" alt="Flutter">
+  <img src="https://img.shields.io/badge/Dart-0175C2?logo=dart&logoColor=white" alt="Dart">
+  <img src="https://img.shields.io/badge/Material_3-E91E83?logo=materialdesign&logoColor=white" alt="Material 3">
+  <img src="https://img.shields.io/badge/Temas-por_temporada-C62828" alt="Temas por temporada">
 </p>
 
 ---
 
-## 🎨 Identidad visual de KittyTokTik
+## 🎨 Identidad visual e iconos
 
-KittyTokTik cuenta con una identidad visual basada en un logotipo que combina la letra T con un símbolo de reproducción. Se contemplan diferentes versiones para representar la aplicación durante distintas temporadas del año.
+La interfaz usa una base clara y rosada. El color de acento y la tipografía cambian con la temporada. Los cuatro iconos que ya están en `assets/icons/` se muestran aquí:
 
-
-## Iconos de la aplicación
-
-Los iconos están guardados en `assets/icons/`. Puedes abrir cada imagen desde el repositorio:
-
-| Temporada | Icono |
+| Tema | Icono de la aplicación |
 | --- | --- |
-| Normal | ![Icono de KittyTokTik](assets/icons/normal.png) |
-| Navidad | ![Icono navideño de KittyTokTik](assets/icons/navidad.png) |
-| Halloween | ![Icono de Halloween de KittyTokTik](assets/icons/halloween.png) |
-| San Valentín | ![Icono de San Valentín de KittyTokTik](assets/icons/san-valentin.png) |
+| Normal · rosa | <img src="assets/icons/Kittytoktik.png" alt="Icono KittyTokTik normal" width="120"> |
+| Halloween · naranja | <img src="assets/icons/Hallowen.png" alt="Icono KittyTokTik de Halloween" width="120"> |
+| Navidad · rojo | <img src="assets/icons/Navidad.png" alt="Icono KittyTokTik de Navidad" width="120"> |
+| San Valentín · rojo y rosa | <img src="assets/icons/Sanvalentin.png" alt="Icono KittyTokTik de San Valentín" width="120"> |
 
 ---
 
@@ -97,145 +87,58 @@ Construir una aplicación de videos verticales con Flutter y Dart, implementando
 | 🎞️ Feed vertical | Permite cambiar de video mediante desplazamientos verticales. |
 | ▶️ Reproducción multimedia | Inicializa y reproduce los archivos de video. |
 | ⏸️ Pausa y reanudación | Permite pausar o reanudar el video al tocarlo. |
-| 🔁 Reproducción en bucle | Repite el contenido al finalizar. |
 | 🔊 Sonido | Configura el reproductor con sonido activado. |
 | 📝 Descripciones | Muestra información relacionada con cada video. |
-| 🌑 Degradado inferior | Ayuda a mejorar el contraste del texto. |
 | ❤️ Indicador de Me gusta | Presenta un icono y una cantidad del catálogo. |
 | 👁️ Visualizaciones | Muestra cantidades de reproducciones. |
-| ⏳ Estado de carga | Indica la inicialización del reproductor. |
 | ⚠️ Manejo de errores | Permite presentar fallos de inicialización. |
 | 🎨 Temas estacionales | Contempla variaciones visuales según la temporada. |
 | 📱 Interfaz vertical | Aprovecha el espacio de la pantalla móvil. |
 
-**Estado de las interacciones:** los iconos laterales de Me gusta y otras acciones se describen en la versión actual como elementos visuales. No se debe asumir que los botones actualizan datos o guardan interacciones si esa lógica todavía no está implementada.
+Los Me gusta se guardan en las preferencias locales. Los comentarios se consultan para los videos compatibles; el marcador de Guardar es temporal y se reinicia al cerrar la pantalla.
 
 ## 📱 Pantalla principal e iconos
 
-La pantalla principal muestra un video vertical acompañado por su descripción y una columna de indicadores visuales.
+La pantalla principal muestra un video vertical acompañado por su descripción y una columna de acciones.
 
-Los iconos que pueden formar parte de esta interfaz son:
+Estos son los iconos que utiliza la interfaz:
 
 | Icono | Función | Referencia Flutter |
 |---|---|---|
-| 👤 Perfil | Identifica al creador del contenido. | `Icons.account_circle` |
-| ♡ Me gusta | Representa la opción de indicar que un video gusta. | `Icons.favorite_border` |
-| ❤️ Me gusta activo | Representa el estado seleccionado, si está implementado. | `Icons.favorite` |
-| 💬 Comentarios | Representa el acceso a comentarios. | `Icons.comment` |
-| ↗ Compartir | Representa la opción de compartir contenido. | `Icons.share` |
-| ▶ Reproducir | Representa el inicio de la reproducción. | `Icons.play_arrow` |
-| ⏸ Pausar | Representa la pausa del video. | `Icons.pause` |
-
-La tabla muestra referencias habituales. Las evidencias deben corresponder a los iconos que realmente aparezcan en la aplicación.
+| ♡ / ❤️ | Me gusta y Me gusta activo | `Icons.favorite_border` / `Icons.favorite` |
+| 💬 | Abrir comentarios | `Icons.mode_comment_outlined` |
+| ▣ | Guardar en la pantalla actual | `Icons.bookmark_border_rounded` / `Icons.bookmark_rounded` |
+| ◉ | Visualizaciones | `Icons.visibility_outlined` |
+| 🔊 / 🔇 | Activar o silenciar | `Icons.volume_up` / `Icons.volume_off` |
+| ▶ | Reanudar un video pausado | `Icons.play_arrow` |
+| 🏠 / 🔎 / ♥ | Inicio, Discovery y Me gusta | `Icons.home_rounded`, `Icons.explore_rounded`, `Icons.favorite_rounded` |
 
 ## 📸 Evidencias de la aplicación
 
-En esta sección se muestran capturas tomadas durante la ejecución de KittyTokTik. Las imágenes permiten documentar la interfaz, los indicadores y el comportamiento del reproductor.
-
-Guarda las capturas en `assets/screenshots/`.
-
-### 1. 🎬 Capturas de aplicacion
-
-Muestra el video vertical, la descripción y la distribución general de la interfaz.
-
-<p align="center">
-  <img src="assets/screenshots/01-pantalla-principal.png" alt="Pantalla principal de KittyTokTik" width="270">
-</p>
-
-<p align="center">
-  <em>Figura 1. Pantalla principal del feed vertical.</em>
-</p>
-
-### 2. 🎬 Iconos laterales del video
-
-Muestra la columna de iconos, las cantidades y su ubicación sobre el contenido.
-
-<p align="center">
-  <img src="assets/screenshots/02-iconos-video.png" alt="Iconos e indicadores laterales de KittyTokTik" width="270">
-</p>
-
-<p align="center">
-  <em>Figura 2. Iconos e indicadores visuales del video.</em>
-</p>
-
-### 3. ❤️ Botón Me gusta: antes y después
-
-Esta evidencia permite comparar el estado inicial del icono con el estado posterior al clic, siempre que la interacción esté implementada.
-
-<table>
-  <tr>
-    <td align="center">
-      <img src="assets/screenshots/03-me-gusta-inicial.png" alt="Me gusta sin seleccionar" width="220">
-      <br>
-      <strong>Estado inicial</strong>
-      <br>
-      <sub>Icono sin seleccionar</sub>
-    </td>
-    <td align="center">
-      <img src="assets/screenshots/04-me-gusta-activo.png" alt="Me gusta seleccionado" width="220">
-      <br>
-      <strong>Estado activo</strong>
-      <br>
-      <sub>Después de pulsar el icono</sub>
-    </td>
-  </tr>
-</table>
-
-<p align="center">
-  <em>Figura 3. Comparación del botón Me gusta.</em>
-</p>
-
-Si el corazón no cambia al pulsarlo, utiliza esta sección para mostrar únicamente el icono visual y señala que la interacción está pendiente. No presentes un estado activo simulado como si fuera una función comprobada.
-
-### 4. ⏯️ Reproducción y pausa
-
-Muestra el video cuando se encuentra pausado. Puedes añadir otra captura para representar la reproducción activa.
-
-<p align="center">
-  <img src="assets/screenshots/05-video-pausado.png" alt="Video pausado en KittyTokTik" width="270">
-</p>
-
-<p align="center">
-  <em>Figura 4. Estado de pausa del reproductor.</em>
-</p>
-
-### 5. 🌑 Descripción y degradado
-
-Esta captura permite observar la descripción y el degradado inferior que ayuda a mantener el texto legible.
-
-<p align="center">
-  <img src="assets/screenshots/06-descripcion-gradiente.png" alt="Descripción y degradado inferior del video" width="270">
-</p>
-
-<p align="center">
-  <em>Figura 5. Descripción del contenido y degradado.</em>
-</p>
-
-> **Importante:** los nombres de las capturas son una propuesta. Debes guardar las imágenes reales con esos nombres o cambiar las rutas para que coincidan con tus archivos. GitHub no crea las imágenes automáticamente.
+Las capturas reales de compilación y pruebas se agregarán en [`evidencias/`](evidencias/README.md). No se muestran imágenes de prueba hasta que se hayan tomado en la aplicación.
 
 ## 🎨 Diseño e identidad visual
 
-KittyTokTik utiliza una apariencia tecnológica y minimalista para mantener el contenido multimedia como elemento principal de la interfaz.
+KittyTokTik usa superficies claras en tonos rosados. El video ocupa el área principal y usa un degradado oscuro detrás de los textos y controles para que sigan siendo legibles.
 
 ### Características del diseño
 
-- Fondo oscuro que destaca el contenido.
-- Texto claro para facilitar la lectura.
-- Acentos cian y violeta.
-- Tipografía Montserrat.
-- Degradados sobre los videos.
-- Iconos e indicadores integrados en la interfaz.
-- Variaciones gráficas para temporadas específicas.
+- Fondo rosa muy claro en las pantallas de navegación.
+- Acentos de color que cambian según la temporada.
+- Tipografía Nunito durante la temporada normal.
+- Tipografías temáticas para Halloween, Navidad y San Valentín.
+- Degradado oscuro sobre la parte inferior del video.
+- Iconos de acciones y navegación de Material.
+- Icono de aplicación propio para cada temporada.
 
 ### Paleta de colores
 
-| Elemento | Color |
-|---|---|
-| Fondo principal | `#09090F` |
-| Color primario | `#22D3EE` |
-| Color secundario | `#A78BFA` |
-| Texto principal | `#FFFFFF` |
-| Tipografía | Montserrat |
+| Tema | Color primario | Acento secundario | Fondo | Superficie |
+|---|---|---|---|---|
+| Normal | `#E91E83` | `#FF4FA0` | `#FFF7FB` | `#FFEFF6` |
+| Halloween | `#F57C00` | `#FFA726` | `#FFE0B2` | `#FFD08A` |
+| Navidad | `#C62828` | `#E57373` | `#FFCDD2` | `#FFCDD2` |
+| San Valentín | `#D32F2F` | `#EF5350` | `#FFCDD2` | `#FFBFC2` |
 
 ### Tematización estacional
 
@@ -243,9 +146,10 @@ La aplicación contempla cambios visuales según la fecha local del dispositivo.
 
 | Periodo | Tema | Apariencia |
 |---|---|---|
-| Octubre | Halloween | Naranja, violeta y fondo oscuro. |
-| Diciembre | Navidad | Verde, rojo y fondo oscuro. |
-| Resto del año | Tecnología | Negro, cian y violeta. |
+| Octubre | Halloween | Naranja sobre fondo durazno; tipografía Creepster. |
+| Diciembre | Navidad | Rojo y rosa claro; tipografía Mountains of Christmas. |
+| Del 1 al 14 de febrero | San Valentín | Rojo y rosa; tipografía Great Vibes. |
+| Resto del año | Normal | Rosa y fondo casi blanco; tipografía Nunito. |
 
 La tematización se debe comprobar ejecutando la aplicación o mediante las pruebas correspondientes.
 

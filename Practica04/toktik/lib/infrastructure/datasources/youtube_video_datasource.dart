@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../domain/datasources/video_posts_datasource.dart';
@@ -7,22 +8,30 @@ import '../../domain/entities/video_post.dart';
 import '../models/comment_model.dart';
 import '../models/video_model.dart';
 
-/// Read-only access to YouTube Data API v3.
-///
-/// Supply the key with --dart-define=YOUTUBE_API_KEY=... or inject [apiKey].
-/// Restrict the key to YouTube Data API v3 and the intended application.
+/// Read-only access to the app's backend proxy for YouTube Data API v3.
 class YouTubeVideoDatasource implements VideoPostDatasource {
-  static const _baseUrl = 'www.googleapis.com';
-  static const _apiKeyFromBuild = String.fromEnvironment('YOUTUBE_API_KEY');
+  static const _configuredBackend = String.fromEnvironment(
+    'YOUTUBE_API_BASE_URL',
+  );
 
   final http.Client _client;
   final bool _ownsClient;
-  final String apiKey;
+  final Uri _backend;
 
-  YouTubeVideoDatasource({http.Client? client, String? apiKey})
+  YouTubeVideoDatasource({http.Client? client, String? backendUrl})
     : _client = client ?? http.Client(),
       _ownsClient = client == null,
-      apiKey = (apiKey ?? _apiKeyFromBuild).trim();
+      _backend = Uri.parse(
+        (backendUrl ?? _defaultBackend).replaceFirst(RegExp(r'/$'), ''),
+      );
+
+  static String get _defaultBackend => _configuredBackend.isNotEmpty
+      ? _configuredBackend
+      : kIsWeb
+      ? 'http://127.0.0.1:3000'
+      : defaultTargetPlatform == TargetPlatform.android
+      ? 'http://10.0.2.2:3000'
+      : 'http://127.0.0.1:3000';
 
   /// Returns the most popular videos for a region, optionally in a category.
   Future<List<VideoModel>> getTrendingVideos({
@@ -31,7 +40,7 @@ class YouTubeVideoDatasource implements VideoPostDatasource {
     int maxResults = 20,
   }) async {
     final query = <String, String>{
-      'part': 'snippet,statistics,status',
+      'part': 'snippet,statistics,status,contentDetails',
       'chart': 'mostPopular',
       'regionCode': regionCode,
       'maxResults': '${_limit(maxResults)}',
@@ -54,15 +63,11 @@ class YouTubeVideoDatasource implements VideoPostDatasource {
     if (ids.isEmpty) return [];
 
     final json = await _get('/youtube/v3/videos', {
-      'part': 'snippet,statistics,status',
+      'part': 'snippet,statistics,status,contentDetails',
       'id': ids.join(','),
       'hl': 'es',
     });
-    return (json['items'] as List<dynamic>? ?? [])
-        .whereType<Map<String, dynamic>>()
-        .map(VideoModel.fromJson)
-        .where((video) => video.id.isNotEmpty)
-        .toList();
+    return _videoItems(json);
   }
 
   /// Gets public top-level comments for a video. Comments disabled by the
@@ -132,7 +137,11 @@ class YouTubeVideoDatasource implements VideoPostDatasource {
     final query = <String, String>{
       'part': 'snippet',
       'type': 'video',
+      // Discovery uses an in-app iframe, so require both YouTube's explicit
+      // embeddable flag and syndication outside youtube.com.
       'videoEmbeddable': 'true',
+      'videoSyndicated': 'true',
+      'videoDuration': 'short',
       'regionCode': regionCode,
       'maxResults': '${_limit(maxResults)}',
       if (pageToken != null && pageToken.isNotEmpty) 'pageToken': pageToken,
@@ -159,7 +168,7 @@ class YouTubeVideoDatasource implements VideoPostDatasource {
     }
 
     final detailsJson = await _get('/youtube/v3/videos', {
-      'part': 'snippet,statistics,status',
+      'part': 'snippet,statistics,status,contentDetails',
       'id': ids.join(','),
     });
     final models = _videoItems(detailsJson);
@@ -190,9 +199,12 @@ class YouTubeVideoDatasource implements VideoPostDatasource {
     String path,
     Map<String, String> query,
   ) async {
-    final uri = Uri.https(_baseUrl, path, query);
+    final uri = _backend.replace(
+      path: '/api${path}',
+      queryParameters: query,
+    );
     final response = await _client
-        .get(uri, headers: {'x-goog-api-key': _requiredApiKey()})
+        .get(uri)
         .timeout(const Duration(seconds: 20));
     final decoded = jsonDecode(response.body);
     if (decoded is! Map<String, dynamic>) {
@@ -210,6 +222,10 @@ class YouTubeVideoDatasource implements VideoPostDatasource {
         response.statusCode,
         message,
         reason: firstDetail['reason'] as String?,
+        errors: details
+            .whereType<Map>()
+            .map((item) => Map<String, dynamic>.from(item))
+            .toList(),
       );
     }
     return decoded;
@@ -220,22 +236,20 @@ class YouTubeVideoDatasource implements VideoPostDatasource {
           .whereType<Map<String, dynamic>>()
           .where((item) {
             final status = item['status'] as Map<String, dynamic>?;
-            return status?['embeddable'] != false;
+            final details = item['contentDetails'] as Map<String, dynamic>?;
+            final rating = details?['contentRating'] as Map<String, dynamic>?;
+            final region = details?['regionRestriction'] as Map<String, dynamic>?;
+            final allowed = region?['allowed'] as List<dynamic>?;
+            final blocked = region?['blocked'] as List<dynamic>? ?? const [];
+            final availableInMexico = allowed == null || allowed.contains('MX');
+            return status?['embeddable'] == true &&
+                rating?['ytRating'] != 'ytAgeRestricted' &&
+                availableInMexico &&
+                !blocked.contains('MX');
           })
           .map(VideoModel.fromJson)
           .where((video) => video.id.isNotEmpty)
           .toList();
-
-  String _requiredApiKey() {
-    if (apiKey.isEmpty) {
-      throw StateError(
-        'La clave de YouTube no se incluyó al compilar la app. Detén la app y '
-        'vuelve a iniciarla con '
-        '--dart-define-from-file=api_credentials.json.',
-      );
-    }
-    return apiKey;
-  }
 
   int _limit(int maxResults) => maxResults.clamp(1, 50).toInt();
 
@@ -248,8 +262,16 @@ class YouTubeApiException implements Exception {
   final int statusCode;
   final String message;
   final String? reason;
+  final List<Map<String, dynamic>> errors;
 
-  const YouTubeApiException(this.statusCode, this.message, {this.reason});
+  const YouTubeApiException(
+    this.statusCode,
+    this.message, {
+    this.reason,
+    this.errors = const [],
+  });
+
+  bool get commentsDisabled => reason == 'commentsDisabled';
 
   @override
   String toString() => 'YouTubeApiException($statusCode, $reason): $message';

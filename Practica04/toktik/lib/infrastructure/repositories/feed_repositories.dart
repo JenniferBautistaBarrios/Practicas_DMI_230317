@@ -6,6 +6,7 @@ import '../../domain/repositories/video_posts_repository.dart';
 import '../../domain/repositories/preferences_repository.dart';
 
 class DiscoverFeedRepository implements ProgressiveFeedRepository {
+  static final _removedVideoId = RegExp(r'(^|[^0-9])12356([^0-9]|$)');
   final Map<String, VideoPostRepository> sources;
   DiscoverFeedRepository(this.sources);
   @override
@@ -33,6 +34,7 @@ class DiscoverFeedRepository implements ProgressiveFeedRepository {
                 (v) =>
                     v.source != VideoSource.local && v.supportsDirectPlayback,
               )
+              .where((video) => !_isRemovedVideo(video))
               .toList();
         } catch (_) {
           warnings.add(entry.key);
@@ -48,6 +50,14 @@ class DiscoverFeedRepository implements ProgressiveFeedRepository {
       }();
     }
     return stream.stream;
+  }
+
+  bool _isRemovedVideo(VideoPost video) {
+    final externalId = video.externalId ?? '';
+    final videoPath = Uri.tryParse(video.videoUrl)?.path ?? video.videoUrl;
+    return _removedVideoId.hasMatch(externalId) ||
+        _removedVideoId.hasMatch(videoPath) ||
+        _removedVideoId.hasMatch(video.caption);
   }
 }
 

@@ -1,6 +1,6 @@
 # APIs públicas utilizadas por Vdry
 
-Las tres integraciones activas no requieren credenciales, registro ni claves inventadas. Se retiraron Pexels y Pixabay. `Heidrhen`/`jennifer230317` identifica el proyecto académico en su documentación y User-Agent; no es una API key.
+Las tres integraciones activas no requieren credenciales, registro ni claves inventadas. Se retiraron Pexels y Pixabay. ``/`jennifer230317` identifica el proyecto académico en su documentación y User-Agent; no es una API key.
 
 | API | Endpoints | Reproducción |
 | --- | --- | --- |

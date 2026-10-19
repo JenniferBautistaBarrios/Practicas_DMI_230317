@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../domain/entities/youtube_video.dart';
 import '../../../domain/entities/video_post.dart';
 import '../../../domain/repositories/feed_repository.dart';
 import '../../providers/discover_provider.dart';
 import '../../providers/preferences_provider.dart';
-import '../../providers/youtube_provider.dart';
 import '../../widgets/settings/season_settings.dart';
 import '../../widgets/shared/season_splash.dart';
-import '../../widgets/shared/youtube_api_view.dart';
 import '../../widgets/shared/video_scrollable_view.dart';
-import '../video_details/youtube_video_details_screen.dart';
 
 class DiscoverScreen extends StatefulWidget {
   final List<FeedRepository> repositories;
@@ -26,16 +22,16 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   late final List<DiscoverProvider> _feeds;
   // La app vuelve a abrir en el feed vertical original; Discovery se abre
   // desde el botón superior y las pestañas inferiores siguen disponibles.
-  int _tab = 0;
+  int _tab = 1;
   @override
   void initState() {
     super.initState();
     _feeds = widget.repositories
         .map((r) => DiscoverProvider(repository: r))
         .toList();
-    _tabs = TabController(length: 3, initialIndex: 0, vsync: this)
+    _tabs = TabController(length: 3, initialIndex: 1, vsync: this)
       ..addListener(_selectTab);
-    _feeds[1].loadNextPage();
+    _feeds[0].loadNextPage();
   }
 
   void _selectTab() {
@@ -44,20 +40,9 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     setState(() => _tab = index);
     if (index == 0 && _feeds[1].initialLoading) {
       _feeds[1].loadNextPage();
+    } else if (index == 1 && _feeds[0].initialLoading) {
+      _feeds[0].loadNextPage();
     }
-  }
-
-  void _openYouTubeDetails(YouTubeVideo video, {bool autoPlay = false}) {
-    final preferences = context.read<PreferencesProvider>();
-    final favorite = video.toVideoPost();
-    Navigator.of(context).push(MaterialPageRoute<void>(
-      builder: (_) => YouTubeVideoDetailsScreen(
-        video: video,
-        autoPlay: autoPlay,
-        isFavorite: preferences.repository.isLiked(favorite),
-        onFavoriteToggle: () => preferences.toggleLike(favorite),
-      ),
-    ));
   }
 
   @override
@@ -197,7 +182,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
           videos: favorites,
           active: _tab == 2,
         );
-  Widget _feedView(int index) => ListenableBuilder(
+  Widget _feedView(int index, {int tabIndex = 0}) => ListenableBuilder(
     listenable: _feeds[index],
     builder: (context, _) {
       final feed = _feeds[index];
@@ -224,7 +209,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
           VideoScrollableView(
             key: ValueKey(index == 0 ? 'discover-videos' : 'for-you-videos'),
             videos: feed.videos,
-            active: _tab == 0,
+            active: _tab == tabIndex,
             onNearEnd: feed.loadNextPage,
           ),
           if (feed.loading)
@@ -239,119 +224,5 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     },
   );
 
-  Widget _discoverView() => NotificationListener<ScrollNotification>(
-    onNotification: (notification) {
-      final youtube = context.read<YouTubeProvider>();
-      if (_tab == 1 &&
-          notification.metrics.axis == Axis.vertical &&
-          notification.metrics.extentAfter < 700 &&
-          youtube.hasMoreVideos &&
-          !youtube.loadingMoreVideos) {
-        youtube.loadMoreVideos();
-      }
-      return false;
-    },
-    child: ListView(
-      padding: EdgeInsets.fromLTRB(
-        16,
-        MediaQuery.paddingOf(context).top + 10,
-        16,
-        MediaQuery.paddingOf(context).bottom + 24,
-      ),
-      children: [
-        Row(
-          children: [
-            Icon(Icons.explore_rounded, color: Theme.of(context).colorScheme.primary, size: 28),
-            const SizedBox(width: 10),
-            Text('Discovery', style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900)),
-            const Spacer(),
-            IconButton.filledTonal(
-              tooltip: 'Temporada',
-              onPressed: () => showModalBottomSheet<void>(
-                context: context,
-                isScrollControlled: true,
-                builder: (_) => const SeasonSettings(),
-              ),
-              icon: const Icon(Icons.tune_rounded),
-            ),
-          ],
-        ),
-        const SizedBox(height: 20),
-        Row(children: [
-          Text('Tendencias musicales · YouTube', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900)),
-          const SizedBox(width: 8),
-          Icon(Icons.local_fire_department_rounded, color: Theme.of(context).colorScheme.primary),
-        ]),
-        const SizedBox(height: 12),
-        SizedBox(
-          height: 205,
-          child: Consumer<YouTubeProvider>(
-            builder: (context, youtube, _) {
-              if (youtube.trendingVideos.isEmpty) {
-                if (youtube.loadingTrendingVideos) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                return Center(
-                  child: TextButton.icon(
-                    onPressed: () => youtube.loadTrendingMusic(force: true),
-                    icon: const Icon(Icons.refresh_rounded),
-                    label: Text(youtube.trendingError ?? 'No hay tendencias disponibles.'),
-                  ),
-                );
-              }
-              final videos = youtube.trendingVideos.take(8).toList();
-              return ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: videos.length,
-                separatorBuilder: (_, _) => const SizedBox(width: 12),
-                itemBuilder: (context, index) => _trendCard(context, video: videos[index]),
-              );
-            },
-          ),
-        ),
-        const SizedBox(height: 25),
-        Row(children: [
-          Expanded(child: Text('Videos musicales de YouTube', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900))),
-          Icon(Icons.music_note_rounded, color: Theme.of(context).colorScheme.secondary),
-        ]),
-        const SizedBox(height: 12),
-        const YouTubeApiView(),
-      ],
-    ),
-  );
-  Widget _trendCard(BuildContext context, {required YouTubeVideo video}) => SizedBox(
-    width: 158,
-    child: InkWell(
-      borderRadius: BorderRadius.circular(20),
-      onTap: () => _openYouTubeDetails(video, autoPlay: true),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            Image.network(
-              video.thumbnailUrl,
-              fit: BoxFit.cover,
-              errorBuilder: (_, _, _) => ColoredBox(
-                color: Theme.of(context).colorScheme.surfaceContainer,
-              ),
-            ),
-            const DecoratedBox(decoration: BoxDecoration(gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.transparent, Color(0xDD100A19)]))),
-            Center(
-              child: CircleAvatar(
-                radius: 25,
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                child: const Icon(
-                  Icons.play_arrow_rounded,
-                  color: Colors.white,
-                  size: 34,
-                ),
-              ),
-            ),
-            Positioned(left: 11, right: 11, bottom: 11, child: Text(video.title, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 13))),
-          ],
-        ),
-      ),
-    ),
-  );
+  Widget _discoverView() => _feedView(0, tabIndex: 1);
 }
