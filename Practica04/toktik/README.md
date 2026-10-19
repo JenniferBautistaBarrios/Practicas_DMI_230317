@@ -25,7 +25,7 @@
   <img src="arquitectura/capturas/Arquitectura%20Inicial.png" alt="Diagrama de arquitectura inicial de KittyTokTik: proveedor local" width="100%">
 </p>
 
-[Abrir diagrama inicial interactivo](https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/inicial/arquitectura.html)
+[Abrir diagrama inicial interactivo](https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica04/toktik/arquitectura/inicial/arquitectura.html)
 
 **Arquitectura final — proveedor, repositorio y fuentes de datos:** muestra las capas de la aplicación y el flujo hacia las fuentes de datos y la persistencia.
 
@@ -33,7 +33,7 @@
   <img src="arquitectura/capturas/ArquitecturaFinal.png" alt="Diagrama de arquitectura final de KittyTokTik: proveedor, repositorio y fuentes de datos" width="100%">
 </p>
 
-[Abrir diagrama final interactivo](https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/final/arquitectura.html)
+[Abrir diagrama final interactivo](https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica04/toktik/arquitectura/final/arquitectura.html)
 
 ---
 
