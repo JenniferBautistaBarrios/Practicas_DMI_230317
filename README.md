@@ -72,7 +72,7 @@ En esta unidad se trabajan los fundamentos iniciales del desarrollo de aplicacio
 | 02 | [Mi primera aplicación móvil con Flutter](https://github.com/JenniferBautistaBarrios/Practicas_DMI_230317/tree/main/Practica02/hello_world_app) | Desarrollo de una aplicación móvil para comprender la estructura de un proyecto Flutter y el uso de widgets Stateless y Stateful mediante un contador interactivo. | 20 | 🟢 Finalizada |
 | 03 | [Yes, No, Maybe — Chat con API de respuestas automáticas](https://github.com/JenniferBautistaBarrios/Practicas_DMI_230317/tree/main/Practica03) | Creación de una aplicación de chat en Flutter que utiliza la API yesno.wtf para mostrar respuestas automáticas acompañadas de GIFs. | 30 | 🟢 Finalizada |
 | 04 | [Aplicación de videos verticales — TokTik](https://github.com/JenniferBautistaBarrios/Practicas_DMI_230317/tree/main/Practica04/toktik) | Desarrollo de una aplicación de reproducción de videos verticales con Flutter, utilizando Provider para la gestión del estado y tematización temporal de Halloween y Navidad. | 30 | 🟢 Finalizada |
-| 05 | [Manual de Instalacion](https://github.com/JenniferBautistaBarrios/Practicas_DMI_230317/tree/ManualDeInstalacion/Manual_Instalacion) | Elaboración de un manual con los pasos necesarios para instalar , incluyendo instrucciones y evidencias del proceso.| sin definir | 🟢 Finalizada |
+|  | [Manual de Instalacion](https://github.com/JenniferBautistaBarrios/Practicas_DMI_230317/tree/ManualDeInstalacion/Manual_Instalacion) | Elaboración de un manual con los pasos necesarios para instalar , incluyendo instrucciones y evidencias del proceso.| sin definir | 🟢 Finalizada |
 
 
 ## 📋📱 Prácticas de la Unidad 2
