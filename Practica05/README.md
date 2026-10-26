@@ -74,10 +74,10 @@ Desarrollar una aplicación interactiva en **Flutter** para explorar la bibliote
 
 ## 🏗️ Diagrama de Arquitectura
 
-> 🔗 **[Ver el Diagrama Interactivo en GitHub Pages](http://127.0.0.1:5500/Practica05/arquitectura/arquitectura-practica05.html)**
+> 🔗 **[Ver el Diagrama Interactivo en GitHub Pages](https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica05/arquitectura/arquitectura-practica05.html)**
 
 <p align="center">
-  <img src="../images/Diagrama de Arquitectura.png" alt="Diagrama de Arquitectura" width="90%"/>
+  <img src="./images/Diagrama de Arquitectura.png" alt="Diagrama de Arquitectura" width="90%"/>
 </p>
 ---
 
