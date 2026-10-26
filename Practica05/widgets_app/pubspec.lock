@@ -5,26 +5,26 @@ packages:
     dependency: "direct main"
     description:
       name: animate_do
-      sha256: "9aeacc1a7238f971c039bdf45d13c628be554a242e0251c4ddda09d19a1a923f"
+      sha256: b6ff08dc6cf3cb5586a86d7f32a3b5f45502d2e08e3fb4f5a484c8421c9b3fc0
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.2"
+    version: "3.3.9"
   async:
     dependency: transitive
     description:
       name: async
-      sha256: bfe67ef28df125b7dddcea62755991f807aa39a2492a23e1550161692950bbe0
+      sha256: e2eb0491ba5ddb6177742d2da23904574082139b07c1e33b8503b9f46f3e1a37
       url: "https://pub.dev"
     source: hosted
-    version: "2.10.0"
+    version: "2.13.1"
   boolean_selector:
     dependency: transitive
     description:
       name: boolean_selector
-      sha256: "6cfb5af12253eaf2b368f07bacc5a80d1301a071c73360d746b7f2e32d762c66"
+      sha256: "8aab1771e1243a5063b8b0ff68042d67334e3feab9e95b9490f9a6ebf73b42ea"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.2"
   characters:
     dependency: transitive
     description:
@@ -66,18 +66,18 @@ packages:
     dependency: "direct dev"
     description:
       name: flutter_lints
-      sha256: aeb0b80a8b3709709c9cc496cdc027c5b3216796bc0af0ce1007eaf24464fd4c
+      sha256: a25a15ebbdfc33ab1cd26c63a6ee519df92338a9c10f122adda92938253bef04
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1"
+    version: "2.0.3"
   flutter_riverpod:
     dependency: "direct main"
     description:
       name: flutter_riverpod
-      sha256: "46a27b7a11dc13738054093076f2dc65692ddcd463979b15092accf5681aea20"
+      sha256: "9532ee6db4a943a1ed8383072a2e3eeda041db5657cdf6d2acecf3c21ecbe7e1"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.6.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -92,10 +92,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: "6dd6b05db749756996b727521b9b9b4ee0968ea4aeb59af2e59383683d6ef34f"
+      sha256: bd7e671d26fd39c78cba82070fa34ef1f830b0e7ed1aeebccabc6561302a7ee5
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.7"
+    version: "6.5.9"
   leak_tracker:
     dependency: transitive
     description:
@@ -124,18 +124,18 @@ packages:
     dependency: transitive
     description:
       name: lints
-      sha256: "5e4a9cd06d447758280a8ac2405101e0e2094d2a1dbdd3756aec3fe7775ba593"
+      sha256: "0a217c6c989d21039f1498c3ed9f3ed71b354e69873f13a8dfc3c9fe76f1b452"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1"
+    version: "2.1.1"
   logging:
     dependency: transitive
     description:
       name: logging
-      sha256: "04094f2eb032cbb06c6f6e8d3607edcfcb0455e2bb6cbc010cb01171dcb64e6d"
+      sha256: c8245ada5f1717ed44271ed1c26b8ce85ca3228fd2ffdb75468ab01979309d61
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.1"
+    version: "1.3.0"
   matcher:
     dependency: transitive
     description:
@@ -156,10 +156,10 @@ packages:
     dependency: transitive
     description:
       name: meta
-      sha256: "307249ce4ff29d58a18e97f6345f539382eb9c9c29ecda628900f31de0443dd9"
+      sha256: c82594181e3312f3d0695fc95aaaf7758d75b8d4ae2bbecf223b9fd5109a059d
       url: "https://pub.dev"
     source: hosted
-    version: "1.19.0"
+    version: "1.18.3"
   path:
     dependency: transitive
     description:
@@ -172,10 +172,10 @@ packages:
     dependency: transitive
     description:
       name: riverpod
-      sha256: "59a48de9c757aa61aa28e9fd625ffb360d43b6b54606f12536622c55be9e8c4b"
+      sha256: "59062512288d3056b2321804332a13ffdd1bf16df70dcc8e506e411280a72959"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.6.1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -185,10 +185,10 @@ packages:
     dependency: transitive
     description:
       name: source_span
-      sha256: dd904f795d4b4f3b870833847c461801f6750a9fa8e61ea5ac53f9422b31f250
+      sha256: "56a02f1f4cd1a2d96303c0144c93bd6d909eea6bee6bf5a0e0b685edbd4c47ab"
       url: "https://pub.dev"
     source: hosted
-    version: "1.9.1"
+    version: "1.10.2"
   stack_trace:
     dependency: transitive
     description:
@@ -201,10 +201,10 @@ packages:
     dependency: transitive
     description:
       name: state_notifier
-      sha256: "8fe42610f179b843b12371e40db58c9444f8757f8b69d181c97e50787caed289"
+      sha256: b8677376aa54f2d7c58280d5a007f9e8774f1968d1fb1c096adcb4792fba29bb
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.2+1"
+    version: "1.0.0"
   stream_channel:
     dependency: transitive
     description:
@@ -217,18 +217,18 @@ packages:
     dependency: transitive
     description:
       name: string_scanner
-      sha256: "556692adab6cfa87322a115640c11f13cb77b3f076ddcc5d6ae3c20242bedcde"
+      sha256: "921cd31725b72fe181906c6a94d987c78e3b98c2e205b397ea399d4054872b43"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.0"
+    version: "1.4.1"
   term_glyph:
     dependency: transitive
     description:
       name: term_glyph
-      sha256: a29248a84fbb7c79282b40b8c72a1209db169a2e0542bce341da992fe1bc7e84
+      sha256: "7f554798625ea768a7518313e58f83891c7f5024f88e46e7182a4558850a4b8e"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.1"
+    version: "1.2.2"
   test_api:
     dependency: transitive
     description:
@@ -241,10 +241,10 @@ packages:
     dependency: transitive
     description:
       name: vector_math
-      sha256: "92b9910f66ed1057fd4da7b040ae7c74cafacf885bdc81be496928d5049b032d"
+      sha256: "1d774bbdf6b72a0b12122fc1560c9c2d2a67db5a4a4cc2bd8a5c990ab20e3188"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.3"
+    version: "2.4.0"
   vm_service:
     dependency: transitive
     description:
