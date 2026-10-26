@@ -76,10 +76,9 @@ En esta unidad se trabajan los fundamentos iniciales del desarrollo de aplicacio
 
 
 ## 📋📱 Prácticas de la Unidad 2
-
 | No. | Nombre de la práctica | Descripción | Potenciador | Estatus |
 |:---:|:--|:--|:---:|:---:|
-| 05 | Publicación de una aplicación Flutter en Appetize.io | Preparación del archivo APK, publicación de la aplicación en Appetize.io y validación de su funcionamiento en un entorno de ejecución en la nube. | Por definir | 🟡 En desarrollo |
+| 05| [Widgets App](https://github.com/JenniferBautistaBarrios/Practicas_DMI_230317/tree/main/Practica05) | 	Aplicación de Widgets | sin definir | 🟢 Finalizada |
 
 ---
 
