@@ -30,13 +30,13 @@
 </tr>
 <tr>
 <td align="center">
-<img src="../images/cap1.jpeg" alt="Menú principal" width="230"/>
+<img src="./images/cap1.jpeg" alt="Menú principal" width="230"/>
 </td>
 <td align="center">
-<img src="../images/cap2.jpeg" alt="Progress Indicators" width="230"/>
+<img src="./images/cap2.jpeg" alt="Progress Indicators" width="230"/>
 </td>
 <td align="center">
-<img src="../images/cap3.jpeg" alt="Cambio de tema" width="230"/>
+<img src="./images/cap3.jpeg" alt="Cambio de tema" width="230"/>
 </td>
 </tr>
 <tr>
@@ -55,10 +55,10 @@
 </tr>
 <tr>
 <td align="center">
-<img src="../images/cap4.jpeg" alt="Captura 4" width="230"/>
+<img src="./images/cap4.jpeg" alt="Captura 4" width="230"/>
 </td>
 <td align="center">
-<img src="../images/cap5.jpeg" alt="Captura 5" width="230"/>
+<img src="./images/cap5.jpeg" alt="Captura 5" width="230"/>
 </td>
 </tr>
 <tr>
