@@ -22,21 +22,23 @@
 <i>Pruebas ejecutadas en un dispositivo móvil Android físico.</i>
 </p>
 
+### 📸 Capturas Principales (1 al 5)
+
 <table>
 <tr>
-<th align="center">Inicio y Navegación</th>
-<th align="center">Demostraciones de Widgets</th>
-<th align="center">Tema y Estado Global</th>
+<th align="center">Imagen 1</th>
+<th align="center">Imagen 2</th>
+<th align="center">Imagen 3</th>
 </tr>
 <tr>
 <td align="center">
-<img src="./images/cap1.jpeg" alt="Menú principal" width="230"/>
+<img src="./images/imagen1.jpeg" alt="Imagen 1" width="230"/>
 </td>
 <td align="center">
-<img src="./images/cap2.jpeg" alt="Progress Indicators" width="230"/>
+<img src="./images/imagen2.jpeg" alt="Imagen 2" width="230"/>
 </td>
 <td align="center">
-<img src="./images/cap3.jpeg" alt="Cambio de tema" width="230"/>
+<img src="./images/imagen3.jpeg" alt="Imagen 3" width="230"/>
 </td>
 </tr>
 <tr>
@@ -46,19 +48,17 @@
 </tr>
 </table>
 
-📸 Capturas adicionales
-
 <table>
 <tr>
-<th align="center">Captura 4</th>
-<th align="center">Captura 5</th>
+<th align="center">Imagen 4</th>
+<th align="center">Imagen 5</th>
 </tr>
 <tr>
 <td align="center">
-<img src="./images/cap4.jpeg" alt="Captura 4" width="230"/>
+<img src="./images/imagen4.jpeg" alt="Imagen 4" width="230"/>
 </td>
 <td align="center">
-<img src="./images/cap5.jpeg" alt="Captura 5" width="230"/>
+<img src="./images/imagen5.jpeg" alt="Imagen 5" width="230"/>
 </td>
 </tr>
 <tr>
@@ -66,6 +66,53 @@
 <td align="center"><b>Demostración adicional de widgets</b></td>
 </tr>
 </table>
+
+### 📸 Capturas Adicionales (6 al 10)
+
+<table>
+<tr>
+<th align="center">Imágenes 6</th>
+<th align="center">Imágenes 7</th>
+<th align="center">Imagen 8</th>
+</tr>
+<tr>
+<td align="center">
+<img src="./images/imagenes6.jpeg" alt="Imágenes 6" width="230"/>
+</td>
+<td align="center">
+<img src="./images/imagenes7.jpeg" alt="Imágenes 7" width="230"/>
+</td>
+<td align="center">
+<img src="./images/imagen8.jpeg" alt="Imagen 8" width="230"/>
+</td>
+</tr>
+<tr>
+<td align="center"><b>Controles e interfaz de usuario</b></td>
+<td align="center"><b>Indicadores de progreso y mensajes</b></td>
+<td align="center"><b>Tutorial onboarding y animación</b></td>
+</tr>
+</table>
+
+<table>
+<tr>
+<th align="center">Imagen 9</th>
+<th align="center">Imagen 10</th>
+</tr>
+<tr>
+<td align="center">
+<img src="./images/imagen9.jpeg" alt="Imagen 9" width="230"/>
+</td>
+<td align="center">
+<img src="./images/imagen10.jpeg" alt="Imagen 10" width="230"/>
+</td>
+</tr>
+<tr>
+<td align="center"><b>Carga dinámica y scroll infinito</b></td>
+<td align="center"><b>Gestión de estado e interacción</b></td>
+</tr>
+</table>
+
+---
 
 ## 📌 Objetivo
 Desarrollar una aplicación interactiva en **Flutter** para explorar la biblioteca de componentes de **Material 3**, implementar patrones de navegación avanzada con `GoRouter` y gestionar el estado global mediante **Riverpod**. Cada sección del proyecto demuestra interacciones, animaciones y componentes específicos dentro de un flujo unificado.
@@ -79,6 +126,7 @@ Desarrollar una aplicación interactiva en **Flutter** para explorar la bibliote
 <p align="center">
   <img src="./images/Diagrama de Arquitectura.png" alt="Diagrama de Arquitectura" width="90%"/>
 </p>
+
 ---
 
 ## ✨ Funcionalidades
@@ -106,7 +154,7 @@ Desarrollar una aplicación interactiva en **Flutter** para explorar la bibliote
 
 ---
 
-## 🛠️Tecnologías Utilizadas
+## 🛠️ Tecnologías Utilizadas
 
 - **Framework:** Flutter & Dart
 - **Diseño:** Material 3
@@ -121,5 +169,9 @@ Desarrollar una aplicación interactiva en **Flutter** para explorar la bibliote
 
 Navega a la carpeta del proyecto ejecutable (`widgets_app`) y ejecuta los siguientes comandos:
 
-# Ejecutar la aplicación 
+```bash
+# Obtener las dependencias
+flutter pub get
+
+# Ejecutar la aplicación
 flutter run
