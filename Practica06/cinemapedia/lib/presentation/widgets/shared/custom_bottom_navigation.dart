@@ -1,65 +1,37 @@
+import 'package:cinemapedia/presentation/providers/movies/movie_country_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
-class CustomBottomNavigation extends StatelessWidget {
-  const CustomBottomNavigation({super.key});
-
-  int getCurrentIndex( BuildContext context ) {
-    final String location = GoRouterState.of(context).uri.toString();
-
-    switch (location) {
-      case '/':
-        return 0;
-
-      case '/categories':
-        return 1;
-
-      case '/favorites':
-        return 2;
-
-      default:
-        return 0;
-    }
-  }
-
-   void onItemTapped(BuildContext context, int index) {
-    switch (index) {
-      case 0:
-        context.go('/');
-        break;
-      case 1:
-        context.go('/categories');
-        break;
-      case 2:
-        context.go('/favorites');
-        break;
-    }
-  }
-
+class CustomBottomNavigation extends ConsumerWidget {
+  final int selectedIndex;
+  final ValueChanged<int> onDestinationSelected;
+  const CustomBottomNavigation({
+    super.key,
+    required this.selectedIndex,
+    required this.onDestinationSelected,
+  });
 
   @override
-  Widget build(BuildContext context) {
-
-
-    return BottomNavigationBar(
-      elevation: 0,
-      currentIndex: getCurrentIndex(context),
-      onTap: (index) => onItemTapped(context, index),
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon( Icons.home_max ),
-          label: 'Inicio'
+  Widget build(BuildContext context, WidgetRef ref) {
+    final country = ref.watch(movieCountryProvider);
+    return NavigationBar(
+      selectedIndex: selectedIndex,
+      onDestinationSelected: onDestinationSelected,
+      destinations: [
+        NavigationDestination(
+          icon: const Icon(Icons.home_outlined),
+          selectedIcon: const Icon(Icons.home_rounded),
+          label: country.text('home'),
         ),
-        BottomNavigationBarItem(
-          icon: Icon( Icons.label_outline ),
-          label: 'Categorías'
+        NavigationDestination(
+          icon: const Icon(Icons.local_movies_outlined),
+          label: country.text('nowPlaying'),
         ),
-        BottomNavigationBarItem(
-          icon: Icon( Icons.favorite_outline ),
-          label: 'Favoritos'
+        NavigationDestination(
+          icon: const Icon(Icons.trending_up_rounded),
+          label: country.text('popular'),
         ),
-      ]
+      ],
     );
   }
 }
