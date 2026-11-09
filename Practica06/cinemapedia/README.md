@@ -1,8 +1,8 @@
- <div align="center">
+﻿ <div align="center">
 
 <br/>
 
-<img src="https://readme-typing-svg.demolab.com?font=Montserrat&weight=900&size=48&duration=3500&pause=1000&color=FF69B4&center=true&vCenter=true&width=850&height=90&lines=%E2%9C%A6+CINEMAPEDIA+%E2%9C%A6" alt="Cinemapedia rosa"/>
+<img src="https://readme-typing-svg.demolab.com?font=Montserrat&weight=900&size=64&duration=3500&pause=1000&color=FF69B4&center=true&vCenter=true&width=1050&height=115&lines=%E2%9C%A6+CINEMAPEDIA+%E2%9C%A6" alt="Cinemapedia rosa"/>
 
 <img src="https://readme-typing-svg.demolab.com?font=Poppins&weight=600&size=20&duration=3000&pause=900&color=DB4C91&center=true&vCenter=true&width=750&height=40&lines=TU+UNIVERSO+CINEMATOGR%C3%81FICO;DESCUBRE+PEL%C3%8DCULAS+Y+SERIES;HISTORIAS+QUE+MERECEN+SER+VISTAS" alt="Frases animadas de Cinemapedia"/>
 
@@ -36,11 +36,14 @@
 
 <br/><br/>
 
-<img src="assets/icon/app_icon.png" width="135" alt="Icono de Cinemapedia"/>
+<img src="assets/icon/cinemapedia_logo.png" width="220" alt="Logo de Cinemapedia con palomitas"/>
 
-<br/>
+<div align="center">
+<a href="../Arquitectura/Arquitectura_de_Cinemapedia.html"><img src="../Arquitectura/image1.png" alt="Diagrama de arquitectura de Cinemapedia" width="1000"></a>
+<p><a href="../Arquitectura/Arquitectura_de_Cinemapedia.html"><strong>Ver diagrama interactivo de la arquitectura</strong></a></p>
+</div>
 
-<sub>✧ UNA EXPERIENCIA CINEMATOGRÁFICA CON UN TOQUE ROSA ✧</sub>
+
 
 <br/><br/>
 
@@ -103,24 +106,28 @@ El objetivo es ofrecer una forma sencilla y agradable de descubrir contenido aud
 
 </div>
 
-<!-- Agrega aquí las capturas reales del proyecto -->
+<table>
+  <tr>
+    <td align="center"><strong>Inicio</strong><br><img src="assets/images/inicio.jpeg" alt="Pantalla de inicio" width="170"></td>
+    <td align="center"><strong>Peliculas populares</strong><br><img src="assets/images/peliculas%20populares.jpeg" alt="Catalogo de peliculas" width="170"></td>
+    <td align="center"><strong>Favoritos</strong><br><img src="assets/images/favorito.jpeg" alt="Lista de favoritos" width="170"></td>
+    <td align="center"><strong>Detalle y elenco</strong><br><img src="assets/images/personajes.jpeg" alt="Detalle de pelicula y elenco" width="170"></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Menu e idiomas</strong><br><img src="assets/images/menu.jpeg" alt="Menu de configuracion e idiomas" width="170"></td>
+    <td align="center"><strong>Clasificacion</strong><br><img src="assets/images/clasificacion.jpeg" alt="Clasificacion por edad" width="170"></td>
+    <td align="center"><strong>English</strong><br><img src="assets/images/ingles.jpeg" alt="Aplicacion en ingles" width="170"></td>
+    <td align="center"><strong>Espanol</strong><br><img src="assets/images/Espa%C3%B1ol.jpeg" alt="Aplicacion en espanol" width="170"></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Arabe</strong><br><img src="assets/images/Arabe.jpeg" alt="Aplicacion en arabe" width="170"></td>
+    <td align="center"><strong>Chino</strong><br><img src="assets/images/chino.jpeg" alt="Aplicacion en chino" width="170"></td>
+    <td align="center"><strong>Logo y carga</strong><br><img src="assets/images/logo.jpeg" alt="Pantalla de carga de Cinemapedia" width="170"></td>
+    <td></td>
+  </tr>
+</table>
 
-| 🏠 Inicio | 🎬 Películas |
-|:---:|:---:|
-| Captura pendiente | Captura pendiente |
-
-| 📺 Series | 💗 Favoritos |
-|:---:|:---:|
-| Captura pendiente | Captura pendiente |
-
-| 🎥 Detalles de película | 👥 Elenco |
-|:---:|:---:|
-| Captura pendiente | Captura pendiente |
-
-| 🌸 Clasificaciones | 🌎 Idiomas |
-|:---:|:---:|
-| Captura pendiente | Captura pendiente |
-
+</div>
 ---
 
 ## 🎨 04. Identidad visual
@@ -144,11 +151,11 @@ Cinemapedia utiliza una identidad gráfica inspirada en tonos rosas, combinando 
 
 <div align="center">
 
-<img src="assets/icon/app_icon.png" width="150" alt="Icono de Cinemapedia"/>
+<img src="assets/icon/cinemapedia_logo.png" width="220" alt="Logo de Cinemapedia con palomitas"/>
 
 <br/>
 
-**CINEMAPEDIA · APP ICON**
+**LOGO DE CINEMAPEDIA**
 
 </div>
 
@@ -313,7 +320,7 @@ build/app/outputs/flutter-apk/app-release.apk
 
 **Prueba la aplicación mediante Appetize**
 
-[🌸 Abrir demostración de Cinemapedia](https://appetize.io/app/b_dqbrzni6n2opryfcgrwoifjnvq)
+[🌸 Abrir demostración de Cinemapedia]()
 
 </div>
 
@@ -350,19 +357,3 @@ build/app/outputs/flutter-apk/app-release.apk
 </div>
 ---
 
-## Capturas de evidencias
-
-En esta sección puedes documentar las pantallas principales y el funcionamiento de Cinemapedia. Guarda las imágenes en `assets/evidencias/` y agrega cada captura con una ruta relativa, por ejemplo:
-
-```markdown
-![Pantalla de inicio](assets/evidencias/inicio.png)
-```
-
-| Evidencia | Archivo sugerido |
-|---|---|
-| Pantalla de inicio | `assets/evidencias/inicio.png` |
-| Catálogo de películas | `assets/evidencias/peliculas.png` |
-| Catálogo de series | `assets/evidencias/series.png` |
-| Lista de favoritos | `assets/evidencias/favoritos.png` |
-| Detalle y elenco | `assets/evidencias/detalle-elenco.png` |
-| Idiomas y clasificaciones | `assets/evidencias/idiomas-clasificaciones.png` |

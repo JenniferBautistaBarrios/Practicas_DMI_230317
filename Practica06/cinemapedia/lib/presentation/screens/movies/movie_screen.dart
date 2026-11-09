@@ -43,7 +43,27 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
     final Movie? movie = ref.watch( movieInfoProvider )[widget.movieId];
 
     if ( movie == null ) {
-      return const Scaffold(body: Center( child: CircularProgressIndicator( strokeWidth: 2)));
+      final loadError = ref.read(movieInfoProvider.notifier).loadErrorFor(widget.movieId);
+      return Scaffold(
+        body: Center(
+          child: loadError == null
+              ? const CircularProgressIndicator(strokeWidth: 2)
+              : Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.cloud_off_outlined, size: 40),
+                    const SizedBox(height: 12),
+                    const Text('No se pudo cargar la película.'),
+                    const SizedBox(height: 8),
+                    FilledButton.icon(
+                      onPressed: () => ref.read(movieInfoProvider.notifier).loadMovie(widget.movieId),
+                      icon: const Icon(Icons.refresh_rounded),
+                      label: const Text('Reintentar'),
+                    ),
+                  ],
+                ),
+        ),
+      );
     }
 
     return Scaffold(
@@ -162,8 +182,8 @@ class _TitleAndOverview extends ConsumerWidget {
           // Imagen
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            child: Image.network(
-              movie.posterPath,
+            child: LoadingNetworkImage(
+              url: movie.posterPath,
               width: size.width * 0.3,
             ),
           ),
@@ -272,32 +292,46 @@ class _CustomSliverAppBar extends ConsumerWidget {
     final scaffoldBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
 
     return SliverAppBar(
+      pinned: true,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      expandedHeight: size.height * 0.7,
+      expandedHeight: size.height * 0.55,
       foregroundColor: Colors.white,
       actions: [
-          IconButton(onPressed: () async {
-            
-            // ref.read(localStorageRepositoryProvider)
-            //   .toggleFavorite(movie);
-            await ref.read( favoriteMoviesProvider.notifier )
-              .toggleFavorite(movie);
-            
-            ref.invalidate(isFavoriteProvider(movie.id));
-
-
-          }, 
-          icon: isFavoriteFuture.when(
-            loading: () => const CircularProgressIndicator(strokeWidth: 2 ),
-            data: (isFavorite) => isFavorite 
-              ? Icon( Icons.favorite_rounded, color: Theme.of(context).colorScheme.primary )
-              : const Icon( Icons.favorite_border ), 
-            error: (_, __) => throw UnimplementedError(), 
+        isFavoriteFuture.when(
+          loading: () => const Padding(
+            padding: EdgeInsets.all(16),
+            child: SizedBox.square(
+              dimension: 20,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
           ),
-          
-          // const Icon( Icons.favorite_border )
-          // icon: const Icon( Icons.favorite_rounded, color: Colors.red )
-        )
+          data: (isFavorite) => IconButton(
+            onPressed: () async {
+              try {
+                await ref.read(favoriteMoviesProvider.notifier).toggleFavorite(
+                  movie,
+                  isCurrentlyFavorite: isFavorite,
+                );
+                ref.invalidate(isFavoriteProvider(movie.id));
+              } catch (error, stackTrace) {
+                debugPrint('Error al guardar favorito: $error\n$stackTrace');
+                if (!context.mounted) return;
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('No se pudo guardar el favorito: $error'),
+                  ),
+                );
+              }
+            },
+            icon: isFavorite
+                ? Icon(Icons.favorite_rounded, color: Theme.of(context).colorScheme.primary)
+                : const Icon(Icons.favorite_border),
+          ),
+          error: (_, __) => IconButton(
+            onPressed: () => ref.invalidate(isFavoriteProvider(movie.id)),
+            icon: const Icon(Icons.favorite_border),
+          ),
+        ),
       ],
       flexibleSpace: FlexibleSpaceBar(
         titlePadding: const EdgeInsets.only(bottom: 0),
@@ -314,13 +348,11 @@ class _CustomSliverAppBar extends ConsumerWidget {
           children: [
 
             SizedBox.expand(
-              child: Image.network(
-                movie.posterPath,
+              child: LoadingNetworkImage(
+                // El encabezado ocupa casi toda la pantalla: usa el arte
+                // horizontal para que no se recorte el póster vertical.
+                url: movie.backdropPath,
                 fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if ( loadingProgress != null ) return const SizedBox();
-                  return FadeIn(child: child);
-                },
               ),
             ),
 

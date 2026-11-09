@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cinemapedia/presentation/widgets/shared/loading_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:cinemapedia/config/i18n/app_strings.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
@@ -148,10 +149,9 @@ class _Slide extends StatelessWidget {
               children: [
 
                 // Imagen de fondo
-                FadeInImage(
+                LoadingNetworkImage(
                   fit: BoxFit.cover,
-                  placeholder: const AssetImage('assets/loaders/bottle-loader.gif'),
-                  image: NetworkImage(movie.backdropPath),
+                  url: movie.backdropPath,
                 ),
 
                 // Título y descripción corta sobre un degradado negro para que se lean bien

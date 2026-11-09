@@ -42,17 +42,17 @@ class StorageMoviesNotifier extends StateNotifier<Map<int, Movie>> {
     return movies;
   }
 
-  Future<void> toggleFavorite(Movie movie) async {
+  Future<void> toggleFavorite(
+    Movie movie, {
+    required bool isCurrentlyFavorite,
+  }) async {
     await localStorageRepository.toggleFavorite(movie);
 
-    final newState = {...state};
-
-    if (newState.containsKey(movie.id)) {
-      newState.remove(movie.id);
+    if (!isCurrentlyFavorite) {
+      state = {...state, movie.id: movie};
     } else {
-      newState[movie.id] = movie;
+      final newState = {...state}..remove(movie.id);
+      state = newState;
     }
-
-    state = newState;
   }
 }

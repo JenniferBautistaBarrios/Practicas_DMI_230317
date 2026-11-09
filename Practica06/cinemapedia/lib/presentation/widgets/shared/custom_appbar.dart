@@ -25,9 +25,9 @@ class CustomAppbar extends ConsumerWidget {
           width: double.infinity,
           child: Row(
             children: [
-              const CinemapediaLogo( size: 26 ),
+              const CinemapediaLogo( size: 30 ),
               const SizedBox( width: 8 ),
-              Text('Cinemapedia 230317', style: titleStyle ),
+              Text('Cinemapedia', style: titleStyle ),
       
               const Spacer(),
       

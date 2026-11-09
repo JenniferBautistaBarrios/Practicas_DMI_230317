@@ -21,7 +21,6 @@ class _SplashScreenState extends State<SplashScreen>
 
   late final Animation<double> _draw;
   late final Animation<double> _popIn;
-  late final Animation<double> _titleFade;
   late final Animation<double> _zoom;
   late final Animation<double> _fadeOut;
 
@@ -42,10 +41,6 @@ class _SplashScreenState extends State<SplashScreen>
       parent: _controller,
       curve: const Interval(0.0, 0.45, curve: Curves.easeOut),
     ));
-    _titleFade = CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.40, 0.62, curve: Curves.easeIn),
-    );
     _zoom = Tween<double>(begin: 1.0, end: 14.0).animate(CurvedAnimation(
       parent: _controller,
       curve: const Interval(0.78, 1.0, curve: Curves.easeInCubic),
@@ -69,8 +64,6 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
-
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Center(
@@ -87,19 +80,6 @@ class _SplashScreenState extends State<SplashScreen>
                     Transform.scale(
                       scale: _popIn.value,
                       child: CinemapediaLogo(size: 130, progress: _draw.value),
-                    ),
-                    const SizedBox(height: 18),
-                    Opacity(
-                      opacity: _titleFade.value,
-                      child: Text(
-                        'CINEMAPEDIA',
-                        style: TextStyle(
-                          color: colors.primary,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 6,
-                        ),
-                      ),
                     ),
                   ],
                 ),

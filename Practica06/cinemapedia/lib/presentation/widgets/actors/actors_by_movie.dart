@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:cinemapedia/presentation/widgets/shared/loading_network_image.dart';
 
 import 'package:cinemapedia/presentation/providers/providers.dart';
 
@@ -51,14 +52,11 @@ class ActorsByMovie extends ConsumerWidget {
                 FadeInRight(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: FadeInImage(
+                    child: LoadingNetworkImage(
                       height: 180,
                       width: 135,
                       fit: BoxFit.cover,
-                      placeholder: const AssetImage('assets/loaders/bottle-loader.gif'),
-                      image: NetworkImage(
-                        actor.profilePath,
-                      ),
+                      url: actor.profilePath,
                     )
                   ),
                 ),

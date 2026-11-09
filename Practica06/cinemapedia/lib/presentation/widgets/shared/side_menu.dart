@@ -36,15 +36,30 @@ class SideMenu extends ConsumerWidget {
             //* Cabecera con el logo
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 24, 20, 8),
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CinemapediaLogo(size: 44),
-                  const SizedBox(width: 12),
-                  Text(
-                    'Cinemapedia',
-                    style: textStyles.titleLarge?.copyWith(
-                      color: colors.primary,
-                      fontWeight: FontWeight.w700,
+                  Row(
+                    children: [
+                      const CinemapediaLogo(size: 44),
+                      const SizedBox(width: 12),
+                      Text(
+                        'Cinemapedia',
+                        style: textStyles.titleLarge?.copyWith(
+                          color: colors.primary,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 56),
+                    child: Text(
+                      'Matrícula: 230317',
+                      style: textStyles.labelSmall?.copyWith(
+                        color: colors.onSurfaceVariant,
+                      ),
                     ),
                   ),
                 ],

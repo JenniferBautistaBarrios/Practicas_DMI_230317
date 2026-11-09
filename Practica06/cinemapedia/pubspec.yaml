@@ -42,3 +42,4 @@ flutter:
     - .env
     - .env.example
     - assets/loaders/
+    - assets/icon/

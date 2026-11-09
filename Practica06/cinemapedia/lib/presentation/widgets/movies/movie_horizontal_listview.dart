@@ -108,12 +108,11 @@ class _Slide extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 child: GestureDetector(
                   onTap: () => context.push('/home/0/movie/${movie.id}'),
-                  child: FadeInImage(
+                  child: LoadingNetworkImage(
                     width: double.infinity,
                     height: double.infinity,
                     fit: BoxFit.cover,
-                    placeholder: const AssetImage('assets/loaders/bottle-loader.gif'),
-                    image: NetworkImage(movie.posterPath),
+                    url: movie.posterPath,
                   ),
                 ),
               ),

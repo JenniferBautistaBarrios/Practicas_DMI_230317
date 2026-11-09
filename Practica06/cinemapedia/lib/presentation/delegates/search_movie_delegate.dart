@@ -4,6 +4,7 @@ import 'package:cinemapedia/config/helpers/human_formats.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
+import 'package:cinemapedia/presentation/widgets/shared/loading_network_image.dart';
 
 
 typedef SearchMoviesCallback = Future<List<Movie>> Function( String query );
@@ -176,11 +177,10 @@ class _MovieItem extends StatelessWidget {
                 width: size.width * 0.2,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: FadeInImage(
+                  child: LoadingNetworkImage(
                     height: 130,
                     fit: BoxFit.cover,
-                    image: NetworkImage(movie.posterPath),
-                    placeholder: const AssetImage('assets/loaders/bottle-loader.gif'),
+                    url: movie.posterPath,
                   )
                 ),
               ),

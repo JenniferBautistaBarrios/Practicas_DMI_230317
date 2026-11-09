@@ -1,20 +1,20 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+﻿<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Arquitectura de Cinemapedia</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
-/* Layout: lienzo apaisado con capas como bandas punteadas, cajas agrupadas, líneas ortogonales y etiquetas visibles. Barra de vistas guiadas arriba, dock de detalle debajo. */
+/* Layout: lienzo apaisado con capas como bandas punteadas, cajas agrupadas, lÃ­neas ortogonales y etiquetas visibles. Barra de vistas guiadas arriba, dock de detalle debajo. */
 :root{
-  --bg:#f1f4f9; --panel:#ffffff; --node:#ffffff; --grid:#dde5f0; --line:#b9c6d8; --fg:#0f1d33; --muted:#566a85; --hi:#0f1d33; --dot:#0b82b0;
-  --c-config:#6b46d6; --c-ui:#0b82b0; --c-state:#0f8a5b; --c-domain:#a87400; --c-infra:#c2531a; --c-ext:#c2255c; --c-plat:#5b6f88;
+  --bg:#fff1f6; --panel:#fffafd; --node:#ffffff; --grid:#f6d6e2; --line:#e7b6ca; --fg:#54263b; --muted:#8a5b70; --hi:#b83267; --dot:#d63384;
+  --c-config:#a855f7; --c-ui:#db2777; --c-state:#be185d; --c-domain:#c24170; --c-infra:#e11d48; --c-ext:#9d174d; --c-plat:#9f5f78;
   --mono:"JetBrains Mono",ui-monospace,Menlo,monospace; --sans:"IBM Plex Sans",system-ui,sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#070d18; --panel:#0e1726; --node:#0c1524; --grid:#111e31; --line:#2a3d57; --fg:#dbe7f5; --muted:#8a9db6; --hi:#ffffff; --dot:#22d3ee;
-  --c-config:#b497ff; --c-ui:#4cc9f0; --c-state:#34d399; --c-domain:#fbbf24; --c-infra:#ff9f6b; --c-ext:#ff7aa8; --c-plat:#8aa0b8; color-scheme:dark}}
+  --bg:#24121c; --panel:#321a28; --node:#2b1722; --grid:#482536; --line:#714055; --fg:#ffe4ef; --muted:#d1a0b4; --hi:#ff8fba; --dot:#fb6fa9;
+  --c-config:#c4a1ff; --c-ui:#ff79b5; --c-state:#f472b6; --c-domain:#f9a8d4; --c-infra:#fb7185; --c-ext:#ff8fba; --c-plat:#d6a0b7; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#070d18; --panel:#0e1726; --node:#0c1524; --grid:#111e31; --line:#2a3d57; --fg:#dbe7f5; --muted:#8a9db6; --hi:#ffffff; --dot:#22d3ee;
-  --c-config:#b497ff; --c-ui:#4cc9f0; --c-state:#34d399; --c-domain:#fbbf24; --c-infra:#ff9f6b; --c-ext:#ff7aa8; --c-plat:#8aa0b8; color-scheme:dark}
+  --bg:#24121c; --panel:#321a28; --node:#2b1722; --grid:#482536; --line:#714055; --fg:#ffe4ef; --muted:#d1a0b4; --hi:#ff8fba; --dot:#fb6fa9;
+  --c-config:#c4a1ff; --c-ui:#ff79b5; --c-state:#f472b6; --c-domain:#f9a8d4; --c-infra:#fb7185; --c-ext:#ff8fba; --c-plat:#d6a0b7; color-scheme:dark}
 
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:14px;line-height:1.5;
@@ -118,11 +118,25 @@ body.present .views .vplay~*{}
 body.present .legend,body.present .dock,body.present .notes{display:none}
 body.present .stage.fit #dg{max-height:calc(100vh - 150px)}
 @media (prefers-reduced-motion:reduce){.edge.cur{animation:none}.node,.edge{transition:none}}
+/* Acabado visual rosa: mejor jerarquÃ­a, superficies suaves y lectura clara. */
+body{background:radial-gradient(ellipse at 8% 0%,#ffd8e8 0,transparent 34%),radial-gradient(ellipse at 96% 14%,#ffe4ef 0,transparent 28%),var(--bg)}
+.wrap{gap:16px}.head{position:relative;padding:22px 24px;border:1px solid #edc3d3;border-radius:20px;background:linear-gradient(120deg,rgba(255,255,255,.96),rgba(255,242,248,.94));box-shadow:0 12px 35px rgba(133,45,83,.09)}
+h1{font-size:clamp(21px,3vw,32px);letter-spacing:-.04em;color:#54263b}h1::before{box-shadow:0 0 0 6px #fce1ec}h1 small{display:block;margin-top:5px;font-family:var(--sans);font-size:12px;letter-spacing:.01em;color:#986278}
+.identity{display:flex;align-items:center;gap:8px;margin-top:8px;color:#8a5b70;font-size:12px;font-weight:600}.identity strong{color:#9d174d}
+.btn{border-color:#e8b9cc;background:rgba(255,255,255,.85);border-radius:999px;padding:9px 15px;box-shadow:0 3px 10px rgba(120,40,75,.05);transition:transform .18s,box-shadow .18s,border-color .18s}.btn:hover,.vchip:hover{transform:translateY(-1px);border-color:#d63384;box-shadow:0 6px 16px rgba(177,44,103,.12)}
+.btn[aria-pressed="true"],.steps button[aria-current="step"]{background:linear-gradient(135deg,#c02665,#e04c8b);color:#fff;border-color:#c02665}
+.views{padding:12px;border-radius:16px;border-color:#edc3d3;background:rgba(255,250,253,.92);box-shadow:0 8px 24px rgba(133,45,83,.06)}.vhead{min-width:175px}.vhead .k{color:#be185d}.vhead .t{font-size:14px;color:#54263b}.vplay{background:#fff0f6;color:#9d174d;border-color:#e7b6ca}
+.vchips{grid-template-columns:repeat(auto-fit,minmax(165px,1fr))}.vchip{border-color:#efd0dd;border-radius:12px;background:#fff;color:#54263b;padding:9px 12px;transition:transform .18s,box-shadow .18s,border-color .18s}.vchip .n{background:#fff0f6;border-color:#e6a8c1;color:#b83267}.vchip[aria-pressed="true"]{background:#ffe5ef;border-color:#d63384;box-shadow:inset 0 0 0 1px #f2b4ce}.vchip[aria-pressed="true"] .n{background:#d63384;color:#fff}
+.legend{padding:0 4px}.chip{background:#fff;border-color:#efd0dd;padding:5px 11px}.stage{border-radius:18px;border-color:#e7b6ca;background:#fffafd;box-shadow:0 12px 32px rgba(133,45,83,.08)}
+.node rect.box,.chipn rect.box{filter:drop-shadow(0 3px 4px rgba(91,28,57,.08));transition:filter .18s,stroke-width .18s}.node:hover rect.box{filter:drop-shadow(0 6px 8px rgba(157,23,77,.18))}.edge{stroke:#a66b84}.edge.on{stroke:#c02665}
+.dock,.notes>div{border-color:#edc3d3;border-radius:16px;background:rgba(255,250,253,.96);box-shadow:0 8px 24px rgba(133,45,83,.06)}.dock{padding:18px 20px}.dock h2{color:#54263b;font-size:17px}.files li,.lk button{background:#fff;border-color:#efd0dd;border-radius:9px}.steps button{background:#fff;border-color:#efd0dd;border-radius:999px}.notes h3{color:#54263b}
+@media(max-width:700px){.head{padding:18px;align-items:flex-start}.tools{width:100%}.identity{flex-wrap:wrap}.views{gap:8px}.vhead{min-width:100%}.vchips{grid-template-columns:1fr 1fr}.vchip{font-size:11px;padding:8px}.stage{border-radius:12px}}
+@media(prefers-reduced-motion:reduce){.btn,.vchip,.node rect.box{transition:none}}
 </style>
 
 <div class="wrap">
   <div class="head">
-    <h1>Arquitectura de Cinemapedia <small>Flutter · providers · Isar · The Movie DB · películas y series</small></h1>
+    <div><h1>Arquitectura de Cinemapedia <small>Flutter Â· providers Â· Isar Â· The Movie DB Â· pelÃ­culas y series</small></h1></div>
     <div class="tools">
       <button class="btn" id="theme">Tema</button>
       <button class="btn" id="fit" aria-pressed="true">Ajustar</button>
@@ -132,23 +146,23 @@ body.present .stage.fit #dg{max-height:calc(100vh - 150px)}
 
   <div class="views">
     <div class="vhead"><span class="k" id="vk">Vistas guiadas 0 / 4</span><span class="t">Explora el sistema</span></div>
-    <button class="btn vplay" id="play">▶ Reproducir</button>
+    <button class="btn vplay" id="play">â–¶ Reproducir</button>
     <div class="vchips" id="vchips"></div>
   </div>
 
   <div class="legend" id="legend">
-    <span class="leg2"><svg viewBox="0 0 30 8" aria-hidden="true"><line x1="0" y1="4" x2="30" y2="4" stroke="currentColor" stroke-width="1.6"/></svg>conexión</span>
+    <span class="leg2"><svg viewBox="0 0 30 8" aria-hidden="true"><line x1="0" y1="4" x2="30" y2="4" stroke="currentColor" stroke-width="1.6"/></svg>conexiÃ³n</span>
     <span class="leg2"><svg viewBox="0 0 30 8" aria-hidden="true"><line x1="0" y1="4" x2="30" y2="4" stroke="currentColor" stroke-width="1.6" stroke-dasharray="3 4"/></svg>inferida por el nombre del archivo</span>
   </div>
 
-  <div class="stage fit" id="stage"><svg id="dg" role="img" aria-label="Diagrama de Cinemapedia agrupado por capas: configuración, presentación y estado, dominio e infraestructura, servicios externos, almacenamiento local y plataformas. Cada caja agrupa varios archivos; selecciona una para ver su detalle."></svg></div>
+  <div class="stage fit" id="stage"><svg id="dg" role="img" aria-label="Diagrama de Cinemapedia agrupado por capas: configuraciÃ³n, presentaciÃ³n y estado, dominio e infraestructura, servicios externos, almacenamiento local y plataformas. Cada caja agrupa varios archivos; selecciona una para ver su detalle."></svg></div>
 
   <div class="dock" id="dock" aria-live="polite"></div>
 
   <div class="notes">
-    <div style="--d:#22d3ee"><h3><i></i>Flujo de datos</h3><p>Los providers piden las películas y series al repositorio, que las trae de The Movie DB y las convierte con mappers a entidades.</p></div>
-    <div style="--d:#34d399"><h3><i></i>Idiomas</h3><p>El idioma se elige en Configuración y se recuerda al reabrir la app. Al cambiarlo se recrean los repositorios y se recargan los datos; si falta la traducción, se usa el inglés como respaldo.</p></div>
-    <div style="--d:#fbbf24"><h3><i></i>Sin backend propio</h3><p>La app consulta The Movie DB como servicio externo y guarda en el dispositivo los favoritos (Isar) y el idioma elegido (shared_preferences). La web no está soportada porque Isar no corre en navegador.</p></div>
+    <div style="--d:#22d3ee"><h3><i></i>Flujo de datos</h3><p>Los providers piden las pelÃ­culas y series al repositorio, que las trae de The Movie DB y las convierte con mappers a entidades.</p></div>
+    <div style="--d:#34d399"><h3><i></i>Idiomas</h3><p>El idioma se elige en ConfiguraciÃ³n y se recuerda al reabrir la app. Al cambiarlo se recrean los repositorios y se recargan los datos; si falta la traducciÃ³n, se usa el inglÃ©s como respaldo.</p></div>
+    <div style="--d:#fbbf24"><h3><i></i>Sin backend propio</h3><p>La app consulta The Movie DB como servicio externo y guarda en el dispositivo los favoritos (Isar) y el idioma elegido (shared_preferences). La web no estÃ¡ soportada porque Isar no corre en navegador.</p></div>
   </div>
 </div>
 
@@ -156,35 +170,35 @@ body.present .stage.fit #dg{max-height:calc(100vh - 150px)}
 (function(){
 const W=1400, NW=190, NH=62, CX=i=>56+280*i, RY=i=>78+124*i;
 const LAYERS=[
- {id:'config',short:'Configuración',c:'--c-config'},{id:'ui',short:'Presentación',c:'--c-ui'},{id:'state',short:'Providers',c:'--c-state'},
+ {id:'config',short:'ConfiguraciÃ³n',c:'--c-config'},{id:'ui',short:'PresentaciÃ³n',c:'--c-ui'},{id:'state',short:'Providers',c:'--c-state'},
  {id:'domain',short:'Dominio',c:'--c-domain'},{id:'infra',short:'Infraestructura',c:'--c-infra'},{id:'ext',short:'Externo y local',c:'--c-ext'},{id:'plat',short:'Plataformas',c:'--c-plat'}];
 const LP='lib/presentation/', LI='lib/infrastructure/', LD='lib/domain/';
 const N=[
- {id:'arranque',l:'config',c:2,r:0,t:'Arranque',s:'main.dart · .env',d:'Inicia la app, lee la API key del archivo .env y las preferencias guardadas (el último idioma elegido), y monta MaterialApp.router con el tema y el idioma activos.',f:[['main.dart','lib/main.dart','Punto de entrada.'],['environment.dart','lib/config/constants/environment.dart','Constantes de entorno y API key del .env.']]},
- {id:'rutas',l:'config',c:1,r:0,t:'Rutas',s:'AppRouter · navegación',d:'Define las rutas y la navegación entre pantallas.',f:[['app_router.dart','lib/config/router/app_router.dart','Rutas de la app.']]},
- {id:'tema',l:'config',c:0,r:0,t:'Tema e idiomas',s:'AppTheme · i18n · EN base',d:'Tema visual, idiomas disponibles y textos traducidos. Si falta una traducción se usa el inglés.',f:[['app_theme.dart','lib/config/theme/app_theme.dart','Tema visual.'],['app_language.dart','lib/config/i18n/app_language.dart','Idiomas disponibles.'],['app_strings.dart','lib/config/i18n/app_strings.dart','Textos traducidos.']]},
+ {id:'arranque',l:'config',c:2,r:0,t:'Arranque',s:'main.dart Â· .env',d:'Inicia la app, lee la API key del archivo .env y las preferencias guardadas (el Ãºltimo idioma elegido), y monta MaterialApp.router con el tema y el idioma activos.',f:[['main.dart','lib/main.dart','Punto de entrada.'],['environment.dart','lib/config/constants/environment.dart','Constantes de entorno y API key del .env.']]},
+ {id:'rutas',l:'config',c:1,r:0,t:'Rutas',s:'AppRouter Â· navegaciÃ³n',d:'Define las rutas y la navegaciÃ³n entre pantallas.',f:[['app_router.dart','lib/config/router/app_router.dart','Rutas de la app.']]},
+ {id:'tema',l:'config',c:0,r:0,t:'Tema e idiomas',s:'AppTheme Â· i18n Â· EN base',d:'Tema visual, idiomas disponibles y textos traducidos. Si falta una traducciÃ³n se usa el inglÃ©s.',f:[['app_theme.dart','lib/config/theme/app_theme.dart','Tema visual.'],['app_language.dart','lib/config/i18n/app_language.dart','Idiomas disponibles.'],['app_strings.dart','lib/config/i18n/app_strings.dart','Textos traducidos.']]},
 
- {id:'pantallas',l:'ui',c:1,r:1,t:'Pantallas',s:'Splash · Home · Detalle',d:'Pantallas de la app. El detalle de una película o serie muestra la clasificación de edad del país elegido, reproduce el tráiler y permite marcar favoritos.',f:[['splash_screen.dart',LP+'screens/splash/splash_screen.dart','Pantalla de arranque.'],['home_screen.dart',LP+'screens/movies/home_screen.dart','Pantalla principal. Muestra las vistas y el menú lateral.'],['movie_screen.dart',LP+'screens/movies/movie_screen.dart','Detalle de una película o serie, con su clasificación de edad.']]},
- {id:'vistas',l:'ui',c:2,r:1,t:'Vistas',s:'Inicio · Populares · Favs',d:'Vistas que muestra la pantalla principal. Según el catálogo elegido (películas o series) leen unos providers u otros con ref.watch y ref.read.',f:[['home_view.dart',LP+'views/movies/home_view.dart','Inicio: slideshow y listas horizontales de películas o series.'],['popular_view.dart',LP+'views/movies/popular_view.dart','Populares en cuadrícula.'],['favorites_view.dart',LP+'views/movies/favorites_view.dart','Películas favoritas.']]},
- {id:'widgets',l:'ui',c:3,r:1,t:'Widgets y búsqueda',s:'Slideshow · listas · menú',d:'Componentes reutilizables. El menú lateral tiene el apartado de Configuración (contenido e idioma) y los carruseles cargan los pósters de TMDB.',f:[['movies_slideshow.dart',LP+'widgets/movies/movies_slideshow.dart','Carrusel principal.'],['movie_horizontal_listview.dart',LP+'widgets/movies/movie_horizontal_listview.dart','Lista horizontal de películas.'],['movie_masonry.dart',LP+'widgets/movies/movie_masonry.dart','Cuadrícula masonry.'],['side_menu.dart',LP+'widgets/shared/side_menu.dart','Menú lateral con Configuración: películas o series e idioma.'],['search_movie_delegate.dart',LP+'delegates/search_movie_delegate.dart','Delegado de búsqueda.']]},
+ {id:'pantallas',l:'ui',c:1,r:1,t:'Pantallas',s:'Splash Â· Home Â· Detalle',d:'Pantallas de la app. El detalle de una pelÃ­cula o serie muestra la clasificaciÃ³n de edad del paÃ­s elegido, reproduce el trÃ¡iler y permite marcar favoritos.',f:[['splash_screen.dart',LP+'screens/splash/splash_screen.dart','Pantalla de arranque.'],['home_screen.dart',LP+'screens/movies/home_screen.dart','Pantalla principal. Muestra las vistas y el menÃº lateral.'],['movie_screen.dart',LP+'screens/movies/movie_screen.dart','Detalle de una pelÃ­cula o serie, con su clasificaciÃ³n de edad.']]},
+ {id:'vistas',l:'ui',c:2,r:1,t:'Vistas',s:'Inicio Â· Populares Â· Favs',d:'Vistas que muestra la pantalla principal. SegÃºn el catÃ¡logo elegido (pelÃ­culas o series) leen unos providers u otros con ref.watch y ref.read.',f:[['home_view.dart',LP+'views/movies/home_view.dart','Inicio: slideshow y listas horizontales de pelÃ­culas o series.'],['popular_view.dart',LP+'views/movies/popular_view.dart','Populares en cuadrÃ­cula.'],['favorites_view.dart',LP+'views/movies/favorites_view.dart','PelÃ­culas favoritas.']]},
+ {id:'widgets',l:'ui',c:3,r:1,t:'Widgets y bÃºsqueda',s:'Slideshow Â· listas Â· menÃº',d:'Componentes reutilizables. El menÃº lateral tiene el apartado de ConfiguraciÃ³n (contenido e idioma) y los carruseles cargan los pÃ³sters de TMDB.',f:[['movies_slideshow.dart',LP+'widgets/movies/movies_slideshow.dart','Carrusel principal.'],['movie_horizontal_listview.dart',LP+'widgets/movies/movie_horizontal_listview.dart','Lista horizontal de pelÃ­culas.'],['movie_masonry.dart',LP+'widgets/movies/movie_masonry.dart','CuadrÃ­cula masonry.'],['side_menu.dart',LP+'widgets/shared/side_menu.dart','MenÃº lateral con ConfiguraciÃ³n: pelÃ­culas o series e idioma.'],['search_movie_delegate.dart',LP+'delegates/search_movie_delegate.dart','Delegado de bÃºsqueda.']]},
 
- {id:'pFav',l:'state',c:0,r:2,t:'Provider favoritos',s:'guarda y lee en Isar',d:'Estado de las películas favoritas. Lee y escribe a través de Isar.',f:[['favorite_movies_provider.dart',LP+'providers/storage/favorite_movies_provider.dart','Favoritos del usuario.']]},
- {id:'pMovies',l:'state',c:2,r:2,t:'Providers películas',s:'listas · detalle · actores',d:'Estado de las listas, el detalle, los actores, la búsqueda y la clasificación de edad. Piden cada página al repositorio.',f:[['movies_providers.dart',LP+'providers/movies/movies_providers.dart','Listas de películas por página.'],['movie_info_provider.dart',LP+'providers/movies/movie_info_provider.dart','Detalle de una película.'],['actors_by_movie_provider.dart',LP+'providers/actors/actors_by_movie_provider.dart','Actores de una película.'],['search_movies_provider.dart',LP+'providers/search/search_movies_provider.dart','Estado de la búsqueda (películas o series).'],['movie_certification_provider.dart',LP+'providers/movies/movie_certification_provider.dart','Clasificación de edad según el país del idioma.']]},
- {id:'pLang',l:'state',c:3,r:2,t:'Provider config',s:'idioma · catálogo · prefs',d:'Configuración de la app. El idioma activo se guarda en el dispositivo; al cambiarlo se recrean los repositorios y se actualiza el locale. También guarda si se ven películas o series.',f:[['language_provider.dart',LP+'providers/language/language_provider.dart','Idioma activo (se recuerda al reabrir la app).'],['catalog_type_provider.dart',LP+'providers/settings/catalog_type_provider.dart','Catálogo activo: películas o series.'],['shared_preferences_provider.dart',LP+'providers/settings/shared_preferences_provider.dart','Preferencias guardadas en el dispositivo.']]},
- {id:'pSeries',l:'state',c:1,r:2,t:'Providers series',s:'listas de series',d:'Estado de las listas de series (en emisión, se emiten hoy, populares y mejor calificadas) con scroll infinito. Piden cada página al repositorio.',f:[['series_providers.dart',LP+'providers/series/series_providers.dart','Listas de series y carrusel.']]},
+ {id:'pFav',l:'state',c:0,r:2,t:'Provider favoritos',s:'guarda y lee en Isar',d:'Estado de las pelÃ­culas favoritas. Lee y escribe a travÃ©s de Isar.',f:[['favorite_movies_provider.dart',LP+'providers/storage/favorite_movies_provider.dart','Favoritos del usuario.']]},
+ {id:'pMovies',l:'state',c:2,r:2,t:'Providers pelÃ­culas',s:'listas Â· detalle Â· actores',d:'Estado de las listas, el detalle, los actores, la bÃºsqueda y la clasificaciÃ³n de edad. Piden cada pÃ¡gina al repositorio.',f:[['movies_providers.dart',LP+'providers/movies/movies_providers.dart','Listas de pelÃ­culas por pÃ¡gina.'],['movie_info_provider.dart',LP+'providers/movies/movie_info_provider.dart','Detalle de una pelÃ­cula.'],['actors_by_movie_provider.dart',LP+'providers/actors/actors_by_movie_provider.dart','Actores de una pelÃ­cula.'],['search_movies_provider.dart',LP+'providers/search/search_movies_provider.dart','Estado de la bÃºsqueda (pelÃ­culas o series).'],['movie_certification_provider.dart',LP+'providers/movies/movie_certification_provider.dart','ClasificaciÃ³n de edad segÃºn el paÃ­s del idioma.']]},
+ {id:'pLang',l:'state',c:3,r:2,t:'Provider config',s:'idioma Â· catÃ¡logo Â· prefs',d:'ConfiguraciÃ³n de la app. El idioma activo se guarda en el dispositivo; al cambiarlo se recrean los repositorios y se actualiza el locale. TambiÃ©n guarda si se ven pelÃ­culas o series.',f:[['language_provider.dart',LP+'providers/language/language_provider.dart','Idioma activo (se recuerda al reabrir la app).'],['catalog_type_provider.dart',LP+'providers/settings/catalog_type_provider.dart','CatÃ¡logo activo: pelÃ­culas o series.'],['shared_preferences_provider.dart',LP+'providers/settings/shared_preferences_provider.dart','Preferencias guardadas en el dispositivo.']]},
+ {id:'pSeries',l:'state',c:1,r:2,t:'Providers series',s:'listas de series',d:'Estado de las listas de series (en emisiÃ³n, se emiten hoy, populares y mejor calificadas) con scroll infinito. Piden cada pÃ¡gina al repositorio.',f:[['series_providers.dart',LP+'providers/series/series_providers.dart','Listas de series y carrusel.']]},
 
- {id:'contratos',l:'domain',c:2,r:3,t:'Contratos',s:'Repository · Datasources',d:'Interfaces abstractas que usan los providers (películas, series y clasificación de edad). Aíslan la app de la API concreta.',f:[['movies_repository.dart',LD+'repositories/movies_repository.dart','Contrato del repositorio.'],['movies_datasource.dart',LD+'datasources/movies_datasource.dart','Contrato de la fuente de datos.'],['local_storage_datasource.dart',LD+'datasources/local_storage_datasource.dart','Contrato del almacenamiento local.']]},
- {id:'entidades',l:'domain',c:3,r:3,t:'Entidades',s:'Movie · Actor · Video',d:'Clases del dominio. No dependen de la API. Las series se guardan como Movie con el id en negativo para no chocar con una película.',f:[['entities/',LD+'entities/','Movie, Actor y Video.']]},
+ {id:'contratos',l:'domain',c:2,r:3,t:'Contratos',s:'Repository Â· Datasources',d:'Interfaces abstractas que usan los providers (pelÃ­culas, series y clasificaciÃ³n de edad). AÃ­slan la app de la API concreta.',f:[['movies_repository.dart',LD+'repositories/movies_repository.dart','Contrato del repositorio.'],['movies_datasource.dart',LD+'datasources/movies_datasource.dart','Contrato de la fuente de datos.'],['local_storage_datasource.dart',LD+'datasources/local_storage_datasource.dart','Contrato del almacenamiento local.']]},
+ {id:'entidades',l:'domain',c:3,r:3,t:'Entidades',s:'Movie Â· Actor Â· Video',d:'Clases del dominio. No dependen de la API. Las series se guardan como Movie con el id en negativo para no chocar con una pelÃ­cula.',f:[['entities/',LD+'entities/','Movie, Actor y Video.']]},
 
  {id:'isarDs',l:'infra',c:0,r:4,t:'Isar datasource',s:'favoritos locales',d:'Lee y escribe los favoritos en la base de datos Isar.',f:[['isar_datasource.dart',LI+'datasources/isar_datasource.dart','Acceso a Isar.']]},
- {id:'repoImpl',l:'infra',c:1,r:4,t:'Repositorios impl',s:'Movie · LocalStorage',d:'Implementan los contratos del dominio y delegan en los datasources.',f:[['movie_repository_impl.dart',LI+'repositories/movie_repository_impl.dart','Implementa MoviesRepository.'],['local_storage_repository_impl.dart',LI+'repositories/local_storage_repository_impl.dart','Implementa el repositorio local.']]},
- {id:'mappers',l:'infra',c:2,r:4,t:'Mappers',s:'JSON → entidades',d:'Convierten el JSON de TMDB (películas y series) en entidades del dominio.',f:[['movie_mapper.dart',LI+'mappers/movie_mapper.dart','JSON de película a Movie.'],['tv_mapper.dart',LI+'mappers/tv_mapper.dart','JSON de serie a Movie (id negativo).'],['actor_mapper.dart',LI+'mappers/actor_mapper.dart','JSON a Actor.'],['video_mapper.dart',LI+'mappers/video_mapper.dart','JSON a Video.']]},
- {id:'datasources',l:'infra',c:3,r:4,t:'Datasources TMDB',s:'Moviedb · Actor Moviedb',d:'Hacen GET a The Movie DB con el idioma elegido, usando la API key de environment.dart. Piden películas (/movie), series (/tv) y las clasificaciones por país.',f:[['moviedb_datasource.dart',LI+'datasources/moviedb_datasource.dart','Películas, series y clasificación de edad.'],['actor_moviedb_datasource.dart',LI+'datasources/actor_moviedb_datasource.dart','Actores.']]},
+ {id:'repoImpl',l:'infra',c:1,r:4,t:'Repositorios impl',s:'Movie Â· LocalStorage',d:'Implementan los contratos del dominio y delegan en los datasources.',f:[['movie_repository_impl.dart',LI+'repositories/movie_repository_impl.dart','Implementa MoviesRepository.'],['local_storage_repository_impl.dart',LI+'repositories/local_storage_repository_impl.dart','Implementa el repositorio local.']]},
+ {id:'mappers',l:'infra',c:2,r:4,t:'Mappers',s:'JSON â†’ entidades',d:'Convierten el JSON de TMDB (pelÃ­culas y series) en entidades del dominio.',f:[['movie_mapper.dart',LI+'mappers/movie_mapper.dart','JSON de pelÃ­cula a Movie.'],['tv_mapper.dart',LI+'mappers/tv_mapper.dart','JSON de serie a Movie (id negativo).'],['actor_mapper.dart',LI+'mappers/actor_mapper.dart','JSON a Actor.'],['video_mapper.dart',LI+'mappers/video_mapper.dart','JSON a Video.']]},
+ {id:'datasources',l:'infra',c:3,r:4,t:'Datasources TMDB',s:'Moviedb Â· Actor Moviedb',d:'Hacen GET a The Movie DB con el idioma elegido, usando la API key de environment.dart. Piden pelÃ­culas (/movie), series (/tv) y las clasificaciones por paÃ­s.',f:[['moviedb_datasource.dart',LI+'datasources/moviedb_datasource.dart','PelÃ­culas, series y clasificaciÃ³n de edad.'],['actor_moviedb_datasource.dart',LI+'datasources/actor_moviedb_datasource.dart','Actores.']]},
 
- {id:'imgs',l:'ext',c:4,r:1,t:'Imágenes TMDB',s:'image.tmdb.org',d:'Servidor de pósters y fondos.',f:[['image.tmdb.org','https://image.tmdb.org','Pósters.']]},
- {id:'yt',l:'ext',c:4,r:2,t:'YouTube',s:'youtube_player_flutter',d:'Reproduce los tráilers en la pantalla de detalle.',f:[['youtube_player_flutter','paquete de Flutter','Reproductor.']]},
- {id:'tmdb',l:'ext',c:4,r:4,t:'The Movie DB',s:'api.themoviedb.org/3',d:'API REST de películas. Recibe el idioma en cada GET.',f:[['api.themoviedb.org/3','https://api.themoviedb.org/3','API REST.']]},
- {id:'prefs',l:'ext',c:4,r:3,t:'Preferencias',s:'shared_preferences',d:'Guarda en el dispositivo el idioma elegido para recordarlo la próxima vez que se abra la app.',f:[['shared_preferences','paquete de Flutter','Guarda el idioma.'],['main.dart','lib/main.dart','Lo inicializa y lo entrega a los providers.']]},
+ {id:'imgs',l:'ext',c:4,r:1,t:'ImÃ¡genes TMDB',s:'image.tmdb.org',d:'Servidor de pÃ³sters y fondos.',f:[['image.tmdb.org','https://image.tmdb.org','PÃ³sters.']]},
+ {id:'yt',l:'ext',c:4,r:2,t:'YouTube',s:'youtube_player_flutter',d:'Reproduce los trÃ¡ilers en la pantalla de detalle.',f:[['youtube_player_flutter','paquete de Flutter','Reproductor.']]},
+ {id:'tmdb',l:'ext',c:4,r:4,t:'The Movie DB',s:'api.themoviedb.org/3',d:'API REST de pelÃ­culas. Recibe el idioma en cada GET.',f:[['api.themoviedb.org/3','https://api.themoviedb.org/3','API REST.']]},
+ {id:'prefs',l:'ext',c:4,r:3,t:'Preferencias',s:'shared_preferences',d:'Guarda en el dispositivo el idioma elegido para recordarlo la prÃ³xima vez que se abra la app.',f:[['shared_preferences','paquete de Flutter','Guarda el idioma.'],['main.dart','lib/main.dart','Lo inicializa y lo entrega a los providers.']]},
  {id:'isarDb',l:'ext',c:0,r:5,t:'Isar (local)',s:'base de datos en el equipo',d:'Base de datos local del dispositivo donde persisten los favoritos.',f:[['Isar','en el dispositivo','Persistencia.']]}
 ];
 const PLAT=[['android','Android','android/'],['ios','iOS','ios/'],['windows','Windows','windows/'],['macos','macOS','macos/'],['linux','Linux','linux/'],['apk','APK release','build/app/outputs/flutter-apk/app-release.apk'],['web','Web (no)','Isar no corre en navegador']];
@@ -200,10 +214,10 @@ const E=[
  ['vistas-pSeries','vistas','pSeries','ref.watch (series)','v',{da:-40,ch:280}],
  ['pSeries-contr','pSeries','contratos','pide series','v',{db:-40}],
  ['pLang-prefs','pLang','prefs','guarda el idioma','v',{da:40}],
- ['widgets-imgs','widgets','imgs','póster','h'],
- ['pant-yt','pantallas','yt','reproduce el tráiler','v',{da:30}],
+ ['widgets-imgs','widgets','imgs','pÃ³ster','h'],
+ ['pant-yt','pantallas','yt','reproduce el trÃ¡iler','v',{da:30}],
  ['pant-pFav','pantallas','pFav','marca favorito','v',{da:-30}],
- ['pMovies-contr','pMovies','contratos','pide la página','v'],
+ ['pMovies-contr','pMovies','contratos','pide la pÃ¡gina','v'],
  ['pLang-contr','pLang','contratos','recrea con el idioma','v',{db:40}],
  ['pLang-arr','pLang','arranque','cambia el locale','gut'],
  ['contr-repo','contratos','repoImpl','implementa','v',{da:-30,db:-30}],
@@ -215,15 +229,15 @@ const E=[
  ['isar-db','isarDs','isarDb','persiste en','v']
 ].map(a=>({id:a[0],a:a[1],b:a[2],t:a[3],k:a[4],o:a[5]||{},em:!!(a[5]&&a[5].em)}));
 const VIEWS=[
- {id:'peliculas',label:'Flujo de películas',note:'La app define rutas, abre la pantalla principal y los providers piden las películas al repositorio, que las trae de The Movie DB y las convierte en entidades.',steps:['arr-rutas','rutas-pant','pant-vistas','vistas-pMovies','pMovies-contr','contr-repo','repo-ds','ds-tmdb','ds-map','map-ent']},
- {id:'idioma',label:'Cambio de idioma',note:'En Configuración (menú lateral) se elige el idioma: se guarda en el dispositivo para recordarlo, se actualiza el locale de la app y se recargan los datos con el nuevo idioma.',steps:['vistas-widgets','widgets-pLang','pLang-prefs','pLang-arr','pLang-contr','contr-repo','repo-ds','ds-tmdb']},
- {id:'series',label:'Series y catálogo',note:'En Configuración se elige Series. La vista pide las listas al provider de series, que llama al repositorio y consulta los endpoints /tv de The Movie DB. Cada serie se convierte en Movie con id negativo.',steps:['widgets-pLang','vistas-pSeries','pSeries-contr','contr-repo','repo-ds','ds-tmdb','ds-map']},
- {id:'favoritos',label:'Favoritos',note:'Desde el detalle de una película el provider guarda y lee los favoritos en Isar, la base de datos local.',steps:['pant-pFav','pFav-isar','isar-db']},
- {id:'media',label:'Pósters y tráiler',note:'Los widgets cargan los pósters desde image.tmdb.org y el detalle reproduce el tráiler con YouTube.',steps:['vistas-widgets','widgets-imgs','pant-yt']}
+ {id:'peliculas',label:'Flujo de pelÃ­culas',note:'La app define rutas, abre la pantalla principal y los providers piden las pelÃ­culas al repositorio, que las trae de The Movie DB y las convierte en entidades.',steps:['arr-rutas','rutas-pant','pant-vistas','vistas-pMovies','pMovies-contr','contr-repo','repo-ds','ds-tmdb','ds-map','map-ent']},
+ {id:'idioma',label:'Cambio de idioma',note:'En ConfiguraciÃ³n (menÃº lateral) se elige el idioma: se guarda en el dispositivo para recordarlo, se actualiza el locale de la app y se recargan los datos con el nuevo idioma.',steps:['vistas-widgets','widgets-pLang','pLang-prefs','pLang-arr','pLang-contr','contr-repo','repo-ds','ds-tmdb']},
+ {id:'series',label:'Series y catÃ¡logo',note:'En ConfiguraciÃ³n se elige Series. La vista pide las listas al provider de series, que llama al repositorio y consulta los endpoints /tv de The Movie DB. Cada serie se convierte en Movie con id negativo.',steps:['widgets-pLang','vistas-pSeries','pSeries-contr','contr-repo','repo-ds','ds-tmdb','ds-map']},
+ {id:'favoritos',label:'Favoritos',note:'Desde el detalle de una pelÃ­cula el provider guarda y lee los favoritos en Isar, la base de datos local.',steps:['pant-pFav','pFav-isar','isar-db']},
+ {id:'media',label:'PÃ³sters y trÃ¡iler',note:'Los widgets cargan los pÃ³sters desde image.tmdb.org y el detalle reproduce el trÃ¡iler con YouTube.',steps:['vistas-widgets','widgets-imgs','pant-yt']}
 ];
 const BND=[
- {t:'Configuración y arranque',c:'--c-config',x:0,y:0,w:3,h:1,rows:[0,0]},
- {t:'Presentación y estado',c:'--c-ui',cols:[0,3],rows:[1,2]},
+ {t:'ConfiguraciÃ³n y arranque',c:'--c-config',x:0,y:0,w:3,h:1,rows:[0,0]},
+ {t:'PresentaciÃ³n y estado',c:'--c-ui',cols:[0,3],rows:[1,2]},
  {t:'Dominio e infraestructura',c:'--c-domain',cols:[0,3],rows:[3,4]},
  {t:'Servicios y preferencias',c:'--c-ext',cols:[4,4],rows:[1,4]},
  {t:'Local',c:'--c-ext',cols:[0,0],rows:[5,5]}
@@ -303,7 +317,7 @@ N.forEach(n=>{
   n.g.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();pick(n.id)}});
 });
 const PN=PLAT.map((p,i)=>{const n={id:p[0],l:'plat',t:p[1],s:p[2],plat:1,ghost:p[0]==='web',x:PX+i*(PW+PG),y:PY,w:PW,h:40,in:[],out:[],f:[[p[1],p[2],'']],
-   d:p[0]==='web'?'Web no soportada: Isar no corre en navegador.':p[0]==='apk'?'Compilación de release para Android.':'Carpeta de la plataforma '+p[1]+'.'};
+   d:p[0]==='web'?'Web no soportada: Isar no corre en navegador.':p[0]==='apk'?'CompilaciÃ³n de release para Android.':'Carpeta de la plataforma '+p[1]+'.'};
   nodeById[n.id]=n;
   n.g=el('g',{class:'node chipn'+(n.ghost?' ghost':''),tabindex:0,role:'button','aria-label':n.t,style:`--c:var(${layerVar('plat')})`},gN);
   el('rect',{x:n.x,y:n.y,width:n.w,height:n.h,rx:7,class:'box'},n.g);
@@ -334,7 +348,7 @@ function render(){
   document.querySelectorAll('.vchip').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.id===view)));
   document.querySelectorAll('#legend .chip').forEach(b=>b.setAttribute('aria-pressed',String(!hidden.has(b.dataset.id))));
   $('#vk').textContent='Vistas guiadas '+(view?VIEWS.findIndex(x=>x.id===view)+1:0)+' / '+VIEWS.length;
-  $('#play').textContent=timer?'❚❚ Pausar':'▶ Reproducir';
+  $('#play').textContent=timer?'âšâš Pausar':'â–¶ Reproducir';
   dock();
 }
 function lk(e,dir){const n=dir==='out'?e.B:e.A;return `<li><button data-go="${n.id}"><span>${esc(n.t)}</span><em>${esc(e.t)}</em></button></li>`}
@@ -349,10 +363,10 @@ function dock(){
     h+='</div>';
   } else if(v){
     h+=`<div class="row"><h2>${esc(v.label)}</h2><span class="muted" style="margin-left:auto;font-family:var(--mono);font-size:12px">paso ${step+1} de ${v.steps.length}</span></div><p>${esc(v.note)}</p>`;
-    h+=`<div class="steps">${v.steps.map((id,i)=>{const e=edgeById[id];return `<button data-s="${i}" class="${i<step?'done':''}" ${i===step?'aria-current="step"':''}>${i+1} · ${esc(e.A.t)} → ${esc(e.B.t)}</button>`}).join('')}</div>`;
+    h+=`<div class="steps">${v.steps.map((id,i)=>{const e=edgeById[id];return `<button data-s="${i}" class="${i<step?'done':''}" ${i===step?'aria-current="step"':''}>${i+1} Â· ${esc(e.A.t)} â†’ ${esc(e.B.t)}</button>`}).join('')}</div>`;
     h+=`<div class="row"><button class="btn" data-a="prev">Anterior</button><button class="btn" data-a="next">Siguiente</button><button class="btn" data-a="close">Salir de la vista</button></div>`;
   } else {
-    h+=`<h3>Cómo usarlo</h3><p class="muted">Elige una vista guiada arriba o pulsa Reproducir para recorrer el sistema. Toca una caja para ver los archivos que agrupa y con quién se conecta. Pasa el cursor por una línea para resaltarla.</p>`;
+    h+=`<h3>CÃ³mo usarlo</h3><p class="muted">Elige una vista guiada arriba o pulsa Reproducir para recorrer el sistema. Toca una caja para ver los archivos que agrupa y con quiÃ©n se conecta. Pasa el cursor por una lÃ­nea para resaltarla.</p>`;
   }
   d.innerHTML=h;
 }
@@ -372,7 +386,7 @@ LAYERS.forEach(L=>{const b=document.createElement('button');b.className='chip';b
 $('#play').onclick=play;
 $('#fit').onclick=e=>{const b=e.currentTarget,on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',String(on));$('#stage').classList.toggle('fit',on)};
 $('#theme').onclick=()=>{const r=document.documentElement;const cur=r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');r.setAttribute('data-theme',cur==='dark'?'light':'dark');lbl()};
-function lbl(){const r=document.documentElement;const cur=r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');$('#theme').textContent=cur==='dark'?'☾ Oscuro':'☀ Claro'}
+function lbl(){const r=document.documentElement;const cur=r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');$('#theme').textContent=cur==='dark'?'â˜¾ Oscuro':'â˜€ Claro'}
 $('#present').onclick=()=>{const on=!document.body.classList.contains('present');document.body.classList.toggle('present',on);$('#present').textContent=on?'Salir':'Presentar';
   try{if(on&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});else if(!on&&document.fullscreenElement)document.exitFullscreen().catch(()=>{})}catch(_){}};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){stopPlay();sel=null;view=null;document.body.classList.remove('present');$('#present').textContent='Presentar';render()}});
