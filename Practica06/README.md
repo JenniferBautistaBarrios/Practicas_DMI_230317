@@ -1,4 +1,4 @@
-﻿ <div align="center">
+ <div align="center">
 
 <br/>
 
@@ -36,10 +36,10 @@
 
 <br/><br/>
 
-<img src="Cinemapedia/assets/icon/cinemapedia_logo.png" width="220" alt="Logo de Cinemapedia con palomitas"/>
+<img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/Cinemapedia/assets/icon/cinemapedia_logo.png" width="220" alt="Logo de Cinemapedia con palomitas"/>
 
 <div align="center">
-<a href="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/Arquitectura/Arquitectura_de_Cinemapedia.html"><img src="Arquitectura/image1.png" alt="Diagrama de arquitectura de Cinemapedia" width="1000"></a>
+<a href="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/Arquitectura/Arquitectura_de_Cinemapedia.html"><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/Arquitectura/image1.png" alt="Diagrama de arquitectura de Cinemapedia" width="1000"></a>
 <p><a href="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/Arquitectura/Arquitectura_de_Cinemapedia.html"><strong>Ver diagrama interactivo de la arquitectura</strong></a></p>
 </div>
 
@@ -108,21 +108,21 @@ El objetivo es ofrecer una forma sencilla y agradable de descubrir contenido aud
 
 <table>
   <tr>
-    <td align="center"><strong>Inicio</strong><br><img src="Cinemapedia/assets/images/inicio.jpeg" alt="Pantalla de inicio" width="170"></td>
-    <td align="center"><strong>Películas populares</strong><br><img src="Cinemapedia/assets/images/peliculas%20populares.jpeg" alt="Catálogo de películas" width="170"></td>
-    <td align="center"><strong>Favoritos</strong><br><img src="Cinemapedia/assets/images/favorito.jpeg" alt="Lista de favoritos" width="170"></td>
-    <td align="center"><strong>Detalle y elenco</strong><br><img src="Cinemapedia/assets/images/personajes.jpeg" alt="Detalle de película y elenco" width="170"></td>
+    <td align="center"><strong>Inicio</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/Cinemapedia/assets/images/inicio.jpeg" alt="Pantalla de inicio" width="170"></td>
+    <td align="center"><strong>Películas populares</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/Cinemapedia/assets/images/peliculas%20populares.jpeg" alt="Catálogo de películas" width="170"></td>
+    <td align="center"><strong>Favoritos</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/Cinemapedia/assets/images/favorito.jpeg" alt="Lista de favoritos" width="170"></td>
+    <td align="center"><strong>Detalle y elenco</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/Cinemapedia/assets/images/personajes.jpeg" alt="Detalle de película y elenco" width="170"></td>
   </tr>
   <tr>
-    <td align="center"><strong>Menú e idiomas</strong><br><img src="Cinemapedia/assets/images/menu.jpeg" alt="Menú de configuración e idiomas" width="170"></td>
-    <td align="center"><strong>Clasificación</strong><br><img src="Cinemapedia/assets/images/clasificacion.jpeg" alt="Clasificación por edad" width="170"></td>
-    <td align="center"><strong>English</strong><br><img src="Cinemapedia/assets/images/ingles.jpeg" alt="Aplicación en inglés" width="170"></td>
-    <td align="center"><strong>Español</strong><br><img src="Cinemapedia/assets/images/Espa%C3%B1ol.jpeg" alt="Aplicación en español" width="170"></td>
+    <td align="center"><strong>Menú e idiomas</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/Cinemapedia/assets/images/menu.jpeg" alt="Menú de configuración e idiomas" width="170"></td>
+    <td align="center"><strong>Clasificación</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/Cinemapedia/assets/images/clasificacion.jpeg" alt="Clasificación por edad" width="170"></td>
+    <td align="center"><strong>English</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/Cinemapedia/assets/images/ingles.jpeg" alt="Aplicación en inglés" width="170"></td>
+    <td align="center"><strong>Español</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/Cinemapedia/assets/images/Espa%C3%B1ol.jpeg" alt="Aplicación en español" width="170"></td>
   </tr>
   <tr>
-    <td align="center"><strong>Árabe</strong><br><img src="Cinemapedia/assets/images/Arabe.jpeg" alt="Aplicación en árabe" width="170"></td>
-    <td align="center"><strong>Chino</strong><br><img src="Cinemapedia/assets/images/chino.jpeg" alt="Aplicación en chino" width="170"></td>
-    <td align="center"><strong>Logo y carga</strong><br><img src="Cinemapedia/assets/images/logo.jpeg" alt="Pantalla de carga de Cinemapedia" width="170"></td>
+    <td align="center"><strong>Árabe</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/Cinemapedia/assets/images/Arabe.jpeg" alt="Aplicación en árabe" width="170"></td>
+    <td align="center"><strong>Chino</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/Cinemapedia/assets/images/chino.jpeg" alt="Aplicación en chino" width="170"></td>
+    <td align="center"><strong>Logo y carga</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/Cinemapedia/assets/images/logo.jpeg" alt="Pantalla de carga de Cinemapedia" width="170"></td>
     <td></td>
   </tr>
 </table>
@@ -151,7 +151,7 @@ Cinemapedia utiliza una identidad gráfica inspirada en tonos rosas, combinando 
 
 <div align="center">
 
-<img src="Cinemapedia/assets/icon/cinemapedia_logo.png" width="220" alt="Logo de Cinemapedia con palomitas"/>
+<img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/Cinemapedia/assets/icon/cinemapedia_logo.png" width="220" alt="Logo de Cinemapedia con palomitas"/>
 
 <br/>
 
