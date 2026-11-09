@@ -1,14 +1,11 @@
-import 'package:cinemapedia/infraestructure/datasources/moviedb_datasource.dart';
+import 'package:cinemapedia/infrastructure/datasources/moviedb_datasource.dart';
+import 'package:cinemapedia/presentation/providers/language/language_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cinemapedia/infraestructure/repositories/movie_repository_impl.dart';
+import 'package:cinemapedia/infrastructure/repositories/movie_repository_impl.dart';
 
-import 'movie_country_provider.dart';
-
-import 'package:cinemapedia/domain/repositories/movies_repository.dart';
-
-// Rebuild repositories and dependent caches whenever the selected country changes.
-final movieRepositoryProvider = Provider<MoviesRepository>((ref) {
-  return MovieRepositoryImpl(
-    MoviedbDatasource(country: ref.watch(movieCountryProvider)),
-  );
+// El repositorio se vuelve a crear cuando cambia el idioma, y con él
+// todos los providers que dependen de él (películas, detalle, búsqueda...).
+final movieRepositoryProvider = Provider((ref) {
+  final language = ref.watch( languageProvider );
+  return MovieRepositoryImpl( MoviedbDatasource( language: language.apiCode ) );
 });

@@ -1,14 +1,19 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+﻿import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:cinemapedia/presentation/providers/series/series_providers.dart';
+import 'package:cinemapedia/presentation/providers/settings/catalog_type_provider.dart';
 import 'movies_providers.dart';
 
+/// True while the selected catalog's first requests are still running.
 final initialLoadingProvider = Provider<bool>((ref) {
-  final step1 = ref.watch(nowPlayingMoviesProvider).isLoading;
-  final step2 = ref.watch(popularMoviesProvider).isLoading;
-  final step3 = ref.watch(topRatedMoviesProvider).isLoading;
-  final step4 = ref.watch(upcomingMoviesProvider).isLoading;
+  final isSeries = ref.watch(catalogTypeProvider) == CatalogType.series;
+  final providers = isSeries
+      ? [onTheAirSeriesProvider, popularSeriesProvider, topRatedSeriesProvider, airingTodaySeriesProvider]
+      : [nowPlayingMoviesProvider, popularMoviesProvider, topRatedMoviesProvider, upcomingMoviesProvider];
 
-  if (step1 || step2 || step3 || step4) return true;
-
-  return false; // terminamos de cargar
+  for (final provider in providers) {
+    ref.watch(provider);
+    if (!ref.read(provider.notifier).hasCompletedInitialLoad) return true;
+  }
+  return false;
 });

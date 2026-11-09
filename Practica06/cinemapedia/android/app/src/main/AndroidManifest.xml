@@ -1,6 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Required so the app can reach The Movie DB API in release builds too. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
-        android:label="cinemapedia"
+        android:label="Cinemapedia"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

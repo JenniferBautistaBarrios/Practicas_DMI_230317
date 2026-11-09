@@ -1,19 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:cinemapedia/config/constants/movie_country.dart';
-import 'package:cinemapedia/presentation/providers/movies/movie_country_provider.dart';
 
 import 'package:cinemapedia/config/router/app_router.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import 'package:cinemapedia/config/i18n/app_language.dart';
+import 'package:cinemapedia/config/i18n/app_strings.dart';
 import 'package:cinemapedia/config/theme/app_theme.dart';
+import 'package:cinemapedia/presentation/providers/language/language_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-Future<void> main() async {
+import 'package:cinemapedia/presentation/providers/settings/shared_preferences_provider.dart';
+
+Future<void> main() async{
+
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: '.env', isOptional: true);
 
-  runApp(const ProviderScope(child: MainApp()));
+  await dotenv.load(fileName: '.env');
+
+  // Formatos de fecha de todos los idiomas (es, en, de, zh, ar)
+  await initializeDateFormatting();
+
+  // Preferencias guardadas (aquí se recuerda el idioma elegido)
+  final prefs = await SharedPreferences.getInstance();
+
+  runApp(
+    ProviderScope(
+      overrides: [
+        sharedPreferencesProvider.overrideWithValue( prefs ),
+      ],
+      child: const MainApp(),
+    )
+  );
 }
 
 class MainApp extends ConsumerWidget {
@@ -21,17 +41,31 @@ class MainApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final country = ref.watch(movieCountryProvider);
+
+    // Cuando cambia el idioma se reconstruye toda la app
+    final language = ref.watch( languageProvider );
+
     return MaterialApp.router(
-      routerConfig: appRouter,
       title: 'Cinemapedia',
-      locale: Locale(country.languageCode, country.code),
-      supportedLocales: MovieCountry.values
-          .map((item) => Locale(item.languageCode, item.code))
-          .toList(),
-      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
       theme: AppTheme().getTheme(),
+      themeMode: ThemeMode.light,
+
+      // El diseño no se voltea en árabe: siempre de izquierda a derecha
+      builder: (context, child) => Directionality(
+        textDirection: TextDirection.ltr,
+        child: child!,
+      ),
+
+      locale: language.locale,
+      supportedLocales: [ for (final l in AppLanguages.all) l.locale ],
+      localizationsDelegates: const [
+        AppStrings.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
     );
   }
 }

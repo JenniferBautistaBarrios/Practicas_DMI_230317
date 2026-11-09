@@ -1,62 +1,368 @@
-# Cinemapedia · Práctica 06 · 230389
+ <div align="center">
 
-Aplicación Flutter con TMDB, Riverpod y GoRouter.
+<br/>
 
-## Ejecutar
+<img src="https://readme-typing-svg.demolab.com?font=Montserrat&weight=900&size=48&duration=3500&pause=1000&color=FF69B4&center=true&vCenter=true&width=850&height=90&lines=%E2%9C%A6+CINEMAPEDIA+%E2%9C%A6" alt="Cinemapedia rosa"/>
 
-En esta carpeta, configura `.env` con `THE_MOVIEDB_KEY=tu_clave_de_tmdb` y ejecuta:
+<img src="https://readme-typing-svg.demolab.com?font=Poppins&weight=600&size=20&duration=3000&pause=900&color=DB4C91&center=true&vCenter=true&width=750&height=40&lines=TU+UNIVERSO+CINEMATOGR%C3%81FICO;DESCUBRE+PEL%C3%8DCULAS+Y+SERIES;HISTORIAS+QUE+MERECEN+SER+VISTAS" alt="Frases animadas de Cinemapedia"/>
 
-```sh
+<br/>
+
+<p>
+  <strong>🎀 PELÍCULAS · SERIES · FAVORITOS · ENTRETENIMIENTO 🎀</strong>
+</p>
+
+<img src="https://img.shields.io/badge/MATRÍCULA-230317-DB4C91?style=for-the-badge&labelColor=FFE4EF"/>
+
+<br/><br/>
+
+<p>
+  Un espacio para descubrir nuevas historias, explorar el mundo del cine
+  y encontrar tus próximas películas favoritas.
+</p>
+
+<br/>
+
+<a href="https://appetize.io/app/b_dqbrzni6n2opryfcgrwoifjnvq">
+  <img src="https://img.shields.io/badge/♡_EXPLORAR_CINEMAPEDIA-FF69B4?style=for-the-badge"/>
+</a>
+
+<br/><br/>
+
+<img src="https://img.shields.io/badge/FLUTTER-FFE4EF?style=for-the-badge&logo=flutter&logoColor=DB4C91"/>
+<img src="https://img.shields.io/badge/DART-FFD6E7?style=for-the-badge&logo=dart&logoColor=DB4C91"/>
+<img src="https://img.shields.io/badge/RIVERPOD-FFC0DA?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/TMDB-FF69B4?style=for-the-badge&logo=themoviedatabase&logoColor=white"/>
+
+<br/><br/>
+
+<img src="assets/icon/app_icon.png" width="135" alt="Icono de Cinemapedia"/>
+
+<br/>
+
+<sub>✧ UNA EXPERIENCIA CINEMATOGRÁFICA CON UN TOQUE ROSA ✧</sub>
+
+<br/><br/>
+
+</div>
+
+---
+
+<div align="center">
+
+# 🎀 BIENVENIDO A CINEMAPEDIA
+
+*Donde cada historia tiene un lugar especial.*
+
+<br/>
+
+| 💗 EXPLORA | 🎬 DESCUBRE | ⭐ GUARDA |
+|:---:|:---:|:---:|
+| Películas y series | Nuevas historias | Tus favoritos |
+
+</div>
+
+---
+
+## 🌸 01. Sobre el proyecto
+
+**Cinemapedia** es una aplicación móvil desarrollada con Flutter que permite explorar películas, descubrir series y consultar información cinematográfica desde una interfaz visual e intuitiva.
+
+Su propuesta combina funcionalidades de consulta, navegación y organización de contenido con una identidad gráfica inspirada en tonos rosas y una experiencia enfocada en los amantes del cine.
+
+El objetivo es ofrecer una forma sencilla y agradable de descubrir contenido audiovisual, conocer más sobre cada producción y mantener organizados los títulos favoritos.
+
+---
+
+## 💕 02. Funcionalidades principales
+
+<div align="center">
+
+| ✨ Sección | Descripción |
+|:---:|---|
+| 🎬 **Películas** | Explorar títulos cinematográficos y consultar su información. |
+| 📺 **Series** | Descubrir series populares y sus detalles. |
+| ⭐ **Favoritos** | Consultar el contenido guardado. |
+| 👥 **Elenco** | Conocer actores y participantes de las producciones. |
+| 🌎 **Idiomas** | Consultar contenido en distintos idiomas. |
+| 🏆 **Clasificaciones** | Explorar contenido mediante categorías. |
+| 💗 **Detalles** | Conocer información de películas y series. |
+| 🧭 **Navegación** | Acceder a las distintas secciones de la aplicación. |
+
+</div>
+
+---
+
+## 🎞️ 03. Galería de la aplicación
+
+<div align="center">
+
+### UNA MIRADA A CINEMAPEDIA
+
+*Interfaz, navegación y contenido cinematográfico.*
+
+</div>
+
+<!-- Agrega aquí las capturas reales del proyecto -->
+
+| 🏠 Inicio | 🎬 Películas |
+|:---:|:---:|
+| Captura pendiente | Captura pendiente |
+
+| 📺 Series | 💗 Favoritos |
+|:---:|:---:|
+| Captura pendiente | Captura pendiente |
+
+| 🎥 Detalles de película | 👥 Elenco |
+|:---:|:---:|
+| Captura pendiente | Captura pendiente |
+
+| 🌸 Clasificaciones | 🌎 Idiomas |
+|:---:|:---:|
+| Captura pendiente | Captura pendiente |
+
+---
+
+## 🎨 04. Identidad visual
+
+Cinemapedia utiliza una identidad gráfica inspirada en tonos rosas, combinando colores suaves y acentos intensos para crear una apariencia moderna y agradable.
+
+<div align="center">
+
+| Color | Código | Aplicación |
+|:---:|:---:|---|
+| <img src="https://placehold.co/40x40/FFF0F6/FFF0F6.png"/> | `#FFF0F6` | Fondo principal |
+| <img src="https://placehold.co/40x40/FFE4EF/FFE4EF.png"/> | `#FFE4EF` | Superficies |
+| <img src="https://placehold.co/40x40/FFB6D5/FFB6D5.png"/> | `#FFB6D5` | Detalles suaves |
+| <img src="https://placehold.co/40x40/FF69B4/FF69B4.png"/> | `#FF69B4` | Color principal |
+| <img src="https://placehold.co/40x40/DB4C91/DB4C91.png"/> | `#DB4C91` | Acentos |
+| <img src="https://placehold.co/40x40/6D3655/6D3655.png"/> | `#6D3655` | Texto |
+
+</div>
+
+### Icono de la aplicación
+
+<div align="center">
+
+<img src="assets/icon/app_icon.png" width="150" alt="Icono de Cinemapedia"/>
+
+<br/>
+
+**CINEMAPEDIA · APP ICON**
+
+</div>
+
+El proyecto también contempla recursos gráficos personalizados y elementos de dibujo mediante `CustomPainter`.
+
+---
+
+## 🌐 05. Idiomas y clasificaciones
+
+La aplicación contempla contenido internacional y opciones de idioma para facilitar la consulta de películas y series.
+
+**Idiomas considerados:**
+
+- Español 🇪🇸
+- Inglés 🇬🇧
+- Alemán 🇩🇪
+- Chino 🇨🇳
+- Árabe 🌍
+
+También se contempla la consulta de clasificaciones cinematográficas para organizar y reconocer el contenido.
+
+---
+
+## 🧰 06. Tecnologías utilizadas
+
+<div align="center">
+
+| Tecnología | Uso en el proyecto |
+|---|---|
+| <img src="https://img.shields.io/badge/Flutter-02569B?style=flat-square&logo=flutter&logoColor=white"/> | Desarrollo de la aplicación móvil |
+| <img src="https://img.shields.io/badge/Dart-0175C2?style=flat-square&logo=dart&logoColor=white"/> | Lenguaje de programación |
+| Riverpod | Gestión de estado |
+| TMDB API | Información de películas y series |
+| GoRouter | Navegación |
+| Dio | Solicitudes HTTP |
+| flutter_dotenv | Variables de entorno |
+| Isar | Persistencia local |
+| Shared Preferences | Preferencias locales |
+| YouTube Player | Reproducción de contenido |
+| Animate Do | Animaciones |
+| Card Swiper | Carruseles |
+| Flutter Staggered Grid View | Cuadrículas |
+| Intl | Formato y localización |
+
+</div>
+
+---
+
+## 🏗️ 07. Arquitectura del proyecto
+
+La organización del proyecto contempla distintas áreas para separar responsabilidades y facilitar el mantenimiento del código.
+
+```text
+Cinemapedia/
+│
+├── assets/
+│   ├── icon/
+│   ├── loaders/
+│   └── readme-header.svg
+│
+├── lib/
+│   ├── config/
+│   │
+│   ├── domain/
+│   │   ├── entities/
+│   │   ├── repositories/
+│   │   ├── datasources/
+│   │   └── mappers/
+│   │
+│   ├── infrastructure/
+│   │
+│   ├── presentation/
+│   │   ├── providers/
+│   │   ├── screens/
+│   │   ├── views/
+│   │   └── widgets/
+│   │
+│   └── main.dart
+│
+├── android/
+├── test/
+├── .env
+├── pubspec.yaml
+└── README.md
+```
+
+---
+
+## ⚙️ 08. Instalación y ejecución
+
+Para ejecutar Cinemapedia localmente, es necesario contar con Flutter y Dart configurados en el entorno de desarrollo.
+
+### 1. Clonar el repositorio
+
+```bash
+git clone URL_DE_TU_REPOSITORIO
+```
+
+### 2. Acceder a la carpeta
+
+```bash
+cd Cinemapedia
+```
+
+### 3. Instalar dependencias
+
+```bash
 flutter pub get
+```
+
+### 4. Configurar las variables de entorno
+
+Crear un archivo `.env` en la raíz del proyecto:
+
+```env
+THE_MOVIEDB_KEY=TU_API_KEY
+```
+
+Sustituye `TU_API_KEY` por tu clave de acceso de TMDB. No publiques credenciales privadas en GitHub.
+
+### 5. Ejecutar la aplicación
+
+```bash
+flutter devices
+```
+
+```bash
 flutter run
 ```
 
-## Navegación y gestos
+---
 
-- Menú hamburguesa: inicio, en cines, próximos estrenos, populares, mejor calificadas y países.
-- Logo propio en la barra y el menú; se conserva la configuración existente de icono y splash.
-- Deslizar horizontalmente: recorrer el carrusel o una lista.
-- Flechas: avanzar o retroceder. Doble toque: principio o final de las películas cargadas.
-- Doble toque en la mitad izquierda/derecha del carrusel: película anterior/siguiente.
-- Tocar una película: abrir el detalle.
-- Botón de flecha hacia arriba o Inicio: volver al principio de la pantalla.
-- Deslizar hacia abajo desde el inicio: recargar las cuatro secciones.
-- Las listas cargan más películas al acercarse al final; los errores permiten reintentar.
+## 📦 09. Generación del APK
 
-## Países e idiomas
+Para generar la versión de instalación de Android, ejecutar:
 
-La bandera de la barra y el selector del menú cambian el mismo estado global:
-
-| Bandera | País | Consulta TMDB | Continente |
-| --- | --- | --- | --- |
-| 🇲🇽 | México | `es-MX`, región `MX` | América del Norte |
-| 🇺🇸 | Estados Unidos | `en-US`, región `US` | América del Norte |
-| 🇩🇪 | Alemania | `de-DE`, región `DE` | Europa |
-| 🇧🇷 | Brasil | `pt-BR`, región `BR` | América del Sur |
-| 🇯🇵 | Japón | `ja-JP`, región `JP` | Asia |
-| 🇿🇦 | Sudáfrica | `en-ZA`, región `ZA` | África |
-| 🇦🇺 | Australia | `en-AU`, región `AU` | Oceanía |
-
-México es la selección inicial. Cambiar país reinicia las listas y la paginación, y actualiza títulos, sinopsis, géneros del detalle, textos de la interfaz, controles de Flutter y clasificaciones. Una respuesta pendiente del país anterior no se agrega al catálogo nuevo. La selección dura durante la sesión.
-
-`language` solicita las traducciones disponibles; `region` selecciona el mercado de consulta y sus estrenos. No es un filtro por país de producción, y algunos catálogos pueden compartir películas. Si TMDB no tiene una traducción, puede devolver el título original.
-
-## Estrellas y clasificación
-
-El carrusel, las tarjetas y el detalle muestran el título localizado, cinco estrellas y la clasificación del país seleccionado.
-
-- Las estrellas convierten la puntuación **global de TMDB** de 0–10 a 0–5; no representan votos separados por país. Mantén pulsado o pasa el cursor por la puntuación para consultar la nota original y el número de votos.
-- Las clasificaciones se obtienen de `/movie/{id}/release_dates`, exclusivamente del código de país seleccionado. Se prioriza el estreno en cines, después el limitado y las demás modalidades.
-- Si falta una clasificación local, se muestra «Sin clasificación» en el idioma elegido. Si falla la consulta, se muestra «No disponible» y se puede tocar para reintentar.
-- Las consultas de clasificación se comparten entre carrusel, listas y detalle para evitar solicitudes duplicadas del mismo país y película.
-
-Referencias oficiales: [idiomas de TMDB](https://developer.themoviedb.org/docs/languages), [estrenos por región](https://developer.themoviedb.org/reference/movie-now-playing-list) y [clasificaciones por película y país](https://developer.themoviedb.org/reference/movie-release-dates).
-
-## Verificación
-
-```sh
-flutter analyze
-flutter test
+```bash
+flutter build apk --release
 ```
 
-Las pruebas usan repositorios y respuestas de API simulados; no necesitan tu clave ni acceso a TMDB. Cubren idiomas y regiones, clasificaciones locales, cambio de cachés, catálogos pequeños o vacíos, errores, paginación, navegación, gestos y pantallas pequeñas con texto ampliado.
+El archivo generado estará disponible en:
+
+```text
+build/app/outputs/flutter-apk/app-release.apk
+```
+
+---
+
+## 🚀 10. Demostración de la aplicación
+
+<div align="center">
+
+<img src="https://readme-typing-svg.demolab.com?font=Poppins&weight=700&size=24&duration=3000&pause=1000&color=FF69B4&center=true&vCenter=true&width=650&height=45&lines=%C2%BFQU%C3%89+PEL%C3%8DCULA+VER%C3%81S+HOY%3F;TU+AVENTURA+CINEMATOGR%C3%81FICA+COMIENZA;DESCUBRE+TU+PR%C3%93XIMA+HISTORIA" alt="Animación de Cinemapedia"/>
+
+<br/><br/>
+
+<a href="https://appetize.io/app/b_dqbrzni6n2opryfcgrwoifjnvq">
+  <img src="https://img.shields.io/badge/♡_PROBAR_CINEMAPEDIA-FF69B4?style=for-the-badge&logo=googlechrome&logoColor=white"/>
+</a>
+
+<br/><br/>
+
+**Prueba la aplicación mediante Appetize**
+
+[🌸 Abrir demostración de Cinemapedia](https://appetize.io/app/b_dqbrzni6n2opryfcgrwoifjnvq)
+
+</div>
+
+---
+
+## 🔐 11. Consideraciones
+
+- Se requiere conexión a internet para consultar información desde TMDB.
+- La clave de acceso debe configurarse localmente mediante `.env`.
+- Algunas funciones pueden depender de servicios externos.
+- La compatibilidad con otras plataformas debe verificarse según las dependencias utilizadas.
+
+---
+
+<div align="center">
+
+<br/>
+
+<img src="https://readme-typing-svg.demolab.com?font=Montserrat&weight=900&size=30&duration=3000&pause=1000&color=FF69B4&center=true&vCenter=true&width=700&height=55&lines=%E2%9C%A6+GRACIAS+POR+VISITAR+CINEMAPEDIA+%E2%9C%A6" alt="Gracias por visitar Cinemapedia"/>
+
+<br/>
+
+### 🎀 CINEMAPEDIA
+
+**Matrícula: 230317**
+
+<sub>Hecho con 💗 y pasión por el mundo del cine.</sub>
+
+<br/><br/>
+
+<img src="https://img.shields.io/badge/MADE_WITH-LOVE-FF69B4?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/FLUTTER-APP-DB4C91?style=for-the-badge"/>
+
+</div>
+---
+
+## Capturas de evidencias
+
+En esta sección puedes documentar las pantallas principales y el funcionamiento de Cinemapedia. Guarda las imágenes en `assets/evidencias/` y agrega cada captura con una ruta relativa, por ejemplo:
+
+```markdown
+![Pantalla de inicio](assets/evidencias/inicio.png)
+```
+
+| Evidencia | Archivo sugerido |
+|---|---|
+| Pantalla de inicio | `assets/evidencias/inicio.png` |
+| Catálogo de películas | `assets/evidencias/peliculas.png` |
+| Catálogo de series | `assets/evidencias/series.png` |
+| Lista de favoritos | `assets/evidencias/favoritos.png` |
+| Detalle y elenco | `assets/evidencias/detalle-elenco.png` |
+| Idiomas y clasificaciones | `assets/evidencias/idiomas-clasificaciones.png` |

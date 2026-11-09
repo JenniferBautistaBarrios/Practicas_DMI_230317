@@ -1,15 +1,38 @@
+import 'package:cinemapedia/presentation/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:cinemapedia/domain/entities/movie.dart';
 
-import 'movies_repository_provider.dart';
-
-final movieInfoProvider = FutureProvider.autoDispose.family((
-  ref,
-  String movieId,
-) {
-  return ref.watch(movieRepositoryProvider).getMovieById(movieId);
+final movieInfoProvider = StateNotifierProvider<MovieMapNotifier, Map<String, Movie>>((ref) {
+  final movieRepository = ref.watch( movieRepositoryProvider );
+  return MovieMapNotifier(getMovie: movieRepository.getMovieById );
 });
 
-// Shared by carousel, lists and details. A country change invalidates the cache.
-final movieCertificationProvider = FutureProvider.family((ref, String movieId) {
-  return ref.watch(movieRepositoryProvider).getCertification(movieId);
-});
+
+/*
+  {
+    '505642': Movie(),
+    '505643': Movie(),
+    '505645': Movie(),
+    '501231': Movie(),
+  }
+*/
+
+typedef GetMovieCallback = Future<Movie>Function(String movieId);
+
+class MovieMapNotifier extends StateNotifier<Map<String,Movie>> {
+
+  final GetMovieCallback getMovie;
+
+  MovieMapNotifier({
+    required this.getMovie,
+  }): super({});
+
+
+  Future<void> loadMovie( String movieId ) async {
+    if ( state[movieId] != null ) return;
+    final movie = await getMovie( movieId );
+    if ( !mounted ) return;
+    state = { ...state, movieId: movie };
+  }
+
+}
