@@ -318,7 +318,7 @@ build/app/outputs/flutter-apk/app-release.apk
 
 <br/><br/>
 
-<a href="https://appetize.io/app/b_dqbrzni6n2opryfcgrwoifjnvq">
+<a href="https://appetize.io/embed/b_wzirg6z4a5m2tkg6elym7eevfa">
   <img src="https://img.shields.io/badge/♡_PROBAR_CINEMAPEDIA-FF69B4?style=for-the-badge&logo=googlechrome&logoColor=white"/>
 </a>
 
@@ -326,7 +326,7 @@ build/app/outputs/flutter-apk/app-release.apk
 
 **Prueba la aplicación mediante Appetize**
 
-[🌸 Abrir demostración de Cinemapedia]()
+[🌸 Abrir demostración de Cinemapedia](https://appetize.io/app/b_wzirg6z4a5m2tkg6elym7eevfa)
 
 </div>
 
