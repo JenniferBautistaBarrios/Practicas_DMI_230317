@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="https://capsule-render.vercel.app/api?type=waving&color=FFB6D5&height=180&section=header" alt="Encabezado rosa"/>
+
 <br/>
 
 <img src="https://readme-typing-svg.demolab.com?font=Playfair+Display&weight=900&size=64&duration=3500&pause=1000&color=FF69B4&center=true&vCenter=true&width=1050&height=115&lines=%E2%9C%A6+CINEMAPEDIA+%E2%9C%A6" alt="Cinemapedia rosa"/>
@@ -359,6 +361,8 @@ build/app/outputs/flutter-apk/app-release.apk
 
 <img src="https://img.shields.io/badge/MADE_WITH-LOVE-FF69B4?style=for-the-badge"/>
 <img src="https://img.shields.io/badge/FLUTTER-APP-DB4C91?style=for-the-badge"/>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=FFB6D5&height=160&section=footer" alt="Pie rosa"/>
 
 </div>
 ---
