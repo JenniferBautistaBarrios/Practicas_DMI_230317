@@ -1,10 +1,10 @@
- <div align="center">
+<div align="center">
 
 <br/>
 
-<img src="https://readme-typing-svg.demolab.com?font=Montserrat&weight=900&size=64&duration=3500&pause=1000&color=FF69B4&center=true&vCenter=true&width=1050&height=115&lines=%E2%9C%A6+CINEMAPEDIA+%E2%9C%A6" alt="Cinemapedia rosa"/>
+<img src="https://readme-typing-svg.demolab.com?font=Playfair+Display&weight=900&size=64&duration=3500&pause=1000&color=FF69B4&center=true&vCenter=true&width=1050&height=115&lines=%E2%9C%A6+CINEMAPEDIA+%E2%9C%A6" alt="Cinemapedia rosa"/>
 
-<img src="https://readme-typing-svg.demolab.com?font=Poppins&weight=600&size=20&duration=3000&pause=900&color=DB4C91&center=true&vCenter=true&width=750&height=40&lines=TU+UNIVERSO+CINEMATOGR%C3%81FICO;DESCUBRE+PEL%C3%8DCULAS+Y+SERIES;HISTORIAS+QUE+MERECEN+SER+VISTAS" alt="Frases animadas de Cinemapedia"/>
+<img src="https://readme-typing-svg.demolab.com?font=Quicksand&weight=700&size=20&duration=3000&pause=900&color=DB4C91&center=true&vCenter=true&width=750&height=40&lines=TU+UNIVERSO+CINEMATOGR%C3%81FICO;DESCUBRE+PEL%C3%8DCULAS+Y+SERIES;HISTORIAS+QUE+MERECEN+SER+VISTAS" alt="Frases animadas de Cinemapedia"/>
 
 <br/>
 
@@ -314,7 +314,7 @@ build/app/outputs/flutter-apk/app-release.apk
 
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Poppins&weight=700&size=24&duration=3000&pause=1000&color=FF69B4&center=true&vCenter=true&width=650&height=45&lines=%C2%BFQU%C3%89+PEL%C3%8DCULA+VER%C3%81S+HOY%3F;TU+AVENTURA+CINEMATOGR%C3%81FICA+COMIENZA;DESCUBRE+TU+PR%C3%93XIMA+HISTORIA" alt="Animación de Cinemapedia"/>
+<img src="https://readme-typing-svg.demolab.com?font=Quicksand&weight=700&size=24&duration=3000&pause=1000&color=FF69B4&center=true&vCenter=true&width=650&height=45&lines=%C2%BFQU%C3%89+PEL%C3%8DCULA+VER%C3%81S+HOY%3F;TU+AVENTURA+CINEMATOGR%C3%81FICA+COMIENZA;DESCUBRE+TU+PR%C3%93XIMA+HISTORIA" alt="Animación de Cinemapedia"/>
 
 <br/><br/>
 
@@ -345,7 +345,7 @@ build/app/outputs/flutter-apk/app-release.apk
 
 <br/>
 
-<img src="https://readme-typing-svg.demolab.com?font=Montserrat&weight=900&size=30&duration=3000&pause=1000&color=FF69B4&center=true&vCenter=true&width=700&height=55&lines=%E2%9C%A6+GRACIAS+POR+VISITAR+CINEMAPEDIA+%E2%9C%A6" alt="Gracias por visitar Cinemapedia"/>
+<img src="https://readme-typing-svg.demolab.com?font=Playfair+Display&weight=900&size=30&duration=3000&pause=1000&color=FF69B4&center=true&vCenter=true&width=700&height=55&lines=%E2%9C%A6+GRACIAS+POR+VISITAR+CINEMAPEDIA+%E2%9C%A6" alt="Gracias por visitar Cinemapedia"/>
 
 <br/>
 
@@ -362,4 +362,3 @@ build/app/outputs/flutter-apk/app-release.apk
 
 </div>
 ---
-
