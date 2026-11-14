@@ -2,7 +2,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cinemapedia/config/i18n/app_strings.dart';
-import 'package:cinemapedia/presentation/widgets/shared/cinemapedia_logo.dart';
 
 
 class FullScreenLoader extends StatelessWidget {
@@ -27,7 +26,19 @@ class FullScreenLoader extends StatelessWidget {
           Pulse(
             infinite: true,
             duration: const Duration(milliseconds: 1400),
-            child: const CinemapediaLogo(size: 72),
+            child: Container(
+              width: 104,
+              height: 104,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.hourglass_empty_rounded,
+                size: 58,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
           ),
           const SizedBox(height: 20),
           Text(t.pleaseWait),

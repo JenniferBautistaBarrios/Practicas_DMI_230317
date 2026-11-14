@@ -15,7 +15,10 @@ class CustomAppbar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final titleStyle = Theme.of(context).textTheme.titleMedium;
+    final titleStyle = Theme.of(context).textTheme.titleMedium?.copyWith(
+      fontWeight: FontWeight.w800,
+      letterSpacing: 0.4,
+    );
 
     return SafeArea(
       bottom: false,
@@ -31,7 +34,7 @@ class CustomAppbar extends ConsumerWidget {
       
               const Spacer(),
       
-              IconButton(onPressed: () {
+              IconButton.filledTonal(onPressed: () {
 
                 final searchedMovies = ref.read( searchedMoviesProvider );
                 final searchQuery = ref.read(searchQueryProvider);
@@ -53,7 +56,7 @@ class CustomAppbar extends ConsumerWidget {
                 });
 
               }, 
-              icon: const Icon(Icons.search)
+              icon: const Icon(Icons.search_rounded)
               )
             ],
           ),

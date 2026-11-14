@@ -1,7 +1,10 @@
+import 'dart:async';
+
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
-/// Network image with a visible progress indicator while bytes are downloading.
-class LoadingNetworkImage extends StatelessWidget {
+/// Displays a pink hourglass for at least one second while an image loads.
+class LoadingNetworkImage extends StatefulWidget {
   const LoadingNetworkImage({
     super.key,
     required this.url,
@@ -16,30 +19,61 @@ class LoadingNetworkImage extends StatelessWidget {
   final double? height;
 
   @override
+  State<LoadingNetworkImage> createState() => _LoadingNetworkImageState();
+}
+
+class _LoadingNetworkImageState extends State<LoadingNetworkImage> {
+  bool _minimumLoadingTimePassed = false;
+  Timer? _loadingTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadingTimer = Timer(const Duration(seconds: 1), () {
+      if (mounted) setState(() => _minimumLoadingTimePassed = true);
+    });
+  }
+
+  @override
+  void dispose() {
+    _loadingTimer?.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
+
     return Image.network(
-      url,
-      fit: fit,
-      width: width,
-      height: height,
+      widget.url,
+      fit: widget.fit,
+      width: widget.width,
+      height: widget.height,
       loadingBuilder: (context, child, progress) {
-        if (progress == null) return child;
-        final total = progress.expectedTotalBytes;
+        if (progress == null && _minimumLoadingTimePassed) return child;
+
         return ColoredBox(
-          color: colors.surfaceContainerHighest,
+          color: colors.primary.withValues(alpha: 0.08),
           child: Center(
-            child: CircularProgressIndicator(
-              color: colors.primary,
-              value: total == null ? null : progress.cumulativeBytesLoaded / total,
+            child: Pulse(
+              infinite: true,
+              duration: const Duration(milliseconds: 1100),
+              child: Icon(
+                Icons.hourglass_empty_rounded,
+                color: colors.primary,
+                size: 38,
+              ),
             ),
           ),
         );
       },
       errorBuilder: (context, error, stackTrace) => ColoredBox(
-        color: colors.surfaceContainerHighest,
+        color: colors.primary.withValues(alpha: 0.08),
         child: Center(
-          child: Icon(Icons.broken_image_outlined, color: colors.onSurfaceVariant),
+          child: Icon(
+            Icons.broken_image_outlined,
+            color: colors.primary.withValues(alpha: 0.7),
+          ),
         ),
       ),
     );

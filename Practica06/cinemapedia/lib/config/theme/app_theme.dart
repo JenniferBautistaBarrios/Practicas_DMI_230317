@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static const _background = Color(0xFFFFF0F6);
+  static const _background = Color(0xFFFFF5F9);
   static const _surface = Color(0xFFFFFFFF);
-  static const _pink = Color(0xFFD63384);
+  static const _pink = Color(0xFFD81B60);
   static const _lightPink = Color(0xFFF48FB1);
 
   ThemeData getTheme() {
@@ -28,6 +28,7 @@ class AppTheme {
       scaffoldBackgroundColor: _background,
       appBarTheme: const AppBarTheme(
         backgroundColor: _background,
+        foregroundColor: const Color(0xFF3D1C2E),
         surfaceTintColor: Colors.transparent,
       ),
       drawerTheme: const DrawerThemeData(
@@ -39,7 +40,7 @@ class AppTheme {
         selectedItemColor: _pink,
         unselectedItemColor: Color(0xFF9B7E8C),
         type: BottomNavigationBarType.fixed,
-        elevation: 8,
+        elevation: 0,
       ),
       cardTheme: CardThemeData(
         color: _surface,

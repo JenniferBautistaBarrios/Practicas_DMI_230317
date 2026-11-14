@@ -37,25 +37,28 @@ class CustomBottomNavigation extends StatelessWidget {
     final colors = Theme.of(context).colorScheme;
     final t = AppStrings.of(context);
 
-    return BottomNavigationBar(
-      currentIndex: currentIndex,
-      onTap: (value) => onItemTapped(context, value),
-      elevation: 0,
-      selectedItemColor: colors.primary,
-      items: [
-        BottomNavigationBarItem(
-          icon: const Icon( Icons.home_max ),
-          label: t.home
+    return SafeArea(
+      top: false,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(22),
+          child: NavigationBar(
+            selectedIndex: currentIndex,
+            onDestinationSelected: (value) => onItemTapped(context, value),
+            height: 68,
+            elevation: 0,
+            backgroundColor: colors.surfaceContainer,
+            indicatorColor: colors.primary.withValues(alpha: 0.16),
+            labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+            destinations: [
+              NavigationDestination(icon: const Icon(Icons.home_outlined), selectedIcon: const Icon(Icons.home_rounded), label: t.home),
+              NavigationDestination(icon: const Icon(Icons.local_fire_department_outlined), selectedIcon: const Icon(Icons.local_fire_department_rounded), label: t.popular),
+              NavigationDestination(icon: const Icon(Icons.favorite_border_rounded), selectedIcon: const Icon(Icons.favorite_rounded), label: t.favorites),
+            ],
+          ),
         ),
-        BottomNavigationBarItem(
-          icon: const Icon( Icons.thumbs_up_down_outlined ),
-          label: t.popular
-        ),
-        BottomNavigationBarItem(
-          icon: const Icon( Icons.favorite_outline ),
-          label: t.favorites
-        ),
-      ]
+      ),
     );
   }
 }
