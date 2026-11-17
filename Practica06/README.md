@@ -85,7 +85,7 @@ El proyecto también contempla recursos gráficos personalizados y elementos de 
 
 ## 🌸 01. Sobre el proyecto
 
-**Cinemapedia** es una aplicación móvil desarrollada con Flutter que permite explorar películas, descubrir series y consultar información cinematográfica desde una interfaz visual e intuitiva.
+**Cinemapedia** es una aplicación móvil desarrollada con Flutter que permite explorar películas, descubrir series y consultar información cinemapedia desde una interfaz visual e intuitiva.
 
 Su propuesta combina funcionalidades de consulta, navegación y organización de contenido con una identidad gráfica inspirada en tonos rosas y una experiencia enfocada en los amantes del cine.
 
@@ -351,7 +351,7 @@ build/app/outputs/flutter-apk/app-release.apk
 
 ### 🎬 Cinemapedia
 
-Explora películas, descubre nuevas historias y disfruta de una experiencia cinematográfica desde una interfaz intuitiva y amigable.
+Explora películas, descubre nuevas historias y disfruta de una experiencia cinemapedia desde una interfaz intuitiva y amigable.
 
 <br/>
 
