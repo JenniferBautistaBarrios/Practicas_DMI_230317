@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
-/// Displays a pink hourglass for at least one second while an image loads.
+/// Displays a pink hourglass for exactly one second while an image loads.
 class LoadingNetworkImage extends StatefulWidget {
   const LoadingNetworkImage({
     super.key,
@@ -50,7 +50,9 @@ class _LoadingNetworkImageState extends State<LoadingNetworkImage> {
       width: widget.width,
       height: widget.height,
       loadingBuilder: (context, child, progress) {
-        if (progress == null && _minimumLoadingTimePassed) return child;
+        // El reloj aparece solo 1 segundo; después se muestra la imagen
+        // aunque todavía se esté terminando de cargar.
+        if (_minimumLoadingTimePassed) return child;
 
         return ColoredBox(
           color: colors.primary.withValues(alpha: 0.08),

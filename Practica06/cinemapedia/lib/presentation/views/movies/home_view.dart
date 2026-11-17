@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,10 +18,26 @@ class HomeView extends ConsumerStatefulWidget {
 
 class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClientMixin {
 
+  //* El reloj de carga de la pantalla completa se muestra solo 1 segundo
+  Timer? _loaderTimer;
+  bool _loaderExpired = false;
+
   @override
   void initState() {
     super.initState();
     _loadFirstPages();
+  }
+
+  @override
+  void dispose() {
+    _loaderTimer?.cancel();
+    super.dispose();
+  }
+
+  void _startLoaderTimer() {
+    _loaderTimer ??= Timer(const Duration(seconds: 1), () {
+      if (mounted) setState(() => _loaderExpired = true);
+    });
   }
 
   /// Pide la primera página de las listas del catálogo que se está viendo
@@ -69,7 +87,16 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
     final isSeries = ref.watch( catalogTypeProvider ) == CatalogType.series;
 
     final initialLoading = ref.watch(initialLoadingProvider);
-    if ( initialLoading ) return const FullScreenLoader();
+    if ( initialLoading && !_loaderExpired ) {
+      _startLoaderTimer();
+      return const FullScreenLoader();
+    }
+    if ( !initialLoading ) {
+      // Terminó de cargar: el próximo reloj vuelve a durar 1 segundo
+      _loaderTimer?.cancel();
+      _loaderTimer = null;
+      _loaderExpired = false;
+    }
 
     final catalogProviders = isSeries
       ? [ onTheAirSeriesProvider, airingTodaySeriesProvider, popularSeriesProvider, topRatedSeriesProvider ]
@@ -120,7 +147,10 @@ class HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClien
               
                     // const CustomAppbar(),
               
-                    MoviesSlideshow(key: ValueKey('slideshow-$isSeries'), movies: slideShowMovies ),
+                    if ( slideShowMovies.isEmpty )
+                      const SizedBox( height: 210 )
+                    else
+                      MoviesSlideshow(key: ValueKey('slideshow-$isSeries'), movies: slideShowMovies ),
               
                     MovieHorizontalListview(
                       key: ValueKey('first-$isSeries'),

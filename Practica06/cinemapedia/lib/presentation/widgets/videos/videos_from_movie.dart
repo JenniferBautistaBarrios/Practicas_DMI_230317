@@ -49,8 +49,21 @@ class _VideosList extends StatelessWidget {
       children: [
         // ignore: prefer_const_constructors
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Text(AppStrings.of(context).videos, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+          padding: const EdgeInsets.fromLTRB(20, 8, 20, 4),
+          child: Row(
+            children: [
+              Container(
+                width: 4,
+                height: 22,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primary,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Text(AppStrings.of(context).videos, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            ],
+          ),
         ),
         
         //* Aunque tengo varios videos, sólo quiero mostrar el primero
@@ -105,14 +118,18 @@ class _YouTubeVideoPlayerState extends State<_YouTubeVideoPlayer> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.fromLTRB(20, 4, 20, 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.name),
-          YoutubePlayer(controller: _controller)
+          Text(widget.name, style: const TextStyle(fontWeight: FontWeight.w600)),
+          const SizedBox(height: 8),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: YoutubePlayer(controller: _controller),
+          ),
         ],
       )
     );
   }
-}
+}

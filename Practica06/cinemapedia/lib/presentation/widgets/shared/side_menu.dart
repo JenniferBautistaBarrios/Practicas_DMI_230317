@@ -26,94 +26,93 @@ class SideMenu extends ConsumerWidget {
     final currentCatalog = ref.watch(catalogTypeProvider);
 
     return Drawer(
-      backgroundColor: colors.surfaceContainer,
+      backgroundColor: colors.surface,
       surfaceTintColor: Colors.transparent,
-      child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadiusDirectional.only(
+          topEnd: Radius.circular(28),
+          bottomEnd: Radius.circular(28),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
 
-            //* Cabecera con el logo
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 24, 20, 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      const CinemapediaLogo(size: 44),
-                      const SizedBox(width: 12),
-                      Text(
-                        'Cinemapedia',
-                        style: textStyles.titleLarge?.copyWith(
-                          color: colors.primary,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
+          //* Cabecera con degradado y el logo
+          _Header(colors: colors, textStyles: textStyles),
+
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.fromLTRB(16, 18, 16, 24),
+              children: [
+
+                //* Apartado de configuración (tarjeta desplegable)
+                Container(
+                  decoration: BoxDecoration(
+                    color: colors.surfaceContainer,
+                    borderRadius: BorderRadius.circular(22),
+                    border: Border.all(color: colors.outline.withValues(alpha: 0.35)),
                   ),
-                  const SizedBox(height: 8),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 56),
-                    child: Text(
-                      'Matrícula: 230317',
-                      style: textStyles.labelSmall?.copyWith(
-                        color: colors.onSurfaceVariant,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            const Divider(height: 32),
-
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: [
-
-                  //* Apartado de configuración
-                  Theme(
+                  child: Theme(
                     // Quita las líneas que Flutter dibuja arriba y abajo del apartado
                     data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
                     child: ExpansionTile(
                       initiallyExpanded: true,
                       shape: const Border(),
                       collapsedShape: const Border(),
-                      tilePadding: const EdgeInsets.symmetric(horizontal: 20),
-                      childrenPadding: EdgeInsets.zero,
+                      tilePadding: const EdgeInsets.symmetric(horizontal: 14),
+                      childrenPadding: const EdgeInsets.fromLTRB(14, 0, 14, 16),
+                      expandedCrossAxisAlignment: CrossAxisAlignment.start,
                       iconColor: colors.primary,
                       collapsedIconColor: colors.onSurfaceVariant,
-                      leading: Icon(Icons.settings_outlined, color: colors.primary),
-                      title: Text(t.settings, style: textStyles.titleMedium),
+                      leading: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: colors.primary.withValues(alpha: 0.12),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Icon(Icons.settings_rounded, color: colors.primary, size: 22),
+                      ),
+                      title: Text(
+                        t.settings,
+                        style: textStyles.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+                      ),
                       children: [
 
                         //* Contenido: películas o series
                         _SectionTitle(
-                          icon: Icons.video_library_outlined,
+                          icon: Icons.video_library_rounded,
                           title: t.content,
                           subtitle: t.chooseContent,
                         ),
 
-                        _CatalogTile(
-                          icon: Icons.movie_outlined,
-                          label: t.movies,
-                          selected: currentCatalog == CatalogType.movies,
-                          onTap: () => _changeCatalog(context, ref, CatalogType.movies),
-                        ),
-                        _CatalogTile(
-                          icon: Icons.tv_outlined,
-                          label: t.series,
-                          selected: currentCatalog == CatalogType.series,
-                          onTap: () => _changeCatalog(context, ref, CatalogType.series),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: _CatalogTile(
+                                icon: Icons.movie_creation_outlined,
+                                label: t.movies,
+                                selected: currentCatalog == CatalogType.movies,
+                                onTap: () => _changeCatalog(context, ref, CatalogType.movies),
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: _CatalogTile(
+                                icon: Icons.live_tv_rounded,
+                                label: t.series,
+                                selected: currentCatalog == CatalogType.series,
+                                onTap: () => _changeCatalog(context, ref, CatalogType.series),
+                              ),
+                            ),
+                          ],
                         ),
 
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 20),
 
                         //* Idioma
                         _SectionTitle(
-                          icon: Icons.language_rounded,
+                          icon: Icons.translate_rounded,
                           title: t.language,
                           subtitle: t.chooseLanguage,
                         ),
@@ -127,16 +126,14 @@ class SideMenu extends ConsumerWidget {
                               Navigator.of(context).pop();   // cierra el menú
                             },
                           ),
-
-                        const SizedBox(height: 12),
                       ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -148,6 +145,76 @@ class SideMenu extends ConsumerWidget {
     ref.read(searchQueryProvider.notifier).state = '';
 
     Navigator.of(context).pop(); // cierra el menú
+  }
+}
+
+
+class _Header extends StatelessWidget {
+
+  final ColorScheme colors;
+  final TextTheme textStyles;
+
+  const _Header({required this.colors, required this.textStyles});
+
+  @override
+  Widget build(BuildContext context) {
+
+    final topPadding = MediaQuery.of(context).padding.top;
+
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.fromLTRB(20, topPadding + 24, 20, 22),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [colors.primary, colors.tertiary, colors.secondary],
+        ),
+        borderRadius: const BorderRadiusDirectional.only(
+          topEnd: Radius.circular(28),
+          bottomEnd: Radius.circular(28),
+        ),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(6),
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+            ),
+            child: const CinemapediaLogo(size: 46),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Cinemapedia',
+                  style: textStyles.titleLarge?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.22),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    'Matrícula: 230317',
+                    style: textStyles.labelSmall?.copyWith(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -171,21 +238,30 @@ class _SectionTitle extends StatelessWidget {
     final textStyles = Theme.of(context).textTheme;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 4, 20, 8),
-      child: Column(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Icon(icon, color: colors.primary, size: 20),
-              const SizedBox(width: 10),
-              Text(title, style: textStyles.titleSmall),
-            ],
-          ),
-          const SizedBox(height: 2),
-          Text(
-            subtitle,
-            style: textStyles.bodySmall?.copyWith(color: colors.onSurfaceVariant),
+          Icon(icon, color: colors.primary, size: 20),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: textStyles.titleSmall?.copyWith(
+                    color: colors.primary,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  subtitle,
+                  style: textStyles.bodySmall?.copyWith(color: colors.onSurfaceVariant),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -212,16 +288,50 @@ class _CatalogTile extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final colors = Theme.of(context).colorScheme;
+    final foreground = selected ? colors.onPrimary : colors.onSurface;
 
-    return ListTile(
-      selected: selected,
-      selectedColor: colors.primary,
-      selectedTileColor: colors.primary.withValues(alpha: 0.14),
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-      leading: Icon(icon, size: 30),
-      title: Text(label),
-      trailing: selected ? const Icon(Icons.check_rounded) : null,
-      onTap: onTap,
+    return Material(
+      color: selected ? colors.primary : colors.primary.withValues(alpha: 0.06),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18),
+        side: BorderSide(
+          color: selected ? colors.primary : colors.outline.withValues(alpha: 0.5),
+        ),
+      ),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(18),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, size: 30, color: foreground),
+              const SizedBox(height: 8),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: Text(
+                      label,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: foreground,
+                        fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  if (selected) ...[
+                    const SizedBox(width: 4),
+                    Icon(Icons.check_circle_rounded, size: 16, color: foreground),
+                  ],
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -244,15 +354,56 @@ class _LanguageTile extends StatelessWidget {
 
     final colors = Theme.of(context).colorScheme;
 
-    return ListTile(
-      selected: selected,
-      selectedColor: colors.primary,
-      selectedTileColor: Theme.of(context).colorScheme.primary.withValues(alpha: 0.14),
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-      leading: FlagIcon(country: language.country, width: 42),
-      title: Text(language.label),
-      trailing: selected ? const Icon(Icons.check_rounded) : null,
-      onTap: onTap,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Material(
+        color: selected ? colors.primary.withValues(alpha: 0.12) : Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: BorderSide(
+            color: selected ? colors.primary : colors.outline.withValues(alpha: 0.45),
+            width: selected ? 1.5 : 1,
+          ),
+        ),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            child: Row(
+              children: [
+                FlagIcon(country: language.country, width: 38),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    language.label,
+                    style: TextStyle(
+                      color: selected ? colors.primary : colors.onSurface,
+                      fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+                    ),
+                  ),
+                ),
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  width: 22,
+                  height: 22,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: selected ? colors.primary : Colors.transparent,
+                    border: Border.all(
+                      color: selected ? colors.primary : colors.outline,
+                      width: 1.5,
+                    ),
+                  ),
+                  child: selected
+                      ? Icon(Icons.check_rounded, size: 15, color: colors.onPrimary)
+                      : null,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

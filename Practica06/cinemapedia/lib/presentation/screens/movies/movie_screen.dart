@@ -100,11 +100,15 @@ class _MovieDetails extends StatelessWidget {
       children: [
         
         //* Titulo, OverView y Rating
-        _TitleAndOverview(movie: movie, size: size, textStyles: textStyles),
+        FadeInUp(
+          duration: const Duration(milliseconds: 450),
+          child: _TitleAndOverview(movie: movie, size: size, textStyles: textStyles),
+        ),
 
         //* Generos de la película
         _Genres(movie: movie),
 
+        const SizedBox(height: 10),
 
         //* Actores de la película
         ActorsByMovie(movieId: movie.id.toString() ),
@@ -129,20 +133,26 @@ class _Genres extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final colors = Theme.of(context).colorScheme;
+
     return Padding(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
       child: SizedBox(
         width: double.infinity,
         child: Wrap(
-          crossAxisAlignment: WrapCrossAlignment.center,
-          alignment: WrapAlignment.center,
+          spacing: 8,
+          runSpacing: 8,
           children: [
-            ...movie.genreIds.map((gender) => Container(
-              margin: const EdgeInsets.only( right: 10),
-              child: Chip(
-                label: Text( gender ),
-                shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20)),
+            ...movie.genreIds.map((gender) => Chip(
+              label: Text(
+                gender,
+                style: TextStyle(color: colors.primary, fontWeight: FontWeight.w600),
               ),
+              backgroundColor: colors.primary.withValues(alpha: 0.10),
+              side: BorderSide(color: colors.primary.withValues(alpha: 0.25)),
+              visualDensity: VisualDensity.compact,
+              shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20)),
             ))
           ],
         ),
@@ -174,57 +184,157 @@ class _TitleAndOverview extends ConsumerWidget {
     final certification = ref.watch( movieCertificationProvider(movie.id) );
 
     return Padding(
-      padding: const EdgeInsets.symmetric( horizontal: 8, vertical: 15),
-      child: Row(
+      padding: const EdgeInsets.fromLTRB(20, 4, 20, 0),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          
-          // Imagen
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: LoadingNetworkImage(
-              url: movie.posterPath,
-              width: size.width * 0.3,
-            ),
-          ),
 
-          const SizedBox( width: 10 ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
 
-          // Descripción
-          SizedBox(
-            width: (size.width - 40) * 0.7,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text( movie.title, style: textStyles.titleLarge ),
-                Text( movie.overview ),
-
-                const SizedBox(height: 10 ),
-                
-                MovieRating(voteAverage: movie.voteAverage ),
-
-                Row(
-                  children: [
-                    Text(t.releaseDate, style: const TextStyle(fontWeight: FontWeight.bold)),
-                    const SizedBox(width: 5 ),
-                    Flexible(child: Text(HumanFormats.shortDate(movie.releaseDate, languageCode)))
+              // Imagen
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(22),
+                  boxShadow: [
+                    BoxShadow(
+                      color: colors.primary.withValues(alpha: 0.28),
+                      blurRadius: 18,
+                      offset: const Offset(0, 8),
+                    ),
                   ],
                 ),
-
-                const SizedBox(height: 6 ),
-
-                //* Clasificación de edad del país elegido
-                certification.when(
-                  loading: () => const SizedBox(height: 24),
-                  error: (_, __) => _AgeRatingBadge(label: t.ageRating, rating: AgeRatings.label(country, ''), country: country, color: colors.primary),
-                  data: (value) => _AgeRatingBadge(label: t.ageRating, rating: AgeRatings.label(country, value), country: country, color: colors.primary),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(22),
+                  child: LoadingNetworkImage(
+                    url: movie.posterPath,
+                    width: size.width * 0.34,
+                  ),
                 ),
-              ],
+              ),
+
+              const SizedBox( width: 16 ),
+
+              // Título, rating, fecha y clasificación
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      movie.title,
+                      style: textStyles.titleLarge?.copyWith(
+                        fontWeight: FontWeight.w800,
+                        height: 1.15,
+                      ),
+                    ),
+
+                    const SizedBox(height: 12 ),
+
+                    //* Rating
+                    _InfoPill(
+                      color: Colors.amber.shade800,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.star_rounded, size: 18, color: Colors.amber.shade800),
+                          const SizedBox(width: 4),
+                          Text(
+                            HumanFormats.number(movie.voteAverage, 1),
+                            style: TextStyle(
+                              color: Colors.amber.shade800,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    const SizedBox(height: 8 ),
+
+                    //* Fecha de estreno
+                    _InfoPill(
+                      color: colors.primary,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.calendar_month_rounded, size: 16, color: colors.primary),
+                          const SizedBox(width: 6),
+                          Flexible(
+                            child: Text.rich(
+                              TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: '${t.releaseDate} ',
+                                    style: const TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  TextSpan(text: HumanFormats.shortDate(movie.releaseDate, languageCode)),
+                                ],
+                              ),
+                              style: TextStyle(color: colors.onSurface, fontSize: 13),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    const SizedBox(height: 10 ),
+
+                    //* Clasificación de edad del país elegido
+                    certification.when(
+                      loading: () => const SizedBox(height: 24),
+                      error: (_, __) => _AgeRatingBadge(label: t.ageRating, rating: AgeRatings.label(country, ''), country: country, color: colors.primary),
+                      data: (value) => _AgeRatingBadge(label: t.ageRating, rating: AgeRatings.label(country, value), country: country, color: colors.primary),
+                    ),
+                  ],
+                ),
+              ),
+
+            ],
+          ),
+
+          //* Descripción en tarjeta
+          if ( movie.overview.isNotEmpty ) ...[
+            const SizedBox(height: 20),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: colors.surfaceContainer,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: const Color(0xFFF3D8E3)),
+              ),
+              child: Text(
+                movie.overview,
+                style: textStyles.bodyMedium?.copyWith(height: 1.5),
+              ),
             ),
-          )
+          ],
 
         ],
       ),
+    );
+  }
+}
+
+
+/// Cápsula con fondo suave para datos cortos (rating, fecha).
+class _InfoPill extends StatelessWidget {
+
+  final Color color;
+  final Widget child;
+
+  const _InfoPill({required this.color, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.10),
+        borderRadius: BorderRadius.circular(14),
+      ),
+      child: child,
     );
   }
 }
@@ -249,17 +359,18 @@ class _AgeRatingBadge extends StatelessWidget {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       spacing: 8,
+      runSpacing: 4,
       children: [
         Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
         Container(
-          padding: const EdgeInsets.symmetric( horizontal: 8, vertical: 2 ),
+          padding: const EdgeInsets.symmetric( horizontal: 10, vertical: 3 ),
           decoration: BoxDecoration(
-            border: Border.all( color: color ),
-            borderRadius: BorderRadius.circular(6),
+            color: color,
+            borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
             rating,
-            style: TextStyle( color: color, fontWeight: FontWeight.bold ),
+            style: const TextStyle( color: Colors.white, fontWeight: FontWeight.bold ),
           ),
         ),
         Text('($country)', style: TextStyle( color: Theme.of(context).colorScheme.onSurfaceVariant )),
@@ -274,6 +385,56 @@ final isFavoriteProvider = FutureProvider.family.autoDispose((ref, int movieId) 
   return localStorageRepository.isMovieFavorite(movieId);
 });
 
+
+/// Botón circular blanco que flota sobre la imagen del encabezado.
+class _CircleButton extends StatelessWidget {
+
+  final Widget child;
+
+  const _CircleButton({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(6),
+      child: Material(
+        color: Colors.white.withValues(alpha: 0.92),
+        elevation: 2,
+        shadowColor: Colors.black38,
+        shape: const CircleBorder(),
+        child: SizedBox.square(
+          dimension: 40,
+          child: Center(child: child),
+        ),
+      ),
+    );
+  }
+}
+
+class _CircleIconButton extends StatelessWidget {
+
+  final IconData icon;
+  final Color? color;
+  final VoidCallback onPressed;
+
+  const _CircleIconButton({
+    required this.icon,
+    required this.onPressed,
+    this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return _CircleButton(
+      child: IconButton(
+        onPressed: onPressed,
+        padding: EdgeInsets.zero,
+        constraints: const BoxConstraints.tightFor(width: 40, height: 40),
+        icon: Icon(icon, size: 22, color: color ?? const Color(0xFF3D1C2E)),
+      ),
+    );
+  }
+}
 
 
 class _CustomSliverAppBar extends ConsumerWidget {
@@ -290,22 +451,29 @@ class _CustomSliverAppBar extends ConsumerWidget {
     final isFavoriteFuture = ref.watch(isFavoriteProvider(movie.id));
     final size = MediaQuery.of(context).size;
     final scaffoldBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
+    final primary = Theme.of(context).colorScheme.primary;
 
     return SliverAppBar(
       pinned: true,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      expandedHeight: size.height * 0.55,
+      backgroundColor: scaffoldBackgroundColor,
+      expandedHeight: size.height * 0.5,
       foregroundColor: Colors.white,
+      leadingWidth: 56,
+      leading: Navigator.of(context).canPop()
+          ? _CircleIconButton(
+              icon: Icons.arrow_back_rounded,
+              onPressed: () => Navigator.of(context).maybePop(),
+            )
+          : null,
       actions: [
         isFavoriteFuture.when(
-          loading: () => const Padding(
-            padding: EdgeInsets.all(16),
+          loading: () => const _CircleButton(
             child: SizedBox.square(
-              dimension: 20,
+              dimension: 18,
               child: CircularProgressIndicator(strokeWidth: 2),
             ),
           ),
-          data: (isFavorite) => IconButton(
+          data: (isFavorite) => _CircleIconButton(
             onPressed: () async {
               try {
                 await ref.read(favoriteMoviesProvider.notifier).toggleFavorite(
@@ -323,27 +491,30 @@ class _CustomSliverAppBar extends ConsumerWidget {
                 );
               }
             },
-            icon: isFavorite
-                ? Icon(Icons.favorite_rounded, color: Theme.of(context).colorScheme.primary)
-                : const Icon(Icons.favorite_border),
+            icon: isFavorite ? Icons.favorite_rounded : Icons.favorite_border_rounded,
+            color: isFavorite ? primary : null,
           ),
-          error: (_, __) => IconButton(
+          error: (_, __) => _CircleIconButton(
             onPressed: () => ref.invalidate(isFavoriteProvider(movie.id)),
-            icon: const Icon(Icons.favorite_border),
+            icon: Icons.favorite_border_rounded,
           ),
         ),
+        const SizedBox(width: 4),
       ],
-      flexibleSpace: FlexibleSpaceBar(
-        titlePadding: const EdgeInsets.only(bottom: 0),
-        title:  _CustomGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: const [0.7, 1.0],
-          colors: [
-            Colors.transparent,
-            scaffoldBackgroundColor
-          ]
+
+      //* Borde superior redondeado que "sube" sobre la imagen
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(24),
+        child: Container(
+          height: 24,
+          decoration: BoxDecoration(
+            color: scaffoldBackgroundColor,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+          ),
         ),
+      ),
+
+      flexibleSpace: FlexibleSpaceBar(
         background: Stack(
           children: [
 
@@ -356,28 +527,27 @@ class _CustomSliverAppBar extends ConsumerWidget {
               ),
             ),
 
-            //* Favorite Gradient Background
+            //* Sombra superior para que se vean los botones
             const _CustomGradient(
-               begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                stops: [0.0, 0.2],
-                colors: [
-                  Colors.black54,
-                  Colors.transparent,
-                ]
-            ),
-
-
-            //* Back arrow background
-            const _CustomGradient(
-              begin: Alignment.topLeft,
-              stops: [0.0, 0.3],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              stops: [0.0, 0.25],
               colors: [
-                Colors.black87,
+                Colors.black54,
                 Colors.transparent,
               ]
             ),
-                
+
+            //* Sombra suave abajo para fundir con el fondo
+            _CustomGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              stops: const [0.75, 1.0],
+              colors: [
+                Colors.transparent,
+                scaffoldBackgroundColor.withValues(alpha: 0.6),
+              ]
+            ),
 
           ],
         ),
@@ -419,5 +589,3 @@ class _CustomGradient extends StatelessWidget {
     );
   }
 }
-
-

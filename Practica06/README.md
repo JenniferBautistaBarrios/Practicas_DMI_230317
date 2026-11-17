@@ -38,7 +38,7 @@
 
 <br/><br/>
 
-<img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/cinemapedia/assets/icon/cinemapedia_logo.png" width="220" alt="Logo de Cinemapedia con palomitas"/>
+
 
 <div align="center">
 <a href="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/Arquitectura/Arquitectura_de_Cinemapedia.html"><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/Arquitectura/image1.png" alt="Diagrama de arquitectura de Cinemapedia" width="1000"></a>
@@ -56,6 +56,20 @@
 <div align="center">
 
 # 🎀 BIENVENIDO A CINEMAPEDIA
+### LOGO DE CINEMAPEDIA
+
+<div align="center">
+
+<img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/cinemapedia/assets/icon/cinemapedia_logo.png" width="220" alt="Logo de Cinemapedia con palomitas"/>
+
+<br/>
+
+
+
+</div>
+
+El proyecto también contempla recursos gráficos personalizados y elementos de dibujo mediante `CustomPainter`.
+
 
 *Donde cada historia tiene un lugar especial.*
 
@@ -97,48 +111,7 @@ El objetivo es ofrecer una forma sencilla y agradable de descubrir contenido aud
 </div>
 
 ---
-
-## 🎞️ 03. Galería de la aplicación
-
-<div align="center">
-
-### UNA MIRADA A CINEMAPEDIA
-
-*Interfaz, navegación y contenido cinematográfico.*
-
-</div>
-
-<table>
-  <tr>
-    <td align="center"><strong>Inicio</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/cinemapedia/assets/images/Inicio.jpeg" alt="Pantalla de inicio" width="400"></td>
-    <td align="center"><strong>Películas populares</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/cinemapedia/assets/images/peliculas%20populares.jpeg" alt="Catálogo de películas" width="400"></td>
-  </tr>
-  <tr>
-    <td align="center"><strong>Favoritos</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/cinemapedia/assets/images/favorito.jpeg" alt="Lista de favoritos" width="400"></td>
-    <td align="center"><strong>Detalle y elenco</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/cinemapedia/assets/images/personajes.jpeg" alt="Detalle de película y elenco" width="400"></td>
-  </tr>
-  <tr>
-    <td align="center"><strong>Menú e idiomas</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/cinemapedia/assets/images/Menu.jpeg" alt="Menú de configuración e idiomas" width="400"></td>
-    <td align="center"><strong>Clasificación</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/cinemapedia/assets/images/Clasificacion.jpeg" alt="Clasificación por edad" width="400"></td>
-  </tr>
-  <tr>
-    <td align="center"><strong>English</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/cinemapedia/assets/images/ingles.jpeg" alt="Aplicación en inglés" width="400"></td>
-    <td align="center"><strong>Español</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/cinemapedia/assets/images/Espa%C3%B1ol.jpeg" alt="Aplicación en español" width="400"></td>
-  </tr>
-  <tr>
-    <td align="center"><strong>Árabe</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/cinemapedia/assets/images/Arabe.jpeg" alt="Aplicación en árabe" width="400"></td>
-    <td align="center"><strong>Chino</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/cinemapedia/assets/images/Chino.jpeg" alt="Aplicación en chino" width="400"></td>
-  </tr>
-  <tr>
-    <td align="center"><strong>Logo y carga</strong><br><img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/cinemapedia/assets/images/logo.jpeg" alt="Pantalla de carga de Cinemapedia" width="400"></td>
-    <td></td>
-  </tr>
-</table>
-
-</div>
----
-
-## 🎨 04. Identidad visual
+## 🎨 03. Identidad visual
 
 Cinemapedia utiliza una identidad gráfica inspirada en tonos rosas, combinando colores suaves y acentos intensos para crear una apariencia moderna y agradable.
 
@@ -155,19 +128,73 @@ Cinemapedia utiliza una identidad gráfica inspirada en tonos rosas, combinando 
 
 </div>
 
-### Icono de la aplicación
+
+## 🎞️ 04. Galería de la aplicación
 
 <div align="center">
 
-<img src="https://jenniferbautistabarrios.github.io/Practicas_DMI_230317/Practica06/cinemapedia/assets/icon/cinemapedia_logo.png" width="220" alt="Logo de Cinemapedia con palomitas"/>
+### UNA MIRADA A CINEMAPEDIA
+
+*Interfaz, navegación y contenido cinematográfico.*
 
 <br/>
 
-**LOGO DE CINEMAPEDIA**
+### 🎬 PELÍCULAS
+
+<table>
+  <tr>
+    <td align="center" width="33%"><strong>Inicio y navegación</strong><br><br><img src="cinemapedia/assets/images/peliculas/cap.Inicio%20y%20navegaci%C3%B3n%20peliculas.jpeg" alt="Pantalla de inicio de películas con el carrusel y la barra de navegación" width="250"></td>
+    <td align="center" width="33%"><strong>Populares</strong><br><br><img src="cinemapedia/assets/images/peliculas/populares%20pelicula.jpeg" alt="Catálogo de películas populares" width="250"></td>
+    <td align="center" width="33%"><strong>Favoritos</strong><br><br><img src="cinemapedia/assets/images/peliculas/me%20gusta%20pelicula.jpeg" alt="Películas guardadas en favoritos" width="250"></td>
+  </tr>
+  <tr>
+    <td align="center" width="33%"><strong>Menú lateral</strong><br><br><img src="cinemapedia/assets/images/peliculas/cap.Menu%20lateral%20peliculas.jpeg" alt="Menú lateral con configuración de contenido e idioma" width="250"></td>
+    <td align="center" width="33%"><strong>Detalle de la película</strong><br><br><img src="cinemapedia/assets/images/peliculas/detalles%20de%20la%20pelicula.jpeg" alt="Detalle de una película con sinopsis, calificación y clasificación" width="250"></td>
+    <td align="center" width="33%"><strong>Elenco y videos</strong><br><br><img src="cinemapedia/assets/images/peliculas/elenco%20pelicula.jpeg" alt="Elenco, tráiler y recomendaciones de una película" width="250"></td>
+  </tr>
+</table>
+
+<br/>
+
+
+<br/>
+
+### 📺 SERIES
+
+<table>
+  <tr>
+    <td align="center" width="33%"><strong>Inicio de series</strong><br><br><img src="cinemapedia/assets/images/series/inicio%20serie.jpeg" alt="Pantalla de inicio de series con carrusel y listas" width="250"></td>
+    <td align="center" width="33%"><strong>Menú lateral</strong><br><br><img src="cinemapedia/assets/images/series/menu%20lateral%20serie.jpeg" alt="Menú lateral con el contenido Series seleccionado" width="250"></td>
+    <td align="center" width="33%"><strong>Detalle de la serie</strong><br><br><img src="cinemapedia/assets/images/series/detalles%20series.jpeg" alt="Detalle de una serie con sinopsis y calificación" width="250"></td>
+  </tr>
+  <tr>
+    <td align="center" width="33%"><strong>Personajes y videos</strong><br><br><img src="cinemapedia/assets/images/series/personajes%20series.jpeg" alt="Reparto, videos y recomendaciones de una serie" width="250"></td>
+    <td align="center" width="33%"><strong>Favoritos</strong><br><br><img src="cinemapedia/assets/images/series/me%20gusta%20series.jpeg" alt="Series guardadas en favoritos" width="250"></td>
+    <td></td>
+  </tr>
+</table>
+
+<br/>
+
+### 🌎 IDIOMAS
+
+*La aplicación cambia sus textos y el contenido de TMDB según el idioma elegido en el menú lateral.*
+
+<table>
+  <tr>
+    <td align="center" width="33%"><strong>MX (Español)</strong><br><br><img src="cinemapedia/assets/images/idiomas/espa%C3%B1ol.jpeg" alt="Aplicación en español" width="250"></td>
+    <td align="center" width="33%"><strong>US (English)</strong><br><br><img src="cinemapedia/assets/images/idiomas/US%20%28English%29.jpeg" alt="Aplicación en inglés" width="250"></td>
+    <td align="center" width="33%"><strong>DE (Deutsch)</strong><br><br><img src="cinemapedia/assets/images/idiomas/DE%20%28Deutsch%29.jpeg" alt="Aplicación en alemán" width="250"></td>
+  </tr>
+  <tr>
+    <td align="center" width="33%"><strong>CN (中文)</strong><br><br><img src="cinemapedia/assets/images/idiomas/CN%20%28%E4%B8%AD%E6%96%87%29.jpeg" alt="Aplicación en chino" width="250"></td>
+    <td align="center" width="33%"><strong>EG (العربية)</strong><br><br><img src="cinemapedia/assets/images/idiomas/EG%20%28%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9%29.jpeg" alt="Aplicación en árabe" width="250"></td>
+    <td></td>
+  </tr>
+</table>
 
 </div>
 
-El proyecto también contempla recursos gráficos personalizados y elementos de dibujo mediante `CustomPainter`.
 
 ---
 
@@ -311,28 +338,37 @@ build/app/outputs/flutter-apk/app-release.apk
 ```
 
 ---
+## 🚀 10. Demostración de la aplicación
+
 
 ## 🚀 10. Demostración de la aplicación
 
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Quicksand&weight=700&size=24&duration=3000&pause=1000&color=FF69B4&center=true&vCenter=true&width=650&height=45&lines=%C2%BFQU%C3%89+PEL%C3%8DCULA+VER%C3%81S+HOY%3F;TU+AVENTURA+CINEMATOGR%C3%81FICA+COMIENZA;DESCUBRE+TU+PR%C3%93XIMA+HISTORIA" alt="Animación de Cinemapedia"/>
+<img src="https://readme-typing-svg.demolab.com?font=Quicksand&weight=700&size=24&duration=3000&pause=1000&color=FF69B4&center=true&vCenter=true&width=750&height=55&lines=TU+AVENTURA+CINEMATOGR%C3%81FICA+COMIENZA;DESCUBRE+TU+PR%C3%93XIMA+HISTORIA" alt="Cinemapedia"/>
 
 <br/><br/>
 
-<a href="https://appetize.io/embed/b_wzirg6z4a5m2tkg6elym7eevfa">
-  <img src="https://img.shields.io/badge/♡_PROBAR_CINEMAPEDIA-FF69B4?style=for-the-badge&logo=googlechrome&logoColor=white"/>
+### 🎬 Cinemapedia
+
+Explora películas, descubre nuevas historias y disfruta de una experiencia cinematográfica desde una interfaz intuitiva y amigable.
+
+<br/>
+
+<img src="./cinemapedia/assets/images/peliculas/imagen%20de%20apetizze.jpeg" alt="Captura de Cinemapedia" width="700"/>
+
+<br/><br/>
+
+<a href="https://appetize.io/app/b_aa5f5ukt2doeqmf2dknxqztte4" target="_blank">
+  <img src="https://img.shields.io/badge/♡%20PROBAR%20CINEMAPEDIA-FF69B4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Abrir Cinemapedia"/>
 </a>
 
 <br/><br/>
 
-**Prueba la aplicación mediante Appetize**
-
-[🌸 Abrir demostración de Cinemapedia](https://appetize.io/app/b_wzirg6z4a5m2tkg6elym7eevfa)
+**🌸 ¡Explora y descubre tu próxima película favorita!**
 
 </div>
 
----
 
 ## 🔐 11. Consideraciones
 

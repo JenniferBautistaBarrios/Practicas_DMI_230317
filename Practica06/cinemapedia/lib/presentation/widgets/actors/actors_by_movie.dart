@@ -20,6 +20,7 @@ class ActorsByMovie extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
 
     final actorsByMovie = ref.watch( actorsByMovieProvider );
+    final colors = Theme.of(context).colorScheme;
 
     //* Loading actors
     if ( actorsByMovie[movieId] == null ) {
@@ -34,16 +35,29 @@ class ActorsByMovie extends ConsumerWidget {
     final actors = actorsByMovie[movieId]!;
 
     return SizedBox(
-      height: 300,
+      height: 310,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         itemCount: actors.length,
         itemBuilder: (context, index) {
           final actor = actors[index];
 
           return Container(
-            padding: const EdgeInsets.all(8.0),
-            width: 135,
+            width: 132,
+            margin: const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
+            decoration: BoxDecoration(
+              color: colors.surfaceContainer,
+              borderRadius: BorderRadius.circular(22),
+              border: Border.all(color: const Color(0xFFF3D8E3)),
+              boxShadow: [
+                BoxShadow(
+                  color: colors.primary.withValues(alpha: 0.10),
+                  blurRadius: 12,
+                  offset: const Offset(0, 6),
+                ),
+              ],
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -51,24 +65,39 @@ class ActorsByMovie extends ConsumerWidget {
                 // Actor Photo
                 FadeInRight(
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: const BorderRadius.vertical(top: Radius.circular(22)),
                     child: LoadingNetworkImage(
                       height: 180,
-                      width: 135,
+                      width: 132,
                       fit: BoxFit.cover,
                       url: actor.profilePath,
                     )
                   ),
                 ),
 
-                // Nombre
-                const SizedBox(height: 5,),
-
-                Text(actor.name, maxLines: 2 ),
-                Text(actor.character ?? '', 
-                  maxLines: 2,
-                  style: const TextStyle( fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 8, 10, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Nombre
+                      Text(
+                        actor.name,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+                      ),
+                      const SizedBox(height: 2),
+                      // Personaje
+                      Text(
+                        actor.character ?? '',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(color: colors.primary, fontSize: 12),
+                      ),
+                    ],
+                  ),
+                ),
 
               ],
             ),
