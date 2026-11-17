@@ -79,7 +79,7 @@ En esta unidad se trabajan los fundamentos iniciales del desarrollo de aplicacio
 | No. | Nombre de la práctica | Descripción | Potenciador | Estatus |
 |:---:|:--|:--|:---:|:---:|
 | 05| [Widgets App](https://github.com/JenniferBautistaBarrios/Practicas_DMI_230317/tree/main/Practica05) | 	Aplicación de Widgets | 40 | 🟢 Finalizada |
-| 06| [Cinemapedia](https://github.com/JenniferBautistaBarrios/Practicas_DMI_230317/tree/Practica06/Practica06) | 	Desarrollar una aplicación multiplataforma para consultar películas, búsquedas, detalles y reparto mediante la API de The Movie Database, aplicando arquitectura CLEAN y administración de estado con Riverpod. | 30 | 🟢 Finalizada |
+| 06| [Cinemapedia](https://github.com/JenniferBautistaBarrios/Practicas_DMI_230317/tree/Practica06/Practica06) | 	Desarrollar una aplicación multiplataforma para consultar películas, búsquedas, detalles y reparto mediante la API de The Movie Database, aplicando arquitectura CLEAN y administración de estado con Riverpod. | 100 | 🟢 Finalizada |
 
 ---
 
